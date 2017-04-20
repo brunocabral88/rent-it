@@ -34,6 +34,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'money-rails', '~>1'
 
+#ReactJS
+gem 'react-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
