@@ -1,0 +1,23 @@
+<article class="tool">
+    <%= link_to tool do %>
+      <%= image_tag tool.image.thumb, alt: tool.name %>
+      <p>name: <%= tool.name %></p>
+      <p>overall rating: <%= tool.rentals.average(:rating) || 'N/A'%> </p>
+    <% end %>
+<!--
+  <p class="description">
+    description:<%= tool.description %>
+  </p> -->
+  <footer class="actions">
+    <%= link_to add_item_cart_path(tool_id: tool.id), class: 'btn btn-primary', method: :put do %>
+      <%= fa_icon "shopping-cart", text: 'Add' %>
+    <% end %>
+    <%= link_to tool, class: 'btn btn-default pull-right' do %>
+      Details &raquo;
+    <% end %>
+  </footer>
+
+  <aside class="daily_price">
+    <%= humanized_money_with_symbol tool.daily_rate %>
+  </aside>
+</article>
