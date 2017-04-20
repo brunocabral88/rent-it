@@ -1,0 +1,30 @@
+<section class="page-intro">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h2><%= image_tag 'rentit-logo', size: '60x60' %><span class="brand-name">  Rent-it</span> is a website to help you rent tools and equipments at competitive prices</h2>
+      <h4><u>You can make some extra money by renting out your spares tools too!</u></h4>
+    </div>
+  </div>
+</section>
+<section class="search-area">
+  <h3>What are you looking for?</h3>
+  <%= form_tag class: 'form-group' do %>
+    <%= label_tag 'Tool name: ' %>
+    <%= text_field_tag :tool %>
+
+    <%= label_tag 'Rent from:' %>
+    <%= date_field_tag :start_date %>
+    
+    <%= label_tag 'To:' %>
+    <%= date_field_tag :end_date %>
+
+    <%= label_tag 'Location:' %>
+    <%= text_field_tag :location %>
+
+    <%= submit_tag 'Search!', class: 'btn btn-success' %>
+  <% end %>
+</section>
+<section class="popular-categories">
+  <h3>Popular categories</h3>
+
+</section>

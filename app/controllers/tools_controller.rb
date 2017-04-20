@@ -4,7 +4,7 @@ class ToolsController < ApplicationController
 	end
 
 	def index
-		@tool = Tool.find params[:id]
+		#@tool = Tool.find params[:id]
 	end
 
 	def create
