@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RentIt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent-It!</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +10,9 @@
   </head>
 
   <body>
+    <%= render 'layouts/navbar' %>
+
     <%= yield %>
+
   </body>
 </html>
