@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  renter_id: 1
+  tool_id: MyString
+  start_date: 2017-04-20
+  end_date: 2017-04-20
+  rating: 1
+  comment: MyText
+  stripe_charge_id: MyString
+
+two:
+  renter_id: 1
+  tool_id: MyString
+  start_date: 2017-04-20
+  end_date: 2017-04-20
+  rating: 1
+  comment: MyText
+  stripe_charge_id: MyString
