@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  category: MyString
+  owner_id: MyString
+  picture: MyString
+  description: MyText
+  lat: 1.5
+  lng: 1.5
+  deposit_cents: 1
+  daily_rate_cents: 1
+  availability: false
+
+two:
+  name: MyString
+  category: MyString
+  owner_id: MyString
+  picture: MyString
+  description: MyText
+  lat: 1.5
+  lng: 1.5
+  deposit_cents: 1
+  daily_rate_cents: 1
+  availability: false
