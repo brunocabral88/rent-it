@@ -11,7 +11,6 @@ class CreateTools < ActiveRecord::Migration[5.0]
       t.integer :deposit_cents
       t.integer :daily_rate_cents
       t.boolean :availability
-
       t.timestamps
     end
 
