@@ -19,6 +19,13 @@ puts 'Seeding data'
 puts 'Seeding users'
 User.destroy_all
 
+admin = User.create(name: Faker::Name.name,
+                    email: 'admin@email.com',
+                    phone: Faker::PhoneNumber.cell_phone,
+                    password: 'password',
+                    password_confirmation: 'password',
+                    admin: true)
+
 user1 = User.create(name: Faker::Name.name,
                     email: 'john@smith.com',
                     phone: Faker::PhoneNumber.cell_phone,
@@ -42,6 +49,7 @@ user4 = User.create(name: Faker::Name.name,
                     phone: Faker::PhoneNumber.cell_phone,
                     password: 'password',
                     password_confirmation: 'password')
+
 
 # Seed tools
 puts 'Seeding tools'
