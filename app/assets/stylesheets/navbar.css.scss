@@ -1,7 +1,31 @@
-$green: #009688;
+
 nav.navbar {
-  background-color: $green;
-  a.navbar-brand {
-    color: white;
+
+  background-color: #39CCCC;
+  height: 65px;
+  size: 2em;
+  color: #000000;
+
+  .navbar-brand {
+    color: black;
+    padding: 5px 10px;
+    &:hover {
+      color: #FFFFFF;
+    }
   }
+  .logo {
+    max-height: 43px;
+    width: auto;
+  }
+
+  .navbar-nav{
+    height: 40px;
+    li a {
+      color: black;
+      &:hover {
+        color: #FFFFFF;
+      }
+    }
+  }
+
 }
