@@ -19,7 +19,13 @@
               <li><a href="#">Separated link</a></li>
             </ul>
           </li>
-          <li><a href="#">Login / Register</a></li>
+          <li>
+            <% if logged_in? %>
+              <%= link_to 'Logout', logout_path %>
+            <% else %>
+              <%= link_to 'Login/Register', login_path %>
+            <% end %>
+          </li>
         </ul>
       </div>
     </nav>
