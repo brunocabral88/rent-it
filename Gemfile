@@ -45,6 +45,15 @@ gem 'rmagick'
 # Used to use Stripe API
 gem 'stripe'
 
+#ReactJS
+gem 'react-rails'
+
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
+
+# Add figaro to manipulate ENV variables
+gem 'figaro'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
