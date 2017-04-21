@@ -1,7 +1,10 @@
 <section class="tools-show">
 
   <header class="page-header">
-    <h1><%= link_to @tool.category.name, @tool.category %> &raquo; <%= @tool.name %></h1>
+
+  <!-- add link_to before @tool.category  -->
+    <h1><%= @tool.category %> &raquo; <%= @tool.name %></h1>
+
   </header>
 
   <article class="tool-detail">
@@ -9,7 +12,9 @@
     <div class="row">
 
       <div class="col-sm-4">
-        <%= image_tag @product.image.url, class: 'main-img' %>
+
+        <%= image_tag @tool.picture.url, class: 'main-img' %>
+
       </div>
 
       <div class="col-sm-8">
@@ -20,7 +25,9 @@
           <dd><%= @tool.description %></dd>
           <dt>Quantity</dt>
           <!-- ask boris to add quantity to DB -->
-         <!--  <dd><%= @tool.quantity %></dd>
+
+         <!--  <dd><%#= @tool.quantity %></dd>
+
           <dt>Price</dt> -->
           <dd><%= @tool.daily_rate %></dd>
           <dt>Overall Rating</dt>
@@ -30,9 +37,11 @@
     </div>
 
 
-    <% if current_user  %>
+
+    <%# if current_user  %>
       <div class="row">
-        <%= form_for [@tool, @tool.retails.new] do |form| %>
+        <%= form_for [@tool, @rental] do |form| %>
+
 
           <% if form.object.errors.any? %>
             <div class="alert alert-danger">
@@ -61,7 +70,9 @@
       </div>
     <%# else %>
       <%#= link_to "login to creat a review", new_session_path %>
-    <% end %>
+
+    <%# end %>
+
 
     <div class="row">
 

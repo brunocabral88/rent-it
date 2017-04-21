@@ -16,13 +16,18 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-$green: #009688;
+$green: #39CCCC;
 span.brand-name {
   color: $green;
 }
 
 section.page-intro {
   height: 20em;
+  padding: 60px 80px 50px 80px;
+
+  .info {
+    text-align: center;
+  }
 }
 
 section.how-it-works {
@@ -35,5 +40,32 @@ section.how-it-works {
     border-radius: 10px;    
     min-width: 200px;
     min-height: 200px;
+  }
+}
+section.search-area {
+
+  display:block;
+  margin: 20px 50px 60px 50px;
+
+
+  .btn-success {
+  @include button-variant(withe, #39CCCC, #39CCCC);
+  padding: 10px 110px 10px 70px;
+  }
+
+  .form-group {
+
+    input{
+      border-radius: 5px;
+      width: 100%;
+      height:2.7em;
+    }
+
+  }
+  .start-search-description {
+  padding: 30px 120px 30px 120px;
+
+  margin: auto;
+  color: #269898;
   }
 }
