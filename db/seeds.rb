@@ -54,6 +54,11 @@ user4 = User.create(name: Faker::Name.name,
 # Seed tools
 puts 'Seeding tools'
 Tool.destroy_all
+Category.destroy_all
+
+hand_tool = Category.create(name: 'Hand Tool')
+cleaning = Category.create(name: 'Cleaning')
+ladder_and_scaffoldding = Category.create(name: 'Ladder and Scaffolding')
 
 tool1 = Tool.create(name: 'Hammer',
                     description: Faker::Hipster.sentence,
@@ -65,7 +70,7 @@ tool1 = Tool.create(name: 'Hammer',
                     daily_rate: 3.5,
                     city: 'Toronto',
                     province: 'ON',
-                    category: 'Hand Tools',
+                    category: hand_tool,
                     availability: true)
 
 tool2 = Tool.create(name: 'Screwdriver',
@@ -78,7 +83,7 @@ tool2 = Tool.create(name: 'Screwdriver',
                     daily_rate: 2.5,
                     city: 'Toronto',
                     province: 'ON',
-                    category: 'Hand Tools',
+                    category: hand_tool,
                     availability: true)
 
 tool3 = Tool.create(name: 'Drill',
@@ -91,7 +96,21 @@ tool3 = Tool.create(name: 'Drill',
                     daily_rate: 11.25,
                     city: 'Toronto',
                     province: 'ON',
-                    category: 'Hand Tools',
+                    category: hand_tool,
+                    availability: true)
+
+
+tool4 = Tool.create(name: 'Vacuum Cleaner',
+                    description: Faker::Hipster.sentence,
+                    owner: user4,
+                    picture: open_asset('vacuum_cleaner.jpg'),
+                    lat: 43.645896,
+                    lng: -79.381348,
+                    deposit: 200,
+                    daily_rate: 12.35,
+                    city: 'Toronto',
+                    province: 'ON',
+                    category: cleaning,
                     availability: true)
 
 
@@ -108,9 +127,12 @@ rental2 = Rental.new(renter: user1, start_date: Faker::Date.backward(3), end_dat
 rental2.tools << tool3
 rental2.save!
 
+rental3 = Rental.new(renter: user2, start_date: Faker::Date.backward(5), end_date: 3.days.ago)
+rental3.tools << tool4
+rental3.save!
 
 puts 'Seeding reviews'
 Review.create(rental_item: rental1.rental_items.first, rating: 5, comment: Faker::Hacker.say_something_smart)
 Review.create(rental_item: rental1.rental_items.second, rating: 3, comment: Faker::Hacker.say_something_smart)
-
+Review.create(rental_item: rental2.rental_items.first, rating: 2, comment: Faker::Hacker.say_something_smart)
 puts 'Done!'

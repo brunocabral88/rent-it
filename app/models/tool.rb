@@ -3,7 +3,8 @@ class Tool < ApplicationRecord
   mount_uploader :picture, ToolPictureUploader
 
   belongs_to :owner, foreign_key: 'owner_id', class_name: 'User'
+  belongs_to :category
   has_many :rentals, through: :rental_items
   has_many :rental_items
-  has_many :reviews, through: :rentals
+  # has_many :reviews, through: :rental_items
 end
