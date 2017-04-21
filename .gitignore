@@ -17,5 +17,7 @@
 .byebug_history
 
 .idea
+
+public/uploads
 # Ignore application configuration
 /config/application.yml

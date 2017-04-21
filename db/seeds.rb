@@ -37,6 +37,11 @@ user3 = User.create(name: Faker::Name.name,
                     password: 'password',
                     password_confirmation: 'password')
 
+user4 = User.create(name: Faker::Name.name,
+                    email: 'joan@smith.com',
+                    phone: Faker::PhoneNumber.cell_phone,
+                    password: 'password',
+                    password_confirmation: 'password')
 
 # Seed tools
 puts 'Seeding tools'
@@ -53,7 +58,7 @@ tool1 = Tool.create(name: 'Hammer',
                     city: 'Toronto',
                     province: 'ON',
                     category: 'Hand Tools',
-                    availability: false)
+                    availability: true)
 
 tool2 = Tool.create(name: 'Screwdriver',
                     description: Faker::Hipster.sentence,
@@ -73,7 +78,7 @@ tool3 = Tool.create(name: 'Drill',
                     owner: user2,
                     picture: open_asset('drill.jpg'),
                     lat: 43.654404,
-                    lng:  -79.380704,
+                    lng: -79.380704,
                     deposit: 100,
                     daily_rate: 11.25,
                     city: 'Toronto',
@@ -84,17 +89,20 @@ tool3 = Tool.create(name: 'Drill',
 
 puts 'Seeding rentals'
 Rental.destroy_all
+RentalItem.destroy_all
+Review.destroy_all
 
-rental1 = Rental.create(renter: user3,
-                        tool: tool2,
-                        start_date: Faker::Date.backward(5),
-                        end_date: Date.today,
-                        rating: Faker::Number.rand_in_range(1, 5),
-                        comment: Faker::Hipster.sentence
-)
+rental1 = Rental.new(renter: user3, start_date: Faker::Date.backward(5), end_date: Date.today)
+rental1.tools << [tool1, tool2]
+rental1.save!
 
-rental2 = Rental.create(renter: user1,
-                        tool: tool1,
-                        start_date: Date.today,
-                        end_date: Faker::Date.forward(10))
+rental2 = Rental.new(renter: user1, start_date: Faker::Date.backward(3), end_date: Date.today)
+rental2.tools << tool3
+rental2.save!
+
+
+puts 'Seeding reviews'
+Review.create(rental_item: rental1.rental_items.first, rating: 5, comment: Faker::Hacker.say_something_smart)
+Review.create(rental_item: rental1.rental_items.second, rating: 3, comment: Faker::Hacker.say_something_smart)
+
 puts 'Done!'
