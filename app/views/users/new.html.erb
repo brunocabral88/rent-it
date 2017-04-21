@@ -1,0 +1,17 @@
+<h1>Register</h1>
+<%= form_for @user, class: 'form-group' do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control' %>
+  
+  <%= f.label :email %>
+  <%= f.text_field :email, class: 'form-control' %>
+  
+  <%= f.label :password %>
+  <%= f.password_field :password, class: 'form-control' %>
+
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+  <%= f.submit 'Go!', class:'btn btn-success' %>
+  <p>Already registered? <%= link_to 'Click here to sign in', login_path %></p>
+<% end %>

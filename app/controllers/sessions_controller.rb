@@ -4,15 +4,19 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:user][:email])
-    if user && user.authenticate(params[:user][:email])
-      # Logged in
+    if login_with_credentials(params[:user][:email],params[:user][:password])
+      flash[:success] = 'Welcome back, #{user.name}'
+      redirect_to root_path
     else
-      # Login unsuccessfull
+      render 'new'
     end
   end
 
   def destroy
+    session[:user_id] = nil
+    session[:user_email] = nil
+    flash[:info] = 'Logged out!'
+    redirect_to root_path
   end
 
   private
