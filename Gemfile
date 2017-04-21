@@ -32,7 +32,18 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# Used to normalize price
 gem 'money-rails', '~>1'
+
+# Used to generate fake data in seeding
+gem 'faker', '~> 1.7'
+
+# Used to upload images
+gem 'carrierwave', '~> 1.0'
+gem 'rmagick'
+
+# Used to use Stripe API
+gem 'stripe'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
