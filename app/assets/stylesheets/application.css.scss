@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$green: #009688;
+span.brand-name {
+  color: $green;
+}
+
+section.page-intro {
+  height: 20em;
+}
