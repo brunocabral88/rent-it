@@ -7,11 +7,18 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   </head>
 
   <body>
     <%= render 'layouts/navbar' %>
 
+    <% if !flash.empty? %>
+      <% flash.each do |type,message| %>
+        <div class="alert alert-<%= type %>"><%= message %></div>
+      <% end %>
+    <% end %>
+    
     <%= yield %>
 
   </body>

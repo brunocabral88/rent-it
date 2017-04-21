@@ -24,3 +24,16 @@ span.brand-name {
 section.page-intro {
   height: 20em;
 }
+
+section.how-it-works {
+  background-color: $green;
+  color: white;
+  
+  div.how-works-tile {
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 10px;    
+    min-width: 200px;
+    min-height: 200px;
+  }
+}

@@ -4,10 +4,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if login_with_credentials(params[:user][:email],params[:user][:password])
-      flash[:success] = 'Welcome back, #{user.name}'
+    user = login_with_credentials(params[:user][:email],params[:user][:password]) 
+    if user
+      flash[:success] = "Welcome back, #{user.name}"
       redirect_to root_path
     else
+      flash.now[:danger] = 'Invalid credentials'
       render 'new'
     end
   end
