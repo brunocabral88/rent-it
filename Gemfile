@@ -48,6 +48,9 @@ gem 'stripe'
 #ReactJS
 gem 'react-rails'
 
+# Rails Geocoder for locations of tools
+gem 'geocoder'
+
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 
