@@ -2,10 +2,11 @@ class ToolsController < ApplicationController
 
 	def show
     @tool = Tool.find params[:id]
+    @rental = Rental.new
   end
 
 	def index
-		#@tool = Tool.find params[:id]
+		# @tool = Tool.all
 	end
 
   def create

@@ -16,13 +16,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-$green: #39CCCC;
+$green: #1abc9c;
 span.brand-name {
   color: $green;
 }
 
 section.page-intro {
-  height: 20em;
+  height: 15em;
   padding: 60px 80px 50px 80px;
 
   .info {
@@ -33,11 +33,11 @@ section.page-intro {
 section.how-it-works {
   background-color: $green;
   color: white;
-  
+
   div.how-works-tile {
     padding: 10px;
     border: 1px solid white;
-    border-radius: 10px;    
+    border-radius: 10px;
     min-width: 200px;
     min-height: 200px;
   }
@@ -45,11 +45,11 @@ section.how-it-works {
 section.search-area {
 
   display:block;
-  margin: 20px 50px 60px 50px;
+  margin: 20px 100px 60px 50px;
 
 
   .btn-success {
-  @include button-variant(withe, #39CCCC, #39CCCC);
+  @include button-variant(withe, $green, $green);
   padding: 10px 110px 10px 70px;
   }
 
@@ -67,5 +67,19 @@ section.search-area {
 
   margin: auto;
   color: #269898;
+  }
+}
+
+section.how-it-works {
+  font-size: 1.2em;
+  padding: 20px 20px 20px 20px;
+
+  .question {
+    padding-bottom: 25px;
+  }
+
+  .fa-wrench, .fa-check-circle, .fa-search {
+    padding: 23px 120px;
+    font-size: 43px;
   }
 }

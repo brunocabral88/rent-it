@@ -1,29 +1,26 @@
 
 nav.navbar {
 
-  background-color: #39CCCC;
+  background-color: #1abc9c;
   height: 65px;
   size: 2em;
-  color: #000000;
+  color: white;
 
   .navbar-brand {
-    color: black;
+    color: white;
     padding: 5px 10px;
     &:hover {
-      color: #FFFFFF;
+      color: black;
     }
   }
-  .logo {
-    max-height: 43px;
-    width: auto;
-  }
+
 
   .navbar-nav{
     height: 40px;
     li a {
-      color: black;
+      color: white;
       &:hover {
-        color: #FFFFFF;
+        color: black;
       }
     }
   }
