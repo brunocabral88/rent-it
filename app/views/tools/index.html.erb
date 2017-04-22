@@ -1,1 +1,16 @@
-<h1>Tools index</h1>
+<h1>Tool Search Result</h1>
+<h2><%= @result.count %> Items Found</h2>
+<% @result.each do |tool|%>
+    <div>
+      <%= image_tag tool.picture.thumb %>
+      <ul>
+        <li>Name: <%= tool.name %></li>
+        <li>Category: <%= tool.category.name %></li>
+        <li>Deposit: <%= currency_symbol %><%= humanized_money tool.deposit %></li>
+        <li>Daily Rate: <%= currency_symbol %><%= humanized_money tool.daily_rate %></li>
+        <li><%= link_to tool do %>Detail<% end %></li>
+        <li>Add to cart</li>
+      </ul>
+    </div>
+<%end%>
+<%= console %>
