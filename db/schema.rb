@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421185424) do
+ActiveRecord::Schema.define(version: 20170421220056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,12 +54,13 @@ ActiveRecord::Schema.define(version: 20170421185424) do
     t.float    "lng"
     t.integer  "deposit_cents"
     t.integer  "daily_rate_cents"
-    t.boolean  "availability"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.boolean  "availability",     default: true
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "city"
     t.string   "province"
     t.integer  "category_id"
+    t.string   "street_address"
     t.index ["owner_id"], name: "index_tools_on_owner_id", using: :btree
   end
 
