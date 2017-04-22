@@ -26,7 +26,7 @@
           <dt>Daily Rate</dt>
           <dd><%= @tool.daily_rate %></dd>
           <dt>Overall Rating</dt>
-          <dd><%= number_with_precision(@tool.rentals.average(:rating), precision: 1)|| 'N/A'%></dd>
+          <dd><%= number_with_precision(@tool.reviews.average(:rating), precision: 1)|| 'N/A'%></dd>
         </dl>
       </div>
     </div>
@@ -71,18 +71,18 @@
 
     <div class="row">
 
-      <h3> Reviews </h2>
+      <h3 style="padding-left: 50px"> Reviews </h2>
       <dl class="dl-horizontal">
         <% @tool.reviews.order("created_at desc").each do |review| %>
           <% if review.id %>
+            <dt>date:</dt>
+            <dd><%= review.created_at.strftime("%d %b. %Y") %></dd>
             <dt>reviewer:</dt>
             <dd><%= review.rental.renter.name %></dd>
             <dt>rate:</dt>
             <dd><%= review.rating %></dd>
             <dt>comment:</dt>
             <dd><%= review.comment %></dd>
-            <dt>date:</dt>
-            <dd><%= review.created_at %></dd>
 
            <!--  <%# if current_user && current_user.id == review.user.id %>
             <dt></dt>
