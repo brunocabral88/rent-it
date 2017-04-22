@@ -30,6 +30,4 @@ class ApplicationController < ActionController::Base
     session[:user_id] = user.id
     session[:user_email] = user.email
   end
-
-
 end
