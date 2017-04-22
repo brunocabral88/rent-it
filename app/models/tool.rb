@@ -5,5 +5,5 @@ class Tool < ApplicationRecord
   belongs_to :owner, foreign_key: 'owner_id', class_name: 'User'
   has_many :rentals, through: :rental_items
   has_many :rental_items
-  has_many :reviews, through: :rentals
+  has_many :reviews, through: :rental_items
 end
