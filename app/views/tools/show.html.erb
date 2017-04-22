@@ -1,7 +1,10 @@
 <section class="tools-show">
 
   <header class="page-header">
-    <h1><%= link_to @tool.category.name, @tool.category %> &raquo; <%= @tool.name %></h1>
+
+  <!-- add link_to before @tool.category  -->
+    <h1><%= @tool.category %> &raquo; <%= @tool.name %></h1>
+
   </header>
 
   <article class="tool-detail">
@@ -9,7 +12,9 @@
     <div class="row">
 
       <div class="col-sm-4">
-        <%= image_tag @product.image.url, class: 'main-img' %>
+
+        <%= image_tag @tool.picture.thumb, class: 'main-img' %>
+
       </div>
 
       <div class="col-sm-8">
@@ -18,74 +23,74 @@
           <dd><%= @tool.name %></dd>
           <dt>Description</dt>
           <dd><%= @tool.description %></dd>
-          <dt>Quantity</dt>
-          <!-- ask boris to add quantity to DB -->
-         <!--  <dd><%= @tool.quantity %></dd>
-          <dt>Price</dt> -->
+          <dt>Daily Rate</dt>
           <dd><%= @tool.daily_rate %></dd>
           <dt>Overall Rating</dt>
-          <dd><%= @tool.rentals.average(:rating) || 'N/A'%></dd>
+          <dd><%= number_with_precision(@tool.rentals.average(:rating), precision: 1)|| 'N/A'%></dd>
         </dl>
       </div>
     </div>
 
 
-    <% if current_user  %>
-      <div class="row">
-        <%= form_for [@tool, @tool.retails.new] do |form| %>
 
-          <% if form.object.errors.any? %>
+    <%# if current_user  %>
+     <!--  <div class="row">
+        <%#= form_for [@tool, @rental] do |form| %>
+
+
+          <%# if form.object.errors.any? %>
             <div class="alert alert-danger">
               <strong>The following errors prevented saving:</strong>
               <ul>
-                <% form.object.errors.full_messages.each do |error| %>
-                  <li><%= error %></li>
-                <% end %>
+                <%# form.object.errors.full_messages.each do |error| %>
+                  <li><%#= error %></li>
+                <%# end %>
               </ul>
             </div>
-          <% end %>
+          <%# end %>
 
           <div class="form-group">
-            <%= form.label :rating %>
-            <%= form.select :rating, options_for_select(1..5), class: 'form-control' %>
+            <%#= form.label :rating %>
+            <%#= form.select :rating, options_for_select(1..5), class: 'form-control' %>
           </div>
 
           <div class="form-group">
-            <%= form.label :description %>
-            <%= form.text_area :description, class: 'form-control' %>
+            <%#= form.label :description %>
+            <%#= form.text_area :description, class: 'form-control' %>
           </div>
 
-          <%= form.submit 'Submit Review', class: 'btn btn-primary' %>
-        <% end %>
+          <%#= form.submit 'Submit Review', class: 'btn btn-primary' %>
+        <%# end %>
 
-      </div>
+      </div> -->
     <%# else %>
       <%#= link_to "login to creat a review", new_session_path %>
-    <% end %>
+
+    <%# end %>
+
 
     <div class="row">
 
       <h3> Reviews </h2>
       <dl class="dl-horizontal">
-      <% @tool.rentals.order("created_at desc").each do |review| %>
-        <% if review.id %>
-          <dt>reviewer:</dt>
-          <dd><%= review.renter.name %></dd>
-          <dt>rate:</dt>
-          <dd><%= review.rating %></dd>
-          <dt>comment:</dt>
-          <dd><%= review.comment %></dd>
-          <dt>date:</dt>
-          <dd><%= review.created_at %></dd>
+        <% @tool.reviews.order("created_at desc").each do |review| %>
+          <% if review.id %>
+            <dt>reviewer:</dt>
+            <dd><%= review.rental.renter.name %></dd>
+            <dt>rate:</dt>
+            <dd><%= review.rating %></dd>
+            <dt>comment:</dt>
+            <dd><%= review.comment %></dd>
+            <dt>date:</dt>
+            <dd><%= review.created_at %></dd>
 
-          </ul>
-         <!--  <%# if current_user && current_user.id == review.user.id %>
-          <dt></dt>
-          check what is tool_review_path
-          <dd><%#= link_to "delete", tool_review_path(@tool, review), :method => :delete, :confirm => "Are you sure?" %></dd>
-          <%# end %> -->
+           <!--  <%# if current_user && current_user.id == review.user.id %>
+            <dt></dt>
+            check what is tool_review_path
+            <dd><%#= link_to "delete", tool_review_path(@tool, review), :method => :delete, :confirm => "Are you sure?" %></dd>
+            <%# end %> -->
+          <% end %>
         <% end %>
-      <% end %>
       </dl>
 
     </div>

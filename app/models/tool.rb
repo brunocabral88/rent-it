@@ -7,6 +7,7 @@ class Tool < ApplicationRecord
   belongs_to :category
   has_many :rentals, through: :rental_items
   has_many :rental_items
+  has_many :reviews, through: :rental_items
 
   validates_presence_of :name, :description, :deposit_cents, :daily_rate_cents
 
@@ -17,5 +18,6 @@ class Tool < ApplicationRecord
 
   geocoded_by :full_address, latitude: :lat, longitude: :lng
   after_validation :geocode
+
 
 end

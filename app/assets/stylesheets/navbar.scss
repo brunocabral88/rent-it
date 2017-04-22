@@ -1,0 +1,28 @@
+
+nav.navbar {
+
+  background-color: #1abc9c;
+  height: 65px;
+  size: 2em;
+  color: white;
+
+  .navbar-brand {
+    color: white;
+    padding: 5px 10px;
+    &:hover {
+      color: black;
+    }
+  }
+
+
+  .navbar-nav{
+    height: 40px;
+    li a {
+      color: white;
+      &:hover {
+        color: black;
+      }
+    }
+  }
+
+}

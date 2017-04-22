@@ -8,24 +8,27 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Rent-it!</a>
+          <div class="name-and-logo">
+            <a class="navbar-brand" href="/">
+              <div class="logo"><%= image_tag 'rentit-logo2', width: '70' %> Rent-it</div>
+            </a>
+          </div>
         </div>
         <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
-          </li>
-          <li>
-            <% if logged_in? %>
-              <%= link_to 'Logout', logout_path %>
-            <% else %>
-              <%= link_to 'Login/Register', login_path %>
-            <% end %>
-          </li>
+          <% if logged_in? %>
+            <li>
+              <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Account <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a>Logged in as <%= current_user.name %></a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">My Dashboard</a></li>
+                <li><a href="#"><%= link_to 'Logout', logout_path %></a></li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%= link_to 'Login/Register', login_path %></li>
+          <% end %>
         </ul>
       </div>
     </nav>
