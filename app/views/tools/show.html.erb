@@ -9,14 +9,15 @@
 
   <article class="tool-detail">
 
-    <div class="row">
+    <div class="row" >
 
-      <div class="col-sm-4">
+      <div class="col-sm-6 col-12 image-table">
 
         <%= image_tag @tool.picture.thumb, class: 'main-img' %>
 
       </div>
 
+<<<<<<< Updated upstream
       <div class="col-sm-8">
         <dl class="dl-horizontal">
           <dt>Name</dt>
@@ -28,9 +29,31 @@
           <dt>Overall Rating</dt>
           <dd><%= number_with_precision(@tool.reviews.average(:rating), precision: 1)|| 'N/A'%></dd>
         </dl>
+=======
+      <div class="col-sm-6 col-12 detail-table">
+        <table class="table table-default">
+          <tbody>
+            <tr>
+              <th>Name:</th>
+              <td><%= @tool.name %></td>
+            </tr>
+            <tr>
+              <th>Description:</th>
+              <td><%= @tool.description %></td>
+            </tr>
+            <tr>
+              <th>Daily Rate:</th>
+              <td><%= @tool.daily_rate %></td>
+            </tr>
+            <tr>
+              <th>Overall Rating:</th>
+              <td><%= number_with_precision(@tool.reviews.average(:rating), precision: 1)|| 'N/A'%></td>
+            </tr>
+          </tbody>
+        </table>
+>>>>>>> Stashed changes
       </div>
     </div>
-
 
 
     <%# if current_user  %>
@@ -71,8 +94,15 @@
 
     <div class="row">
 
+<<<<<<< Updated upstream
       <h3 style="padding-left: 50px"> Reviews </h2>
       <dl class="dl-horizontal">
+=======
+      <h3> Reviews </h3>
+    </div>
+    <div class="row">
+      <dl id="my-style-on-review-list" class="dl-horizontal">
+>>>>>>> Stashed changes
         <% @tool.reviews.order("created_at desc").each do |review| %>
           <% if review.id %>
             <dt>date:</dt>
@@ -83,6 +113,11 @@
             <dd><%= review.rating %></dd>
             <dt>comment:</dt>
             <dd><%= review.comment %></dd>
+<<<<<<< Updated upstream
+=======
+            <dt>date:</dt>
+            <dd><%= review.created_at.strftime("%d %b. %Y") %></dd>
+>>>>>>> Stashed changes
 
            <!--  <%# if current_user && current_user.id == review.user.id %>
             <dt></dt>
