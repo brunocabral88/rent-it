@@ -3,7 +3,7 @@
   <header class="page-header">
 
   <!-- add link_to before @tool.category  -->
-    <h1><%= @tool.category %> &raquo; <%= @tool.name %></h1>
+    <h1><%= @tool.category.name %> &raquo; <%= @tool.name %></h1>
 
   </header>
 
@@ -17,19 +17,6 @@
 
       </div>
 
-<<<<<<< Updated upstream
-      <div class="col-sm-8">
-        <dl class="dl-horizontal">
-          <dt>Name</dt>
-          <dd><%= @tool.name %></dd>
-          <dt>Description</dt>
-          <dd><%= @tool.description %></dd>
-          <dt>Daily Rate</dt>
-          <dd><%= @tool.daily_rate %></dd>
-          <dt>Overall Rating</dt>
-          <dd><%= number_with_precision(@tool.reviews.average(:rating), precision: 1)|| 'N/A'%></dd>
-        </dl>
-=======
       <div class="col-sm-6 col-12 detail-table">
         <table class="table table-default">
           <tbody>
@@ -51,7 +38,6 @@
             </tr>
           </tbody>
         </table>
->>>>>>> Stashed changes
       </div>
     </div>
 
@@ -94,15 +80,12 @@
 
     <div class="row">
 
-<<<<<<< Updated upstream
-      <h3 style="padding-left: 50px"> Reviews </h2>
-      <dl class="dl-horizontal">
-=======
+
       <h3> Reviews </h3>
     </div>
     <div class="row">
       <dl id="my-style-on-review-list" class="dl-horizontal">
->>>>>>> Stashed changes
+
         <% @tool.reviews.order("created_at desc").each do |review| %>
           <% if review.id %>
             <dt>date:</dt>
@@ -113,11 +96,6 @@
             <dd><%= review.rating %></dd>
             <dt>comment:</dt>
             <dd><%= review.comment %></dd>
-<<<<<<< Updated upstream
-=======
-            <dt>date:</dt>
-            <dd><%= review.created_at.strftime("%d %b. %Y") %></dd>
->>>>>>> Stashed changes
 
            <!--  <%# if current_user && current_user.id == review.user.id %>
             <dt></dt>
