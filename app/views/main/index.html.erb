@@ -15,14 +15,12 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <%= form_tag class: 'form-group' do %>
+      <%= form_tag :tools, class: 'form-group', method: 'get' do %>
       <div class="form-group">
         <div class="col-md-2 col-md-offset-1 search-box">
-          <%#= label_tag 'Tool name: ' %>
           <%= text_field_tag :tool , nil, placeholder: 'Tool name:' %>
         </div>
         <div class="col-md-2 search-box">
-          <%#= label_tag 'Location:' %>
           <%= text_field_tag :location, nil, placeholder: 'Location' %>
         </div>
       <!-- <div class="form-group"> -->

@@ -48,11 +48,18 @@ gem 'stripe'
 #ReactJS
 gem 'react-rails'
 
+# Rails Geocoder for locations of tools
+gem 'geocoder'
+
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 
 # Add figaro to manipulate ENV variables
 gem 'figaro'
+
+# Facebook auth
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
