@@ -15,4 +15,6 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
+  resources :rentals, only: [:create, :show]
+
 end
