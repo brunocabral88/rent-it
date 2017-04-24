@@ -2,7 +2,7 @@
     <%= link_to tool do %>
       <%= image_tag tool.image.thumb, alt: tool.name %>
       <p>name: <%= tool.name %></p>
-      <p>overall rating: <%= number_with_precision(tool.rentals.average(:rating), precision: 1) || 'N/A'%> </p>
+      <p>overall rating: <%= number_with_precision(tool.reviews.average(:rating), precision: 1) || 'N/A'%> </p>
     <% end %>
 
 <!--

@@ -14,6 +14,7 @@
     </div>
   </div>
   <div class="row">
+    <div id="gmaps-error"></div>
     <div class="col-md-12">
       <%= form_tag :tools, class: 'form-group', method: 'get' do %>
       <div class="form-group">
@@ -34,6 +35,10 @@
         <%#= label_tag 'To:' %>
         <%= date_field_tag :end_date, nil, placeholder: 'Return Date' %>
         </div>
+
+        <%= hidden_field_tag :lat %>
+        <%= hidden_field_tag :lng %>
+
         <div class="col-md-2">
         <!-- <div id="search-button"> -->
           <%= submit_tag 'Search!', class: 'btn btn-success' %>
@@ -75,3 +80,43 @@
     </div>
   </div>
 </section>
+
+<script>
+    var autocomplete;
+
+    function initAutocomplete() {
+        autocomplete = new google.maps.places.Autocomplete(
+            (document.getElementById('location')),
+            {types: []});
+        autocomplete.addListener('place_changed', function () {
+            var place = autocomplete.getPlace();
+            var formatted_address = place.formatted_address;
+            var lng = place.geometry.location.toJSON().lng;
+            var lat = place.geometry.location.toJSON().lat;
+
+
+            $("input[name = location]").val(formatted_address);
+            $("input[name = lng]").val(lng);
+            $("input[name = lat]").val(lat);
+        });
+    }
+
+    function geolocate() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                var circle = new google.maps.Circle({
+                    center: geolocation,
+                    radius: position.coords.accuracy
+                });
+                autocomplete.setBounds(circle.getBounds());
+            });
+        }
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2pWNHJAhzOEtqohWE1mD1tvTLXQfBQLI&libraries=places&callback=initAutocomplete"
+        async defer></script>
