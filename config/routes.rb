@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get '/register', to: 'users#new'
   resources :users, only: [:create, :destroy]
+  resource :cart, only: [:show] do
+    put :add_item
+    delete :delete_item
+  end
 
   root to: 'main#index'
 

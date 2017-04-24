@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :logged_in?, :current_user
+  helper_method :logged_in?, :current_user, :cart
 
   def logged_in?
     if session[:user_id]
@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
   
   def current_user
     User.find_by(email: session[:user_email]) if logged_in?
+  end
+
+  def cart
+    session[:cart_items] ||= []
   end
 
   private

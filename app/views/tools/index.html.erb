@@ -9,8 +9,7 @@
         <li>Deposit: <%= currency_symbol %><%= humanized_money tool.deposit %></li>
         <li>Daily Rate: <%= currency_symbol %><%= humanized_money tool.daily_rate %></li>
         <li><%= link_to tool do %>Detail<% end %></li>
-        <li>Add to cart</li>
+        <li><%= link_to 'Add to cart', add_item_cart_path(tool_id: tool.id), method: :put %></li>
       </ul>
     </div>
 <%end%>
-<%= console %>
