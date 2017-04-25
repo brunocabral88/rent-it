@@ -34,7 +34,7 @@
             <tr>
             <th>Total Fee:</th>
             <td>
-              <%= humanized_money_with_symbol @rental.total_cents %>
+              <%= humanized_money_with_symbol @rental.total_cents/100.00 %>
             </td>
             </tr>
           </table>
