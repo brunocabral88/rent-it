@@ -1,16 +1,42 @@
 <h1>Tool Search Result</h1>
 <h2><%= @result.count %> Items Found</h2>
 
-<div class="sort_by">
-  <label for="sort_by">Sort By:</label>
-  <select id="sort_by">
-    <option value="category">Category</option>
-    <option value="distance">Distance</option>
-  </select>
+<div id="filter_bys">
+
+  <header>Filter Result:</header>
+  <!--<div class="sort_by">-->
+    <!--<label for="sort_by">Sort By:</label>-->
+    <!--<select id="sort_by">-->
+      <!--<option value="category">Category</option>-->
+      <!--<option value="distance">Distance</option>-->
+    <!--</select>-->
+  <!--</div>-->
+
+  <div class="filter_by">
+    <label for="filter_by_category_name">Category: </label>
+    <select id="filter_by_category_name">
+      <option value="all">Show all categories</option>
+      <% @categories.each do |category| %>
+          <option value="<%= category.name %>"><%= category.name %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <div class="filter_by">
+    <label for="filter_by_distance">Distance: </label>
+    <select id="filter_by_distance">
+      <option value="5">5 km</option>
+      <option value="10">10 km</option>
+      <option value="15">15 km</option>
+      <option value="25">25 km</option>
+      <option value="50" selected="selected">50 km</option>
+      <option value="100">100 km</option>
+    </select>
+  </div>
 </div>
 
 <div class="tools">
-  <% @result.each do |tool|%>
+  <% @result.each do |tool| %>
       <div class="tool">
         <%= image_tag tool.picture.thumb %>
         <ul>
@@ -21,40 +47,85 @@
           <% if @lat && @lng %>
               <li>Distance from your location:
                 <span class="distance">
-                <%= tool.distance_to([@lat, @lng]).round (2)%>
-              </span> km</li>
+                <%= tool.distance_to([@lat, @lng]).round (2) %>
+              </span> km
+              </li>
           <% end %>
           <li><%= link_to 'Details', tool %></li>
           <li><%= link_to 'Add to cart', add_item_cart_path(tool_id: tool.id), method: :put %></li>
         </ul>
       </div>
-  <%end%>
+  <% end %>
 </div>
 <script type="text/javascript" charset="utf-8">
-  $(document).ready(function(){
-      var $tools = $('.tool');
+    $(document).ready(function () {
+        var $tools = $('.tool');
 
-      function sort_tools($sort_by_value){
-          $tools.sort(function(a, b){
-              var an = $(a).find('.' + $sort_by_value).text();
-              var bn = $(b).find('.' + $sort_by_value).text();
-              if(an > bn) {
-                  return 1;
-              }
-              if(an < bn) {
-                  return -1;
-              }
-              return 0;
-          });
-      }
+        function sort_tools($sort_by_value) {
+            $tools.sort(function (a, b) {
+                var an = $(a).find('.' + $sort_by_value).text();
+                var bn = $(b).find('.' + $sort_by_value).text();
+                if (an > bn) {
+                    return 1;
+                }
+                if (an < bn) {
+                    return -1;
+                }
+                return 0;
+            });
+        }
 
-      sort_tools($('#sort_by').val());
-      $tools.detach().appendTo('.tools');
+        function filter_tools_by_category(category_name) {
+            if (category_name === 'all') {
+                return $tools;
+            } else {
+                var $filtered_tools = $tools.filter(function (index) {
+                    return $($tools[index]).find('.category').text() === category_name
+                });
+                return $filtered_tools;
+            }
+        }
 
-      $('#sort_by').change(function(){
-          sort_tools($(this).val());
-          $tools.detach().appendTo('.tools');
-      })
+        function filter_tools_by_distance(distance) {
+            if (distance === 'all') {
+                return $tools
+            } else {
+                var $filtered_tools = $tools.filter(function (index) {
+                    return Number($($tools[index]).find('.distance').text()) <= Number(distance)
+                });
+                return $filtered_tools
+            }
+        }
 
-  });
+        function filter_tools() {
+            var category_name = $('#filter_by_category_name').val();
+            var distance = $('#filter_by_distance').val();
+            if (category_name === 'all'){
+                return $tools.filter(function (index) {
+                    return Number($($tools[index]).find('.distance').text()) <= Number(distance)
+                });
+            } else {
+                var $filtered_tools_by_distance = $tools.filter(function (index) {
+                    return Number($($tools[index]).find('.distance').text()) <= Number(distance)
+                });
+                // Filter again by category
+                return $filtered_tools_by_distance.filter(function(index){
+                    return $($filtered_tools_by_distance[index]).find('.category').text() === category_name
+                });
+            }
+        }
+
+        function render (){
+            $tools.hide();
+            var $result = filter_tools();
+            $result.show();
+        }
+
+        render();
+
+        $('.filter_by').change(function () {
+            render();
+        })
+
+    });
 </script>
