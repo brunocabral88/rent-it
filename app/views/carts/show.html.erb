@@ -1,0 +1,58 @@
+<section id="cart">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-1">
+      <h1>My selected tools</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <% if cart.any? %>
+      <table class="table table-striped">
+        <thead>
+          <th>#</th>
+          <th>Name</th>
+          <th>Owner</th>
+          <th> </th>
+        </thead>
+        <tbody>
+          <% @tools.each do |tool| %>
+            <tr>
+              <td><%= image_tag tool.picture.tiny %></td>
+              <td><%= link_to tool.name, tool %></td>
+              <td><%= tool.owner.name %></td>
+              <td><%= link_to 'Delete', delete_item_cart_path(tool_id: tool.id), method: :delete, class: 'btn btn-danger' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tr>
+          <td colspan="3"></td>
+          <!-- <td><%#= link_to "Proceed to checkout ->", "/rentals" ,method: :post, class: 'btn btn-info' %></td> -->
+          <td>
+            <div class="row">
+              <div class="col-xs-12">
+                <%= form_tag rentals_path do %>
+                <!-- it was @cart_total * 100 instead of 100 in data-amount -->
+                <!-- we should add price per day and total price the same way as jungle -->
+                  <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                    data-amount="<%= 100 %>"
+                    data-name="Rent-it"
+                    data-description="Rent-it Rental Order"
+                    data-locale="auto"
+                    data-email="gh.sadooghi@gmail.com"
+                    data-currency="cad">
+                  </script>
+                <% end %>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <% else%>
+        <p>No item found on cart :(</p>
+        <%= link_to '<- Back to main page', root_path %>
+      <% end %>
+    </div>
+  </div>
+</section>

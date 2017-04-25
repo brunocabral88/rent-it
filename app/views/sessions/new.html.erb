@@ -9,4 +9,9 @@
 
   <%= f.submit 'Login', class: 'btn btn-success' %>
   <p>Not registered? <%= link_to 'Click here to register', register_path %></p> 
+  
+  <div class="facebook-login">
+    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+  </div>
 <% end %>

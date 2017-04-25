@@ -1,8 +1,8 @@
 <section class="page-intro">
   <div class="row info">
-    <div class="col-md-12">
+    <div class="col-md-12 introduction">
       <h3><span class="brand-name">  Rent-it</span> helps you rent tools and equipments at competitive prices</h3>
-      <h3>You can also save money by renting these equipments for the period you need instead of buying them!</h3>
+      <h3>You can also save money by renting these equipments for the period you need instead of buying the!</h3>
     </div>
   </div>
 </section>
@@ -18,28 +18,26 @@
     <div class="col-md-12">
       <%= form_tag :tools, class: 'form-group', method: 'get' do %>
       <div class="form-group">
-        <div class="col-md-2 col-md-offset-1">
-          <%#= label_tag 'Tool name: ' %>
-          <%= text_field_tag :tool , nil, placeholder: 'Name of Tool' %>
+        <div class="col-md-2 col-md-offset-1 search-box">
+          <%= text_field_tag :tool , nil, placeholder: 'Tool name:' %>
         </div>
-        <div class="col-md-2">
-          <%#= label_tag 'Location:' %>
+        <div class="col-md-2 search-box">
           <%= text_field_tag :location, nil, placeholder: 'Location' %>
         </div>
       <!-- <div class="form-group"> -->
-        <div class="col-md-2">
+        <div class="col-md-2 search-box">
           <%#= label_tag 'Rent from:' %>
-          <%= date_field_tag :start_date, nil, placeholder: 'Start Date' %>
+          <%= date_field_tag :start_date, nil, placeholder: 'Lendign Date' %>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 search-box">
         <%#= label_tag 'To:' %>
-        <%= date_field_tag :end_date, nil, placeholder: 'Return Date' %>
+        <%= date_field_tag :end_date, nil, placeholder: 'Returning Date' %>
         </div>
 
         <%= hidden_field_tag :lat %>
         <%= hidden_field_tag :lng %>
-
-        <div class="col-md-2">
+                               
+        <div class="col-md-2 search-box">
         <!-- <div id="search-button"> -->
           <%= submit_tag 'Search!', class: 'btn btn-success' %>
         </div>
@@ -56,26 +54,22 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3 col-md-offset-1">
-      <div class="how-works-tile">
+    <div class="col-md-3 col-md-offset-1 how-it-works_item">
+      <div class="how-works-title">
         <i class="fa fa-search fa-4x" aria-hidden="true"></i>
         <main>Search the tools you will need</main>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="how-works-tile">
+    <div class="col-md-3 how-it-works_item">
+      <div class="how-works-title">
         <i class="fa fa-wrench fa-4x" aria-hidden="true"></i>
         <main>Rent-it will find owner with the available tools and schedule the pick-up</main>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="how-works-tile">
+    <div class="col-md-3 how-it-works_item">
+      <div class="how-works-title">
         <i class="fa fa-check-circle fa-4x" aria-hidden="true"></i>
-        <main>
-          <p>After you use them, return them to the owner and rate your experience.</p>
-          <p>You will be charged only
-            after returning the tools</p>
-          </main>
+        <main>After you use them, return them to the owner and rate your experience.<br> You will be charged only after returning the tools</main>
       </div>
     </div>
   </div>

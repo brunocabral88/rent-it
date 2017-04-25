@@ -1,7 +1,6 @@
 <h1>Tool Search Result</h1>
 <h2><%= @result.count %> Items Found</h2>
 
-
 <div class="sort_by">
   <label for="sort_by">Sort By:</label>
   <select id="sort_by">
@@ -25,8 +24,8 @@
                 <%= tool.distance_to([@lat, @lng]).round (2)%>
               </span> km</li>
           <% end %>
-          <li><%= link_to tool do %>Detail<% end %></li>
-          <li>Add to cart</li>
+          <li><%= link_to 'Details', tool %></li>
+          <li><%= link_to 'Add to cart', add_item_cart_path(tool_id: tool.id), method: :put %></li>
         </ul>
       </div>
   <%end%>

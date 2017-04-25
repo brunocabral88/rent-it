@@ -1,3 +1,77 @@
-// Place all the styles related to the tools controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+$green: #1abc9c;
+
+@media screen and (min-width: 601px){
+  section.tools-show {
+    .page-header h1 {
+      margin-left: 20px;
+    }
+    .tool-detail {
+      .row {
+        display: flex;
+        margin-left: 50px;
+        flex-direction: initial;
+        width: 60%
+      }
+      .image-table{
+
+        border: 1px solid gray;
+        border-radius: 2px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+      .detail-table {
+        border-right: 1px solid gray;
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+  }
+}
+
+#my-style-on-review-list{
+  dt {
+    width: 70px;
+  }
+  dd {
+  margin-left: 90px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+
+  section.tools-show {
+    .page-header h1 {
+      margin-left: 10px;
+    }
+    .tool-detail {
+      .row {
+        flex-direction: column-reverse;
+        display: flex;
+        margin: 10px 20px;
+        width: 90%
+      }
+      .detail-table {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-right: 1px solid gray;
+        border-left: 1px solid gray;
+        border-top: 1px solid gray;
+      }
+      .image-table {
+
+        border: 1px solid gray;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        img {
+          width: 100%;
+        }
+
+      }
+    }
+  }
+}
+
