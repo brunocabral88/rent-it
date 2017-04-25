@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
-  
+
   def current_user
     User.find_by(email: session[:user_email]) if logged_in?
   end
@@ -34,4 +34,13 @@ class ApplicationController < ActionController::Base
     session[:user_id] = user.id
     session[:user_email] = user.email
   end
+
+  def update_cart(new_cart)
+    cookies[:cart] = {
+      value: JSON.generate(new_cart),
+      expires: 10.days.from_now
+    }
+    cookies[:cart]
+  end
+
 end
