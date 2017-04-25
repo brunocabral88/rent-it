@@ -1,0 +1,44 @@
+<section class="orders-show">
+
+  <% if !current_user %>
+    <h2>Please Login from <a href="/login">here</a></h2>
+  <%else %>
+    <header class="page-header">
+      <h1>Rental #<%= @rental.id %></h1>
+    </header>
+
+    <div class="rental-summary jumbotron">
+      <h4>Thank you for renting from Rent-it!</h4>
+    </div>
+    <div class="panel panel-default rental-details">
+      <h4>Rental Detail</h4>
+          <table class="table table-bordered" >
+            <thead>
+            <tr>
+              <th>Tool Image</th>
+              <th>Tool Name</th>
+              <th>Tool Description</th>
+              <th>Tool Rental Daily Price</th>
+              <!-- <th>Total Renting duration</th> -->
+              <th>Tool Deposite</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <%= render @rental.rental_items %>
+            </tbody>
+            <tr>
+              <th>Email:</th>
+              <td><%= current_user.email %></td>
+            </tr>
+            <tr>
+            <th>Total Fee:</th>
+            <td>
+              <%= humanized_money_with_symbol @rental.total_cents %>
+            </td>
+            </tr>
+          </table>
+    </div>
+    <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
+  <% end %>
+</section>
