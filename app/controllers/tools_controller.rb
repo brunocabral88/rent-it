@@ -10,6 +10,8 @@ class ToolsController < ApplicationController
     tool_name = params[:tool]
     @result = Tool.where('name ILIKE ?', "%#{tool_name}%").where('availability = true')
 
+    category_ids = @result.distinct(:category).pluck(:category_id)
+    @categories = Category.find(category_ids);
     unless params[:lat].empty? && params[:lng].empty?
       @lat = params[:lat]
       @lng = params[:lng]
