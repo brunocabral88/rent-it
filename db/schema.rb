@@ -32,13 +32,13 @@ ActiveRecord::Schema.define(version: 20170426185702) do
     t.integer  "renter_id"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "total_cents"
     t.integer  "stripe_charge_id"
-    t.boolean  "returned",         default: false
-    t.boolean  "customer"
-    t.boolean  "source_id"
+    t.boolean  "returned",           default: false
+    t.string   "stripe_customer_id"
+    t.string   "stripe_card_id"
     t.index ["renter_id"], name: "index_rentals_on_renter_id", using: :btree
   end
 
