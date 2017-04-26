@@ -2,6 +2,31 @@
 <section id="graphs">
   <svg id="graph"></svg>
 </section>
+<% if @rentals_not_returned_this_user.count > 0 %>
+  <section id="current-rentouts">
+    <h3>Current rentouts</h3>
+    <table class="table table-hover">
+      <thead>
+        <th>Rental #</th>
+        <th>Renter name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% @rentals_not_returned_this_user.each do |rental| %>
+          <tr>
+            <td><%= rental["id"] %></td>
+            <td><%= get_renter_name_by_rental_id rental["id"] %></td>
+            <td><%= rental["start_date"] %></td>
+            <td><%= rental["end_date"] %></td>
+            <td><%= link_to 'Mark as returned', rental_return_path(rental_id: rental["id"]), method: :post, class: 'btn btn-default' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+<% end %>
 <section id="tools">
   <h3>My tools</h3>
   <table class="table table-hover">

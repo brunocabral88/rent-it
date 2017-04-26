@@ -56,16 +56,3 @@
     </div>
   </div>
 </section>
-
-<!-- imaginary dashboard -->
-
-<%= user.rental_items.each do |item| %>
-
-  <div class="item-container">
-
-    <!-- <a href="/rentals/return?rental_item_id=1">return items</a> -->
-    <%= link_to rental_return_patgh(rental_item_id: item.id), "return items", method: "POST" %>
-  </div>
-
-
-<% end %>
