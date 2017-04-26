@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426173600) do
+ActiveRecord::Schema.define(version: 20170426185702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,11 +32,11 @@ ActiveRecord::Schema.define(version: 20170426173600) do
     t.integer  "renter_id"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "total_cents"
     t.integer  "stripe_charge_id"
-    t.boolean  "returned"
+    t.boolean  "returned",           default: false
     t.string   "stripe_customer_id"
     t.string   "stripe_card_id"
     t.index ["renter_id"], name: "index_rentals_on_renter_id", using: :btree
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20170426173600) do
 
   create_table "tools", force: :cascade do |t|
     t.string   "name"
-    t.string   "owner_id"
+    t.integer  "owner_id"
     t.string   "picture"
     t.text     "description"
     t.float    "lat"

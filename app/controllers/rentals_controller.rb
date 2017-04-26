@@ -24,10 +24,10 @@ class RentalsController < ApplicationController
   end
 
   def refund_and_total_charge
-      # find the existing rental
-      item = RentalItem.find(params[:rental_item_id])
-
-      @deposit_rental = item.rental
+      puts "test"
+      puts params[:rental_id]
+      puts "test"
+      @deposit_rental = Rental.find(params[:rental_id])
 
       # if rental has a deposit charge, proceed to refund
       if @deposit_rental.stripe_charge_id
@@ -51,7 +51,6 @@ class RentalsController < ApplicationController
 
       else
         redirect_to(cart_path, error: rental.errors.full_messages.first)
-
       end
 
     rescue Stripe::CardError => e
