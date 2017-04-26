@@ -13,7 +13,7 @@ class RentalsController < ApplicationController
       empty_cart
 
         # UserMailer.successful_order_email(user_email, order).deliver_now
-puts rental
+        # puts rental
         redirect_to(rental_path(rental), notice: 'Your Order has been placed.')
       else
         redirect_to(cart_path, error: rental.errors.full_messages.first)
