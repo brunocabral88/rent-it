@@ -35,12 +35,8 @@ class ApplicationController < ActionController::Base
     session[:user_email] = user.email
   end
 
-  def update_cart(new_cart)
-    cookies[:cart] = {
-      value: JSON.generate(new_cart),
-      expires: 10.days.from_now
-    }
-    cookies[:cart]
+  def empty_cart
+    session[:cart_items] = []
   end
 
 end

@@ -21,4 +21,6 @@ Rails.application.routes.draw do
 
   resources :rentals, only: [:create, :show]
 
+  post "/rentals/return", to: "rentals#refund_and_total_charge", as: :rental_return
+
 end

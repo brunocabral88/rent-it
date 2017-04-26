@@ -25,7 +25,9 @@
               </span> km</li>
           <% end %>
           <li><%= link_to 'Details', tool %></li>
-          <li><%= link_to 'Add to cart', add_item_cart_path(tool_id: tool.id), method: :put %></li>
+          <%if current_user %>
+            <li><%= link_to 'Add to cart', add_item_cart_path(tool_id: tool.id), method: :put %></li>
+          <% end %>
         </ul>
       </div>
   <%end%>
