@@ -13,7 +13,7 @@ class RentalsController < ApplicationController
       empty_cart
 
         # UserMailer.successful_order_email(user_email, order).deliver_now
-
+puts rental
         redirect_to(rental_path(rental), notice: 'Your Order has been placed.')
       else
         redirect_to(cart_path, error: rental.errors.full_messages.first)
@@ -73,7 +73,7 @@ class RentalsController < ApplicationController
     Stripe::Charge.create(
       source:      params[:stripeToken],
       amount:      cart_total, # in cents
-      description: "Rent-it Order deposit payment",
+      description: "Rent-it Order total payment",
       currency:    'cad',
       card: @deposit_rental.stripe_card_id,
       customer: @deposit_rental.stripe_customer_id
@@ -92,7 +92,7 @@ class RentalsController < ApplicationController
       stripe_charge_id: stripe_charge.id, # returned by stripe
       start_date: session[:start_date],
       end_date: session[:end_date],
-      stripe_customer_id: stripe_charge.customer   # returned by stripe
+      stripe_customer_id: stripe_charge.customer,   # returned by stripe
       stripe_card_id: stripe_charge.source.id      # returned by stripe
     )
     cart.each do |tool_id|
@@ -102,7 +102,13 @@ class RentalsController < ApplicationController
         )
       end
     end
-    rental.save!
+    if rental.start_date === nil || rental.end_date === nil
+      flash[:notice] = "Please fill the start and end date fields"
+    else
+      puts "working"
+      rental.save!
+
+    end
     rental
   end
 
