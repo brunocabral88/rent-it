@@ -43,4 +43,8 @@ class ApplicationController < ActionController::Base
     cookies[:cart]
   end
 
+  def require_authentication
+    redirect_to root_path unless current_user
+  end
+
 end
