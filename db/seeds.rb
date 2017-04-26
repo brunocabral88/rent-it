@@ -69,6 +69,7 @@ tool1 = Tool.create(name: 'Hammer',
                     daily_rate: 3.5,
                     city: 'Toronto',
                     province: 'ON',
+                    full_address: "46 Spadina Ave, Toronto, ON",
                     category: hand_tool,
                     availability: true)
 

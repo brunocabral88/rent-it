@@ -1,0 +1,111 @@
+<h1>My Dashboard</h1>
+<section id="graphs">
+  <svg id="graph"></svg>
+</section>
+<section id="tools">
+  <h3>My tools</h3>
+  <table class="table table-hover">
+    <thead>
+      <th>#</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Daily rate</th>
+      <th>Available?</th>
+    </thead>
+    <tbody>
+      <% @user.tools.each do |tool| %>
+        <tr>
+          <td><%= image_tag tool.picture.tiny %></td>
+          <td><%= link_to tool.name, tool %></td>
+          <td><%= tool.description %></td>
+          <td>$ <%= '%.2f' % (tool.daily_rate_cents.to_f / 100) %></td>
+          <td><%= tool.availability %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="4"></td>
+        <td><%= link_to "+ New tool", new_tool_path, class: 'btn btn-info' %></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<section id="rental-history">
+  <h2>Rental history</h2>
+  <table class="table table-hover">
+    <thead>
+      <th>#</th>
+      <th>Date</th>
+      <th>Total</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <% if @user.rentals.size > 0 %>
+        <% @user.rentals.each do |rental| %>
+          <tr>
+            <td><%= rental.id %></td>
+            <td><%= rental.start_date %> to <%= rental.end_date %></td>
+            <td>$ <%= "%.2f" % (rental.total_cents.to_f / 100) %></td>
+            <td><%= link_to 'View', rental, class: 'btn btn-info' %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="3">No rents history so far :(</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<section id="renter-history">
+  <h2>Rentout history</h2>
+  <table class="table">
+    <thead>
+      <th>#</th>
+      <th>Date</th>
+      <th>Total earned</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <% if @user.tools.size > 0 %>
+        <% @user.tools.each do |tool| %>
+          <% tool.rentals.each do |rental| %>
+            <tr>
+              <td><%= rental.id %></td>
+              <td><%= rental.start_date %> to <%= rental.end_date %></td>
+              <td>$ <%= "%.2f" % (rental.total_cents.to_f / 100) %></td>
+              <td><%= link_to 'View', rental, class: 'btn btn-info' %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="3">No rentouts history so far :(</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+  <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+<script>
+window.onload = function() { 
+  Morris.Area({
+    element: 'graph',
+    data: [
+      { y: '2006', a: 100, b: 90 },
+      { y: '2007', a: 75,  b: 65 },
+      { y: '2008', a: 50,  b: 40 },
+      { y: '2009', a: 75,  b: 65 },
+      { y: '2010', a: 50,  b: 40 },
+      { y: '2011', a: 75,  b: 65 },
+      { y: '2012', a: 100, b: 90 }
+    ],
+    xkey: 'y',
+    ykeys: ['a', 'b'],
+    labels: ['Earnings', 'Spenditures']
+  });
+}
+</script>

@@ -14,9 +14,8 @@
     </div>
   </div>
   <div class="row">
-    <div id="gmaps-error"></div>
     <div class="col-md-12">
-      <%= form_tag :tools, class: 'form-group', method: 'get' do %>
+      <%= form_tag :tools, class: 'form-group', id: 'tool_search_form', method: 'get' do %>
       <div class="form-group">
         <div class="col-md-2 col-md-offset-1 search-box">
           <%= text_field_tag :tool , nil, placeholder: 'Tool name:' %>
@@ -110,6 +109,44 @@
             });
         }
     }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/additional-methods.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+      $('#tool_search_form').validate({
+          rules: {
+              "tool": {
+                  required: true
+              },
+              "location": {
+                  required: true
+              },
+              "start_date": {
+                  required: true
+              },
+              "end_date": {
+                  required: true
+              }
+          },
+          messages: {
+              "tool": {
+                  required: "Please enter a tool name"
+              },
+              "location": {
+                  required: "Please enter your location"
+              },
+              "start_date": {
+                  required: "Please enter the date you want to start renting"
+              },
+              "end_date": {
+                  required: "Please enter the date you want to return the tool"
+              }
+          }
+      });
+  })
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2pWNHJAhzOEtqohWE1mD1tvTLXQfBQLI&libraries=places&callback=initAutocomplete"
