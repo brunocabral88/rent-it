@@ -13,7 +13,10 @@ class ToolsController < ApplicationController
     @params = params # for debugging only
     tool_name = params[:tool]
     @result = Tool.where('name ILIKE ?', "%#{tool_name}%").where('availability = true')
-
+    if params[:start_date] && params[:end_date]
+      session[:start_date] = params[:start_date]
+      session[:end_date] = params[:end_date]
+    end
     category_ids = @result.distinct(:category).pluck(:category_id)
     @categories = Category.find(category_ids);
     unless params[:lat].empty? && params[:lng].empty?

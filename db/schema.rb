@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170425224806) do
     t.datetime "updated_at",       null: false
     t.integer  "total_cents"
     t.integer  "stripe_charge_id"
+    t.boolean  "returned"
     t.index ["renter_id"], name: "index_rentals_on_renter_id", using: :btree
   end
 

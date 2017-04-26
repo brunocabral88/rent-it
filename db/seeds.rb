@@ -115,15 +115,15 @@ Rental.destroy_all
 RentalItem.destroy_all
 Review.destroy_all
 
-rental1 = Rental.new(renter: user3, start_date: Faker::Date.backward(5), end_date: Date.today)
+rental1 = Rental.new(renter: user3, start_date: Faker::Date.backward(5), end_date: Date.today, total_cents: 200, stripe_charge_id: 1)
 rental1.tools << [tool1, tool2]
 rental1.save!
 
-rental2 = Rental.new(renter: user1, start_date: Faker::Date.backward(3), end_date: Date.today)
+rental2 = Rental.new(renter: user1, start_date: Faker::Date.backward(3), end_date: Date.today, total_cents: 400, stripe_charge_id: 2)
 rental2.tools << tool3
 rental2.save!
 
-rental3 = Rental.new(renter: user2, start_date: Faker::Date.backward(5), end_date: 3.days.ago)
+rental3 = Rental.new(renter: user2, start_date: Faker::Date.backward(5), end_date: 3.days.ago, total_cents: 100, stripe_charge_id: 3)
 rental3.tools << tool4
 rental3.save!
 
