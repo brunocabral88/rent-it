@@ -39,4 +39,8 @@ class ApplicationController < ActionController::Base
     session[:cart_items] = []
   end
 
+  def require_authentication
+    redirect_to root_path unless current_user
+  end
+
 end
