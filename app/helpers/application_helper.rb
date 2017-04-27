@@ -9,4 +9,7 @@ module ApplicationHelper
     nil
   end
 
+  def format_price(price)
+    "$" + "%.2f" % (price.to_f / 100)
+  end
 end

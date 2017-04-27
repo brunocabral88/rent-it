@@ -114,37 +114,13 @@
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-  <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+<script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
 <script>
-window.onload = function() {
-  Morris.Area({
-    element: 'graph',
-    data: [
-      { y: '2006', a: 100, b: 90 },
-      { y: '2007', a: 75,  b: 65 },
-      { y: '2008', a: 50,  b: 40 },
-      { y: '2009', a: 75,  b: 65 },
-      { y: '2010', a: 50,  b: 40 },
-      { y: '2011', a: 75,  b: 65 },
-      { y: '2012', a: 100, b: 90 }
-    ],
-    xkey: 'y',
-    ykeys: ['a', 'b'],
-    labels: ['Earnings', 'Spenditures']
-  });
-}
+Morris.Area({
+  element: 'graph',
+  data: <%= @graph_data.to_json.html_safe %>,
+  xkey: 'day',
+  ykeys: ['user_data', 'owner_data'],
+  labels: ['Earnings', 'Spenditures']
+});
 </script>
-
-
-<!-- imaginary dashboard -->
-
-<%#= user.rental_items.each do |item| %>
-
-  <!-- <div class="item-container"> -->
-
-    <!-- <a href="/rentals/return?rental_item_id=1">return items</a> -->
-    <%#= link_to rental_return_patgh(rental_item_id: item.id), "return items", method: "POST" %>
-  <!-- </div> -->
-
-
-<%# end %>
