@@ -26,17 +26,14 @@
         </tbody>
         <tr>
           <td colspan="3"></td>
-          <!-- <td><%#= link_to "Proceed to checkout ->", "/rentals" ,method: :post, class: 'btn btn-info' %></td> -->
           <td>
             <div class="row">
               <div class="col-xs-12">
                 <%= form_tag rentals_path do %>
-                <!-- it was @cart_total * 100 instead of 100 in data-amount -->
-                <!-- we should add price per day and total price the same way as jungle -->
-                  <script
+                <script
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                     data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                    data-amount="<%= 100 %>"
+                    data-amount="<%= @total_deposit %>"
                     data-name="Rent-it"
                     data-description="Rent-it Rental Order"
                     data-locale="auto"
@@ -56,16 +53,3 @@
     </div>
   </div>
 </section>
-
-<!-- imaginary dashboard -->
-
-<%= user.rental_items.each do |item| %>
-
-  <div class="item-container">
-
-    <!-- <a href="/rentals/return?rental_item_id=1">return items</a> -->
-    <%= link_to rental_return_patgh(rental_item_id: item.id), "return items", method: "POST" %>
-  </div>
-
-
-<% end %>
