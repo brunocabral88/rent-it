@@ -20,9 +20,12 @@
               <td><%= image_tag tool.picture.tiny %></td>
               <td><%= link_to tool.name, tool %></td>
               <td><%= tool.owner.name %></td>
-              <td><%= link_to 'Delete', delete_item_cart_path(tool_id: tool.id), method: :delete, class: 'btn btn-danger' %></td>
+              <td align="right"><%= link_to 'x', delete_item_cart_path(tool_id: tool.id), method: :delete, class: 'btn btn-default' %></td>
             </tr>
           <% end %>
+          <tr>
+            <td colspan="4" align="right"><strong>Total:</strong><%= format_price @total %></td>
+          </tr>
         </tbody>
         <tr>
           <td colspan="3"></td>
