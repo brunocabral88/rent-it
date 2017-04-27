@@ -123,6 +123,19 @@ tool4 = Tool.create(name: 'Vacuum Cleaner',
                     availability: true)
 
 
+tool5 = Tool.create(name: 'Hammer - 2',
+                    description: Faker::Hipster.sentence,
+                    owner: user1,
+                    picture: open_asset('hammer.jpg'),
+                    street_address: '30 Spadina Ave.',
+                    deposit: 30,
+                    daily_rate: 3.5,
+                    city: 'Toronto',
+                    province: 'ON',
+                    full_address: "46 Spadina Ave, Toronto, ON",
+                    category: hand_tool,
+                    availability: true)
+
 puts 'Seeding rentals'
 Rental.destroy_all
 RentalItem.destroy_all
@@ -139,6 +152,11 @@ rental2.save!
 rental3 = Rental.new(renter: user2, start_date: Faker::Date.backward(5), end_date: 3.days.ago, total_cents: 100, stripe_charge_id: 3)
 rental3.tools << tool4
 rental3.save!
+
+
+rental4 = Rental.new(renter: user2, start_date: Date.today, end_date: 3.days.from_now, total_cents: 300, stripe_charge_id: 4)
+rental4.tools << tool1
+rental4.save!
 
 1..60.times do |n|
   start_date = Faker::Date.backward(Random.rand(120)) 
@@ -160,6 +178,7 @@ rental3.save!
   rental.total_cents = total_cents
   rental.save!
 end
+
 
 puts 'Seeding reviews'
 Review.create(rental_item: rental1.rental_items.first, rating: 5, comment: Faker::Hacker.say_something_smart)

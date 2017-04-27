@@ -26,11 +26,11 @@
       <!-- <div class="form-group"> -->
         <div class="col-md-2 search-box">
           <%#= label_tag 'Rent from:' %>
-          <%= date_field_tag :start_date, nil, placeholder: 'Lendign Date' %>
+          <%= date_field_tag :start_date, nil, placeholder: 'Borrowing Date', value: Time.now.strftime('%Y-%m-%d') %>
         </div>
         <div class="col-md-2 search-box">
         <%#= label_tag 'To:' %>
-        <%= date_field_tag :end_date, nil, placeholder: 'Returning Date' %>
+        <%= date_field_tag :end_date, nil, placeholder: 'Returning Date', value: 1.day.from_now.strftime('%Y-%m-%d')%>
         </div>
 
         <%= hidden_field_tag :lat %>
@@ -114,40 +114,75 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/additional-methods.min.js"></script>
 
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function () {
-      $('#tool_search_form').validate({
-          rules: {
-              "tool": {
-                  required: true
-              },
-              "location": {
-                  required: true
-              },
-              "start_date": {
-                  required: true
-              },
-              "end_date": {
-                  required: true
-              }
-          },
-          messages: {
-              "tool": {
-                  required: "Please enter a tool name"
-              },
-              "location": {
-                  required: "Please enter your location"
-              },
-              "start_date": {
-                  required: "Please enter the date you want to start renting"
-              },
-              "end_date": {
-                  required: "Please enter the date you want to return the tool"
-              }
-          }
-      });
-  })
-</script>
+<!--<script type="text/javascript" charset="utf-8">-->
+//  $(document).ready(function () {
+//
+//      $.validator.addMethod("minDate", function(value, element) {
+//          var curDate = new Date();
+//          var inputDate = new Date(value);
+//
+//          curDate.setHours(0,0,0,0);
+//          inputDate.setMinutes(inputDate.getMinutes() + inputDate.getTimezoneOffset());
+//
+//          return inputDate >= curDate
+//
+//      }, "Please put in the today’s date or a date in the future");
+//
+//      var date_of_today = new Date();
+//      date_of_today = date_of_today.setHours(0,0,0,0);
+//
+//
+//      $.validator.addMethod("greaterThan",
+//          function(value, element, params) {
+//
+//              if (!/Invalid|NaN/.test(new Date(value))) {
+//                  return new Date(value) > new Date($(params).val());
+//              }
+//
+//              return isNaN(value) && isNaN($(params).val())
+//                  || (Number(value) > Number($(params).val()));
+//          },'Must be greater than {0}.');
+//
+//      $('#tool_search_form').validate({
+//          rules: {
+//              "tool": {
+//                  required: true
+//              },
+//              "location": {
+//                  required: true
+//              },
+//              "start_date": {
+//                  required: true,
+//                  date: true,
+//                  minDate: true
+//
+//              },
+//              "end_date": {
+//                  required: true,
+//                  date: true,
+//                  greaterThan: "#start_date"
+//              }
+//          },
+//          messages: {
+//              "tool": {
+//                  required: "Please enter a tool name"
+//              },
+//              "location": {
+//                  required: "Please enter your location"
+//              },
+//              "start_date": {
+//                  required: "Please enter the date you want to start renting"
+//              },
+//              "end_date": {
+//                  required: "Please enter the date you want to return the tool",
+//                  greaterThan: "Please enter a date after the start date"
+//              }
+//          }
+//      });
+//  })
+<!--</script>-->
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2pWNHJAhzOEtqohWE1mD1tvTLXQfBQLI&libraries=places&callback=initAutocomplete"
         async defer></script>
+
+<% console %>
