@@ -1,16 +1,9 @@
 <h1>Tool Search Result</h1>
-<h2><%= @result.count %> Items Found</h2>
+<h2><%= @filtered_result.count %> Items Found</h2>
 
 <div id="filter_bys">
 
   <header>Filter Result:</header>
-  <!--<div class="sort_by">-->
-    <!--<label for="sort_by">Sort By:</label>-->
-    <!--<select id="sort_by">-->
-      <!--<option value="category">Category</option>-->
-      <!--<option value="distance">Distance</option>-->
-    <!--</select>-->
-  <!--</div>-->
 
   <div class="filter_by">
     <label for="filter_by_category_name">Category: </label>
@@ -36,7 +29,7 @@
 </div>
 
 <div class="tools">
-  <% @result.each do |tool| %>
+  <% @filtered_result.each do |tool| %>
       <div class="tool">
         <%= image_tag tool.picture.thumb %>
         <ul>
@@ -129,3 +122,4 @@
 
     });
 </script>
+<% console %>
