@@ -1,11 +1,17 @@
 class CartsController < ApplicationController
+  include CartDeposit
+
   def show
     if cart.any?
       @tools = []
+      @total = 0
       cart.each do |tool_id|
-        @tools << Tool.find(tool_id)
+        tool = Tool.find(tool_id)
+        @tools << tool
+        @total += tool.daily_rate_cents
       end
     end
+    @total_deposit = cart_deposit(@tools)
   end
 
   def add_item

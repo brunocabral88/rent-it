@@ -8,7 +8,7 @@
     </header>
 
     <div class="rental-summary jumbotron">
-      <h4>Thank you for renting from Rent-it!</h4>
+
     </div>
     <div class="panel panel-default rental-details">
       <h4>Rental Detail</h4>
@@ -19,7 +19,7 @@
               <th>Tool Name</th>
               <th>Tool Description</th>
               <th>Tool Rental Daily Price</th>
-              <!-- <th>Total Renting duration</th> -->
+              <th>Total Renting duration</th>
               <th>Tool Deposite</th>
 
             </tr>
@@ -34,7 +34,7 @@
             <tr>
             <th>Total Fee:</th>
             <td>
-              <%= humanized_money_with_symbol @rental.total_cents %>
+              <%= @rental.total_fee %>
             </td>
             </tr>
           </table>

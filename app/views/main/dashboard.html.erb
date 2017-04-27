@@ -1,0 +1,133 @@
+<h1>My Dashboard</h1>
+<% if @graph_data.size > 0 %>
+  <section id="graphs">
+    <div id="graph"></div>
+  </section>
+<% end %>
+<% if @rentals_not_returned_this_user.count > 0 %>
+  <section id="current-rentouts">
+    <h3>Current rentouts</h3>
+    <table class="table table-hover">
+      <thead>
+        <th>Rental #</th>
+        <th>Renter name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% @rentals_not_returned_this_user.each do |rental| %>
+          <tr>
+            <td><%= rental["id"] %></td>
+            <td><%= get_renter_name_by_rental_id rental["id"] %></td>
+            <td><%= rental["start_date"] %></td>
+            <td><%= rental["end_date"] %></td>
+            <td><%= link_to 'Mark as returned', rental_return_path(rental_id: rental["id"]), method: :post, class: 'btn btn-default' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+<% end %>
+<section id="tools">
+  <h3>My tools</h3>
+  <table class="table table-hover">
+    <thead>
+      <th>#</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Daily rate</th>
+      <th>Available?</th>
+    </thead>
+    <tbody>
+      <% @user.tools.each do |tool| %>
+        <tr>
+          <td><%= image_tag tool.picture.tiny %></td>
+          <td><%= link_to tool.name, tool %></td>
+          <td><%= tool.description %></td>
+          <td>$ <%= '%.2f' % (tool.daily_rate_cents.to_f / 100) %></td>
+          <td><%= tool.availability %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="4"></td>
+        <td><%= link_to "+ New tool", new_tool_path, class: 'btn btn-info' %></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<section id="rental-history">
+  <h2>Rental history</h2>
+  <table class="table table-hover">
+    <thead>
+      <th>#</th>
+      <th>Date</th>
+      <th>Total</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <% if @user.rentals.size > 0 %>
+        <% @user.rentals.each do |rental| %>
+          <tr>
+            <td><%= rental.id %></td>
+            <td><%= rental.start_date %> to <%= rental.end_date %></td>
+            <td>$ <%= "%.2f" % (rental.total_cents.to_f / 100) %></td>
+            <td><%= link_to 'View', rental, class: 'btn btn-info' %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="3">No rents history so far :(</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<section id="renter-history">
+  <h2>Rentout history</h2>
+  <table class="table">
+    <thead>
+      <th>#</th>
+      <th>Date</th>
+      <th>Total earned</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <% if @user.tools.size > 0 %>
+        <% @user.tools.each do |tool| %>
+          <% tool.rentals.distinct.each do |rental| %>
+            <tr>
+              <td><%= rental.id %></td>
+              <td><%= rental.start_date %> to <%= rental.end_date %></td>
+              <td>$ <%= "%.2f" % (rental.total_cents.to_f / 100) %></td>
+              <td><%= link_to 'View', rental, class: 'btn btn-info' %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="3">No rentouts history so far :(</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+<script>
+  <% if @graph_data.size > 0 %>
+    var morris = Morris.Line({
+      element: 'graph',
+      data: <%= @graph_data.to_json.html_safe %>,
+      xkey: 'day',
+      ykeys: ['user_data', 'owner_data'],
+      labels: ['Earnings', 'Spenditures'],
+      resize: true,
+      preUnits: "$"
+    });
+    <% end %>
+    $(window).resize(function() { morris.redraw() });
+</script>

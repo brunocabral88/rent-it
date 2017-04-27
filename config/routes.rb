@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get '/register', to: 'users#new'
+  get '/dashboard', to: 'main#dashboard'
   resources :users, only: [:create, :destroy]
   resource :cart, only: [:show] do
     put :add_item
@@ -20,5 +21,7 @@ Rails.application.routes.draw do
   end
 
   resources :rentals, only: [:create, :show]
+
+  post "/rentals/return", to: "rentals#final_charge_and_refund", as: :rental_return
 
 end

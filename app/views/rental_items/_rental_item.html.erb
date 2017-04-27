@@ -13,17 +13,16 @@
   </td>
 
   <td>
-  <%= humanized_money_with_symbol rental_item.tool.daily_rate_cents %>
+  <%= humanized_money_with_symbol rental_item.tool.daily_rate_cents/100.00 %>
   </td>
 
   <td>
-  <%#= rental.end_date - rental.start_date %>
+  <%= (@rental.end_date - @rental.start_date).to_i%> days
   </td>
 
   <td>
-  <%= humanized_money_with_symbol rental_item.tool.deposit_cents %>
+  <%= humanized_money_with_symbol rental_item.tool.deposit_cents/100.00 %>
   </td>
-
 
 
 </tr>
