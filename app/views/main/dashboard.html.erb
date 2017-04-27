@@ -1,7 +1,9 @@
 <h1>My Dashboard</h1>
-<section id="graphs">
-  <svg id="graph"></svg>
-</section>
+<% if @graph_data.size > 0 %>
+  <section id="graphs">
+    <div id="graph"></div>
+  </section>
+<% end %>
 <% if @rentals_not_returned_this_user.count > 0 %>
   <section id="current-rentouts">
     <h3>Current rentouts</h3>
@@ -94,7 +96,7 @@
     <tbody>
       <% if @user.tools.size > 0 %>
         <% @user.tools.each do |tool| %>
-          <% tool.rentals.each do |rental| %>
+          <% tool.rentals.distinct.each do |rental| %>
             <tr>
               <td><%= rental.id %></td>
               <td><%= rental.start_date %> to <%= rental.end_date %></td>
@@ -116,11 +118,16 @@
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
 <script>
-Morris.Area({
-  element: 'graph',
-  data: <%= @graph_data.to_json.html_safe %>,
-  xkey: 'day',
-  ykeys: ['user_data', 'owner_data'],
-  labels: ['Earnings', 'Spenditures']
-});
+  <% if @graph_data.size > 0 %>
+    var morris = Morris.Line({
+      element: 'graph',
+      data: <%= @graph_data.to_json.html_safe %>,
+      xkey: 'day',
+      ykeys: ['user_data', 'owner_data'],
+      labels: ['Earnings', 'Spenditures'],
+      resize: true,
+      preUnits: "$"
+    });
+    <% end %>
+    $(window).resize(function() { morris.redraw() });
 </script>

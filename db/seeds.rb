@@ -51,6 +51,18 @@ user4 = User.create(name: Faker::Name.name,
                     password_confirmation: 'password')
 
 
+1..50.times do |n|
+  admin = (n == 1) ? true : false
+  User.create(
+    name: Faker::Name.name,
+    email: "user#{n}@example.org",
+    phone: Faker::PhoneNumber.cell_phone,
+    password: "password",
+    password_confirmation: "password",
+    admin: admin
+  )
+end
+
 # Seed tools
 puts 'Seeding tools'
 Tool.destroy_all
@@ -85,6 +97,7 @@ tool2 = Tool.create(name: 'Screwdriver',
                     category: hand_tool,
                     availability: true)
 
+
 tool3 = Tool.create(name: 'Drill',
                     description: Faker::Hipster.sentence,
                     owner: user2,
@@ -93,7 +106,7 @@ tool3 = Tool.create(name: 'Drill',
                     deposit: 100,
                     daily_rate: 11.25,
                     city: 'Toronto',
-                    province: 'ON',
+                    province: 'N',
                     category: hand_tool,
                     availability: true)
 
@@ -126,6 +139,27 @@ rental2.save!
 rental3 = Rental.new(renter: user2, start_date: Faker::Date.backward(5), end_date: 3.days.ago, total_cents: 100, stripe_charge_id: 3)
 rental3.tools << tool4
 rental3.save!
+
+1..60.times do |n|
+  start_date = Faker::Date.backward(Random.rand(120)) 
+  returned = Random.rand(2) == 1 ? true : false
+  rental = Rental.new(
+    renter: User.find(Random.rand(User.count-1)+1),
+    start_date: start_date, 
+    end_date: start_date + Random.rand(10),
+    returned: returned,
+    stripe_charge_id: "12323113"
+    )
+  total_rate = 0
+  1..Random.rand(Tool.count).times do |y|
+    tool = y == 0 ? Tool.find(y+1) : Tool.find(y)
+    total_rate += tool.daily_rate * (rental.end_date - start_date).to_i
+    rental.tools << tool
+  end
+  total_cents = total_rate.to_i * 100
+  rental.total_cents = total_cents
+  rental.save!
+end
 
 puts 'Seeding reviews'
 Review.create(rental_item: rental1.rental_items.first, rating: 5, comment: Faker::Hacker.say_something_smart)
