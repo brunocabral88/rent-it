@@ -1,4 +1,6 @@
 class CartsController < ApplicationController
+  include CartDeposit
+
   def show
     if cart.any?
       @tools = []
@@ -6,6 +8,7 @@ class CartsController < ApplicationController
         @tools << Tool.find(tool_id)
       end
     end
+    @total_deposit = cart_deposit(@tools)
   end
 
   def add_item
