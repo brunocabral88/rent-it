@@ -1,6 +1,7 @@
 class RentalsController < ApplicationController
   include CartDeposit
   include SendMail
+  attr_accessor :final_charge_and_refund
 
   def show
     @rental = Rental.find(params[:id])
@@ -15,7 +16,8 @@ class RentalsController < ApplicationController
       empty_cart
 
         # UserMailer.successful_order_email(user_email, order).deliver_now
-        send_email_message(rental)
+        send_email_message_deposit_rentee(rental)
+        send_email_message_rented_owner(rental)
         redirect_to(rental_path(rental), notice: 'Your Order has been placed.')
       else
         redirect_to(cart_path, error: rental.errors.full_messages.first)
@@ -32,6 +34,7 @@ class RentalsController < ApplicationController
       if @deposit_rental.stripe_charge_id
         charge = perform_stripe_refund(@deposit_rental)
         refund = create_final_charge_and_refund(@deposit_rental, charge)
+        send_email_message_refund_rentee(@deposit_rental)
         redirect_to(rental_path(@deposit_rental), notice: 'Renting process successfully finished')
 
       else
@@ -49,7 +52,6 @@ class RentalsController < ApplicationController
       amount:      cart_deposit(cart), # in cents
       description: "Rent-it Order deposit payment",
       currency:    'cad',
-      receipt_email: current_user.email
     )
   end
 
@@ -57,7 +59,6 @@ class RentalsController < ApplicationController
     Stripe::Refund.create(
       charge: rental.stripe_charge_id,
       amount: refund_amount(rental),
-      receipt_email: current_user.email
     )
   end
 
@@ -96,16 +97,6 @@ class RentalsController < ApplicationController
     rental
   end
 
-  # def cart_deposit(tools)
-  #   total = 0
-  #   tools.each do |tool_id|
-  #     if t = Tool.find_by(id: tool_id)
-  #       total += t.deposit_cents.to_i
-  #     end
-  #   end
-  #   total
-  # end
-
   def refund_amount(rental)
     total = 0
     rental.tools.each do |tool|
@@ -114,6 +105,9 @@ class RentalsController < ApplicationController
       total += daily_fee * renting_duration
     end
     if cart_deposit(rental.tools) > total
+      puts rental.tools.inspect
+      puts cart_deposit(rental.tools)
+      puts total
       return cart_deposit(rental.tools) - total
     else
       return 1
