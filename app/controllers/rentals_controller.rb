@@ -1,5 +1,6 @@
 class RentalsController < ApplicationController
   include CartDeposit
+  include SendMail
 
   def show
     @rental = Rental.find(params[:id])
@@ -14,7 +15,7 @@ class RentalsController < ApplicationController
       empty_cart
 
         # UserMailer.successful_order_email(user_email, order).deliver_now
-
+        send_email_message(rental)
         redirect_to(rental_path(rental), notice: 'Your Order has been placed.')
       else
         redirect_to(cart_path, error: rental.errors.full_messages.first)
@@ -47,14 +48,16 @@ class RentalsController < ApplicationController
       source:      params[:stripeToken],
       amount:      cart_deposit(cart), # in cents
       description: "Rent-it Order deposit payment",
-      currency:    'cad'
+      currency:    'cad',
+      receipt_email: current_user.email
     )
   end
 
   def perform_stripe_refund(rental)
     Stripe::Refund.create(
       charge: rental.stripe_charge_id,
-      amount: refund_amount(rental)
+      amount: refund_amount(rental),
+      receipt_email: current_user.email
     )
   end
 
