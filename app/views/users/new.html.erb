@@ -35,9 +35,9 @@
             <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Password Confirmation' %>
           </div>
           <div class="form-group">
-            <%= f.submit 'Go!', class:'btn btn-default form-control' %>
+            <%= f.submit 'Go!', class:'btn btn-default form-control register_submit_botton' %>
           </div>
-          <p>Already registered? <%= link_to 'Click here to sign in', login_path %></p>
+          <p>Already registered? <%= link_to 'Click here to sign in', login_path, class: 'gray-text' %></p>
           <%= link_to "/auth/facebook", id: "sign_in" do %>
             <div class="facebook-login form-control">
               <i class="fa fa-facebook-official" aria-hidden="true"></i> Sign up with Facebook

@@ -10,8 +10,9 @@ class CartsController < ApplicationController
         @tools << tool
         @total += tool.daily_rate_cents
       end
+      @total_deposit = cart_deposit(@tools)
     end
-    @total_deposit = cart_deposit(@tools)
+
   end
 
   def add_item

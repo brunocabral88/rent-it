@@ -2,6 +2,7 @@
 @import "bootstrap";
 $green: #1abc9c;
 
+
 @media screen and (min-width: 601px){
   section.tools-show {
     .page-header h1 {
@@ -12,7 +13,18 @@ $green: #1abc9c;
         display: flex;
         margin-left: 50px;
         flex-direction: initial;
-        width: 60%
+        width: 60%;
+        .form-rating {
+          padding-top: 40px;
+          font-size: 1.2em;
+        }
+        .form-comment {
+          padding-bottom: 10px;
+          font-size: 1.2em;
+          .comment_text_area {
+            padding: 30px 350px;
+          }
+        }
       }
       .image-table{
 
@@ -30,6 +42,9 @@ $green: #1abc9c;
       }
     }
   }
+  section.new-tool-page {
+    padding: 30px;
+  }
 }
 
 #my-style-on-review-list{
@@ -42,6 +57,10 @@ $green: #1abc9c;
 }
 
 @media screen and (max-width: 600px) {
+
+  section.new-tool-page {
+    padding: 30px;
+  }
 
   section.tools-show {
     .page-header h1 {

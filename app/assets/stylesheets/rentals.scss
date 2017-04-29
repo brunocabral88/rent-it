@@ -1,3 +1,17 @@
-// Place all the styles related to the rentals controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+section.orders-show {
+  padding: 30px;
+  .table-bordered > thead > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > tfoot > tr > td {
+    border: 0px solid #ddd;
+  }
+  .panel-default {
+    border-color: white;
+  }
+  .rental-details {
+    #tool_image {
+      max-width: 200px !important;
+    }
+    #table_title_line{
+      border-bottom: 2px solid #ddd;
+    }
+  }
+}

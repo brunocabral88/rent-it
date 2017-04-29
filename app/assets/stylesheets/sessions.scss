@@ -12,7 +12,7 @@ body.login-page {
   div.facebook-login {
     border-radius: 3px;
     background-color: #4065b3;
-    display: inline-block; 
+    display: inline-block;
     color: white;
     padding: 0.4em;
     a {
@@ -31,8 +31,14 @@ body.login-page {
     padding: 2em;
     text-align: center;
   }
+  .login {
+    .login-botton {
+      background-color: #6C7A89;
+      color: white;
+    }
+  }
 }
 
-.white-text {
-  color: white;
+.gray-text {
+  color: #6C7A89;
 }

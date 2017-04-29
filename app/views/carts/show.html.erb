@@ -9,7 +9,7 @@
       <% if cart.any? %>
       <table class="table table-striped">
         <thead>
-          <th>#</th>
+          <th>Image</th>
           <th>Name</th>
           <th>Owner</th>
           <th> </th>
@@ -20,7 +20,7 @@
               <td><%= image_tag tool.picture.tiny %></td>
               <td><%= link_to tool.name, tool %></td>
               <td><%= tool.owner.name %></td>
-              <td align="right"><%= link_to 'x', delete_item_cart_path(tool_id: tool.id), method: :delete, class: 'btn btn-default' %></td>
+              <td align="right"><%= link_to 'Delete', delete_item_cart_path(tool_id: tool.id), method: :delete, class: 'btn btn-danger' %></td>
             </tr>
           <% end %>
           <tr>
@@ -30,8 +30,8 @@
         <tr>
           <td colspan="3"></td>
           <td>
-            <div class="row">
-              <div class="col-xs-12">
+            <div class="row pull-right">
+              <div class="col-xs-12 ">
                 <%= form_tag rentals_path do %>
                 <script
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -40,7 +40,7 @@
                     data-name="Rent-it"
                     data-description="Rent-it Rental Order"
                     data-locale="auto"
-                    data-email="gh.sadooghi@gmail.com"
+                    data-email= "<%= current_user.email %>"
                     data-currency="cad">
                   </script>
                 <% end %>
