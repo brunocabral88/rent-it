@@ -1,11 +1,9 @@
-<h1>Tool Search Result</h1>
+<h1>Tool Search Result for <i><%= params[:tool]%></i></h1>
 <h2><%= @filtered_result.count %> Items Found</h2>
 
 
 <div class="row">
-  <div class="col-md-12 col-lg-12">
-    <div id="map"></div>
-  </div>
+  <div id="map"></div>
 </div>
 <div id="filter_bys">
 
@@ -60,7 +58,6 @@
 
 </div>
 
-
 <style>
   #map {
     height: 400px;
@@ -68,8 +65,6 @@
     margin: 0 auto;
   }
 </style>
-
-
 
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function () {
@@ -261,13 +256,19 @@
 
         const iconUrl = '<%= image_url('rentit-logo') %>';
 
-        const pinIcon = new google.maps.MarkerImage(
-            iconUrl,
-            null,
-            null,
-            null,
-            new google.maps.Size(30, 30)
-        );
+        const pinIcon = new google.maps.MarkerImage(iconUrl, null, null, null, new google.maps.Size(30, 30));
+
+        const user_marker = new google.maps.Marker({
+            position: {
+                lat: Number(gon.coordinate.lat),
+                lng: Number(gon.coordinate.lng)
+            },
+            map: map
+        });
+
+        let markers = [user_marker];
+
+        let bounds = new google.maps.LatLngBounds();
 
         for (let i in tools) {
             let tool = tools[i];
@@ -276,12 +277,14 @@
                     lat: Number(tool.lat),
                     lng: Number(tool.lng)
                 },
-                map: map,
+                map: map
             });
+
+            markers.push(marker);
 
             marker.setIcon(pinIcon);
 
-            let content = `<img src="${tool.picture.tiny.url}"><ul><li>${tool.name}</li><li>${tool.street_address}</li></ul>`;
+            let content = `<img src="${tool.picture.tiny.url}"><ul><li>Name: ${tool.name}</li><li>Location: ${tool.street_address}</li><li>Deposit: ${tool.deposit_cents / 100}</li><li>Daily Rate: ${tool.daily_rate_cents / 100}</li><li><a href="/tools/${tool.id}" target="_blank">Details</a></li></ul>`;
 
             google.maps.event.addListener(marker, 'click', function() {
                 if (infowindow) {
@@ -294,7 +297,14 @@
             });
         }
 
+        for (var i = 0; i < markers.length; i++) {
+            bounds.extend(markers[i].getPosition());
+        }
+
+        map.fitBounds(bounds);
+
+        const markerCluster = new MarkerClusterer(map, markers, {imagePath: '/cluster-m'});
     }
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC2pWNHJAhzOEtqohWE1mD1tvTLXQfBQLI&callback=initMap"></script>

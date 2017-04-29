@@ -42,13 +42,12 @@ class ToolsController < ApplicationController
 
         # pass data to view as JS
         gon.result = @filtered_result.as_json
+        gon.coordinate = { lat: params[:lat], lng: params[:lng] }
 
         category_ids = @result.distinct(:category).pluck(:category_id)
         @categories = Category.find(category_ids);
       end
     end
-
-    
 
     unless params[:lat].empty? && params[:lng].empty?
       @lat = params[:lat]
