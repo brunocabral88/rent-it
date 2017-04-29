@@ -1,5 +1,11 @@
-<h2>Tool Search Result</h2>
+<h1>Tool Search Result for <i><%= params[:tool]%></i></h1>
 <h3><i class="fa fa-angle-double-right" aria-hidden="true"></i><%= pluralize @filtered_result.count, 'item' %> found</h3>
+
+
+<div class="row">
+  <div id="map"></div>
+</div>
+
 <div id="filter_bys">
 
   <header>Filter Result:</header>
@@ -90,7 +96,6 @@
   }
 </style>
 
-
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function () {
 
@@ -161,15 +166,140 @@
             render();
         })
     });
+
     function initMap() {
+
+        const styles = [
+            {
+                "featureType": "landscape",
+                "stylers": [
+                    {
+                        "hue": "#FFA800"
+                    },
+                    {
+                        "saturation": 0
+                    },
+                    {
+                        "lightness": 0
+                    },
+                    {
+                        "gamma": 1
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "stylers": [
+                    {
+                        "hue": "#53FF00"
+                    },
+                    {
+                        "saturation": -73
+                    },
+                    {
+                        "lightness": 40
+                    },
+                    {
+                        "gamma": 1
+                    }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "stylers": [
+                    {
+                        "hue": "#FBFF00"
+                    },
+                    {
+                        "saturation": 0
+                    },
+                    {
+                        "lightness": 0
+                    },
+                    {
+                        "gamma": 1
+                    }
+                ]
+            },
+            {
+                "featureType": "road.local",
+                "stylers": [
+                    {
+                        "hue": "#00FFFD"
+                    },
+                    {
+                        "saturation": 0
+                    },
+                    {
+                        "lightness": 30
+                    },
+                    {
+                        "gamma": 1
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "stylers": [
+                    {
+                        "hue": "#00BFFF"
+                    },
+                    {
+                        "saturation": 6
+                    },
+                    {
+                        "lightness": 8
+                    },
+                    {
+                        "gamma": 1
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "stylers": [
+                    {
+                        "hue": "#679714"
+                    },
+                    {
+                        "saturation": 33.4
+                    },
+                    {
+                        "lightness": -25.4
+                    },
+                    {
+                        "gamma": 1
+                    }
+                ]
+            }
+        ];
+
+
         const map = new google.maps.Map(document.getElementById('map'), {
             zoom: 11,
-            center: {lat: gon.result[0].lat, lng: gon.result[0].lng}
+            center: {lat: gon.result[0].lat, lng: gon.result[0].lng},
+            styles: styles
         });
 
         const tools = gon.result;
 
         let infowindow = null;
+
+        const iconUrl = '<%= image_url('rentit-logo') %>';
+
+        const pinIcon = new google.maps.MarkerImage(iconUrl, null, null, null, new google.maps.Size(30, 30));
+
+        const user_marker = new google.maps.Marker({
+            position: {
+                lat: Number(gon.coordinate.lat),
+                lng: Number(gon.coordinate.lng)
+            },
+            map: map
+        });
+
+        let markers = [user_marker];
+
+        let bounds = new google.maps.LatLngBounds();
 
         for (let i in tools) {
             let tool = tools[i];
@@ -181,24 +311,31 @@
                 map: map
             });
 
+            markers.push(marker);
 
-            let content = `<img src="${tool.picture.tiny.url}"><ul><li>${tool.name}</li><li>${tool.street_address}</li></ul>`;
+            marker.setIcon(pinIcon);
+
+            let content = `<img src="${tool.picture.tiny.url}"><ul><li>Name: ${tool.name}</li><li>Location: ${tool.street_address}</li><li>Deposit: ${tool.deposit_cents / 100}</li><li>Daily Rate: ${tool.daily_rate_cents / 100}</li><li><a href="/tools/${tool.id}" target="_blank">Details</a></li></ul>`;
 
             google.maps.event.addListener(marker, 'click', function() {
                 if (infowindow) {
                     infowindow.close();
                 }
-
                 infowindow = new google.maps.InfoWindow({
                     content: content
                 });
-
                 infowindow.open(map, marker);
-
             });
         }
 
+        for (var i = 0; i < markers.length; i++) {
+            bounds.extend(markers[i].getPosition());
+        }
+
+        map.fitBounds(bounds);
+
+        const markerCluster = new MarkerClusterer(map, markers, {imagePath: '/cluster-m'});
     }
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC2pWNHJAhzOEtqohWE1mD1tvTLXQfBQLI&callback=initMap"></script>
