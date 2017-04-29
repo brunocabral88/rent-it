@@ -1,6 +1,5 @@
 <h1>Tool Search Result</h1>
 <h2><%= @filtered_result.count %> Items Found</h2>
-
 <div id="filter_bys">
 
   <header>Filter Result:</header>
@@ -45,15 +44,32 @@
               </li>
           <% end %>
           <li><%= link_to 'Details', tool %></li>
-          <%if current_user %>
-            <li><%= link_to 'Add to cart', add_item_cart_path(tool_id: tool.id), method: :put %></li>
+          <% if current_user %>
+              <li><%= link_to 'Add to cart', add_item_cart_path(tool_id: tool.id), method: :put %></li>
           <% end %>
         </ul>
       </div>
   <% end %>
 </div>
+
+
+<style>
+  #map {
+    height: 400px;
+    width: 80%;
+    margin: 0 auto;
+  }
+</style>
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <div id="map"></div>
+  </div>
+</div>
+
+
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function () {
+
         var $tools = $('.tool');
 
         function sort_tools($sort_by_value) {
@@ -95,7 +111,7 @@
         function filter_tools() {
             var category_name = $('#filter_by_category_name').val();
             var distance = $('#filter_by_distance').val();
-            if (category_name === 'all'){
+            if (category_name === 'all') {
                 return $tools.filter(function (index) {
                     return Number($($tools[index]).find('.distance').text()) <= Number(distance)
                 });
@@ -104,24 +120,64 @@
                     return Number($($tools[index]).find('.distance').text()) <= Number(distance)
                 });
                 // Filter again by category
-                return $filtered_tools_by_distance.filter(function(index){
+                return $filtered_tools_by_distance.filter(function (index) {
                     return $($filtered_tools_by_distance[index]).find('.category').text() === category_name
                 });
             }
         }
 
-        function render (){
+        function render() {
             $tools.hide();
             var $result = filter_tools();
             $result.show();
         }
 
         render();
-
         $('.filter_by').change(function () {
             render();
         })
-
     });
+
+
+
+    function initMap() {
+        const map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 11,
+            center: {lat: gon.result[0].lat, lng: gon.result[0].lng}
+        });
+
+        const tools = gon.result;
+
+        let infowindow = null;
+
+        for (let i in tools) {
+            let tool = tools[i];
+            let marker = new google.maps.Marker({
+                position: {
+                    lat: Number(tool.lat),
+                    lng: Number(tool.lng)
+                },
+                map: map
+            });
+
+
+            let content = `<img src="${tool.picture.tiny.url}"><ul><li>${tool.name}</li><li>${tool.street_address}</li></ul>`;
+
+            google.maps.event.addListener(marker, 'click', function() {
+                if (infowindow) {
+                    infowindow.close();
+                }
+
+                infowindow = new google.maps.InfoWindow({
+                    content: content
+                });
+
+                infowindow.open(map, marker);
+
+            });
+        }
+
+    }
 </script>
-<% console %>
+
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC2pWNHJAhzOEtqohWE1mD1tvTLXQfBQLI&callback=initMap"></script>
