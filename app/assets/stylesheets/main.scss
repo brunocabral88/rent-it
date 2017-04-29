@@ -166,6 +166,17 @@ $green: #1abc9c;
       font-size: 43px;
     }
   }
+}
 
+// All screen sizes
 
+div.animated-element {
+  opacity: 0;
+  transition: all 500ms linear;
+  transform: translate3d(-100px,0px,0px);
+}
+
+div.animated-element.in-view {
+  opacity: 1;
+  transform: translate3d(0px,0px,0px);
 }

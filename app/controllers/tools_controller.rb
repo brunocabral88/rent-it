@@ -40,6 +40,9 @@ class ToolsController < ApplicationController
           end
         end
 
+        # pass data to view as JS
+        gon.result = @filtered_result.as_json
+
         category_ids = @result.distinct(:category).pluck(:category_id)
         @categories = Category.find(category_ids);
       end
