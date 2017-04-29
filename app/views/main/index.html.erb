@@ -1,51 +1,53 @@
-<section class="page-intro">
-  <div class="row info">
-    <div class="col-md-12 introduction">
-      <h3><span class="brand-name">  Rent-it</span> helps you rent tools and equipments at competitive prices</h3>
-      <h3>You can also save money by renting these equipments for the period you need instead of buying the!</h3>
-    </div>
-  </div>
-</section>
-<section class="search-area">
-
-  <div class=row>
-    <div class="col-md-12">
-      <h3 class="start-search-description">Start by searching for a tool</h3>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <%= form_tag :tools, class: 'form-group', id: 'tool_search_form', method: 'get' do %>
-      <div class="form-group">
-        <div class="col-md-2 col-md-offset-1 search-box">
-          <%= text_field_tag :tool , nil, placeholder: 'Tool name:' %>
-        </div>
-        <div class="col-md-2 search-box">
-          <%= text_field_tag :location, nil, placeholder: 'Location' %>
-        </div>
-      <!-- <div class="form-group"> -->
-        <div class="col-md-2 search-box">
-          <%#= label_tag 'Rent from:' %>
-          <%= date_field_tag :start_date, nil, placeholder: 'Borrowing Date', value: Time.now.strftime('%Y-%m-%d') %>
-        </div>
-        <div class="col-md-2 search-box">
-        <%#= label_tag 'To:' %>
-        <%= date_field_tag :end_date, nil, placeholder: 'Returning Date', value: 1.day.from_now.strftime('%Y-%m-%d')%>
-        </div>
-
-        <%= hidden_field_tag :lat %>
-        <%= hidden_field_tag :lng %>
-                               
-        <div class="col-md-2 search-box">
-        <!-- <div id="search-button"> -->
-          <%= submit_tag 'Search!', class: 'btn btn-success' %>
-        </div>
+<div class= background-img>
+  <section class="page-intro">
+    <div class="row info">
+      <div class="col-md-12 introduction">
+        <h3><span class="brand-name">  Rent-it</span> helps you rent tools and equipments at competitive prices</h3>
+        <h3>You can also save money by renting these equipments for the period you need instead of buying the!</h3>
       </div>
-      <% end %>
     </div>
-  </div>
+  </section>
+  <section class="search-area">
 
-</section>
+    <div class=row>
+      <div class="col-md-12">
+        <h3 class="start-search-description">Start by searching for a tool</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <%= form_tag :tools, class: 'form-group', id: 'tool_search_form', method: 'get' do %>
+        <div class="form-group">
+          <div class="col-md-2 col-md-offset-1 search-box">
+            <%= text_field_tag :tool , nil, placeholder: 'Tool name:' %>
+          </div>
+          <div class="col-md-2 search-box">
+            <%= text_field_tag :location, nil, placeholder: 'Location' %>
+          </div>
+        <!-- <div class="form-group"> -->
+          <div class="col-md-2 search-box">
+            <%#= label_tag 'Rent from:' %>
+            <%= date_field_tag :start_date, nil, placeholder: 'Borrowing Date', value: Time.now.strftime('%Y-%m-%d') %>
+          </div>
+          <div class="col-md-2 search-box">
+          <%#= label_tag 'To:' %>
+          <%= date_field_tag :end_date, nil, placeholder: 'Returning Date', value: 1.day.from_now.strftime('%Y-%m-%d')%>
+          </div>
+
+          <%= hidden_field_tag :lat %>
+          <%= hidden_field_tag :lng %>
+
+          <div class="col-md-2 search-box">
+          <!-- <div id="search-button"> -->
+            <%= submit_tag 'Search!', class: 'btn btn-success' %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+  </section>
+</div>
 <section class="how-it-works">
   <div class="row">
     <div class="col-md-3 col-md-offset-4 question">
@@ -56,19 +58,19 @@
     <div class="col-md-3 col-md-offset-1 how-it-works_item">
       <div class="how-works-title">
         <i class="fa fa-search fa-4x" aria-hidden="true"></i>
-        <main>Search the tools you will need</main>
+        <main>Search tools that you need by location and availability</main>
       </div>
     </div>
     <div class="col-md-3 how-it-works_item">
       <div class="how-works-title">
         <i class="fa fa-wrench fa-4x" aria-hidden="true"></i>
-        <main>Rent-it will find owner with the available tools and schedule the pick-up</main>
+        <main>Find appropriate tools, schedule a pick-up and make easy payments</main>
       </div>
     </div>
     <div class="col-md-3 how-it-works_item">
       <div class="how-works-title">
         <i class="fa fa-check-circle fa-4x" aria-hidden="true"></i>
-        <main>After you use them, return them to the owner and rate your experience.<br> You will be charged only after returning the tools</main>
+        <main>Return the rentals to the owner and rate your experience</main>
       </div>
     </div>
   </div>
@@ -114,73 +116,73 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/additional-methods.min.js"></script>
 
-<!--<script type="text/javascript" charset="utf-8">-->
-//  $(document).ready(function () {
-//
-//      $.validator.addMethod("minDate", function(value, element) {
-//          var curDate = new Date();
-//          var inputDate = new Date(value);
-//
-//          curDate.setHours(0,0,0,0);
-//          inputDate.setMinutes(inputDate.getMinutes() + inputDate.getTimezoneOffset());
-//
-//          return inputDate >= curDate
-//
-//      }, "Please put in the today’s date or a date in the future");
-//
-//      var date_of_today = new Date();
-//      date_of_today = date_of_today.setHours(0,0,0,0);
-//
-//
-//      $.validator.addMethod("greaterThan",
-//          function(value, element, params) {
-//
-//              if (!/Invalid|NaN/.test(new Date(value))) {
-//                  return new Date(value) > new Date($(params).val());
-//              }
-//
-//              return isNaN(value) && isNaN($(params).val())
-//                  || (Number(value) > Number($(params).val()));
-//          },'Must be greater than {0}.');
-//
-//      $('#tool_search_form').validate({
-//          rules: {
-//              "tool": {
-//                  required: true
-//              },
-//              "location": {
-//                  required: true
-//              },
-//              "start_date": {
-//                  required: true,
-//                  date: true,
-//                  minDate: true
-//
-//              },
-//              "end_date": {
-//                  required: true,
-//                  date: true,
-//                  greaterThan: "#start_date"
-//              }
-//          },
-//          messages: {
-//              "tool": {
-//                  required: "Please enter a tool name"
-//              },
-//              "location": {
-//                  required: "Please enter your location"
-//              },
-//              "start_date": {
-//                  required: "Please enter the date you want to start renting"
-//              },
-//              "end_date": {
-//                  required: "Please enter the date you want to return the tool",
-//                  greaterThan: "Please enter a date after the start date"
-//              }
-//          }
-//      });
-//  })
-<!--</script>-->
+<script type="text/javascript" charset="utf-8">
+ $(document).ready(function () {
+
+     $.validator.addMethod("minDate", function(value, element) {
+         var curDate = new Date();
+         var inputDate = new Date(value);
+
+         curDate.setHours(0,0,0,0);
+         inputDate.setMinutes(inputDate.getMinutes() + inputDate.getTimezoneOffset());
+
+         return inputDate >= curDate
+
+     }, "Please put in the today’s date or a date in the future");
+
+     var date_of_today = new Date();
+     date_of_today = date_of_today.setHours(0,0,0,0);
+
+
+     $.validator.addMethod("greaterThan",
+         function(value, element, params) {
+
+             if (!/Invalid|NaN/.test(new Date(value))) {
+                 return new Date(value) > new Date($(params).val());
+             }
+
+             return isNaN(value) && isNaN($(params).val())
+                 || (Number(value) > Number($(params).val()));
+         },'Must be greater than {0}.');
+
+     $('#tool_search_form').validate({
+         rules: {
+             "tool": {
+                 required: true
+             },
+             "location": {
+                 required: true
+             },
+             "start_date": {
+                 required: true,
+                 date: true,
+                 minDate: true
+
+             },
+             "end_date": {
+                 required: true,
+                 date: true,
+                 greaterThan: "#start_date"
+             }
+         },
+         messages: {
+             "tool": {
+                 required: "Please enter a tool name"
+             },
+             "location": {
+                 required: "Please enter your location"
+             },
+             "start_date": {
+                 required: "Please enter the date you want to start renting"
+             },
+             "end_date": {
+                 required: "Please enter the date you want to return the tool",
+                 greaterThan: "Please enter a date after the start date"
+             }
+         }
+     });
+ })
+</script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2pWNHJAhzOEtqohWE1mD1tvTLXQfBQLI&libraries=places&callback=initAutocomplete"
         async defer></script>
