@@ -57,6 +57,12 @@ gem 'autoprefixer-rails'
 # Add figaro to manipulate ENV variables
 gem 'figaro'
 
+# Use Gon to pass data from Rails to JS
+gem 'gon'
+
+# For including JS files
+gem 'sprockets-rails'
+
 # Facebook auth
 gem 'omniauth'
 gem 'omniauth-facebook'
