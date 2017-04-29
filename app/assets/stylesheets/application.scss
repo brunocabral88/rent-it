@@ -12,9 +12,16 @@
  *
  *= require_tree .
  *= require_self
- 
+
  */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "font-awesome"; 
+@import "font-awesome";
+
+.alert {
+  font-size: 1.3em;
+  padding-left: 50px;
+  color: red;
+}
+
