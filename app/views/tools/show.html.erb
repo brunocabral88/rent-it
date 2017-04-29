@@ -35,6 +35,18 @@
               <th>Overall Rating:</th>
               <td><%= number_with_precision(@tool.reviews.average(:rating), precision: 1)|| 'N/A'%></td>
             </tr>
+            <% if logged_in? %>
+              <tr>
+                <th></th>
+                <td>
+                  <div class="pull-right">
+                    <%= link_to add_item_cart_path(tool_id: @tool.id), method: :put, class: 'btn btn-default' do %>
+                      Add to cart <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
       </div>

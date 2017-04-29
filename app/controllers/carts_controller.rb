@@ -12,7 +12,6 @@ class CartsController < ApplicationController
       end
       @total_deposit = cart_deposit(@tools)
     end
-
   end
 
   def add_item
