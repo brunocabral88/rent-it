@@ -3,6 +3,12 @@
 $green: #1abc9c;
 
 @media screen and (min-width: 601px){
+
+  div.tools {
+    height: 400px;
+    overflow-y: scroll;
+  }
+
   section.tools-show {
     .page-header h1 {
       margin-left: 20px;
@@ -75,3 +81,17 @@ $green: #1abc9c;
   }
 }
 
+a.add-to-cart {
+  background-color: $green;
+  color: white;
+  padding:8px;
+  margin-bottom: 5px;
+  border-bottom: 3px solid #4c8060;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+.no-padding {
+  padding: 0;
+}
