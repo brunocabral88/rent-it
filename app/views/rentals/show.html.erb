@@ -4,17 +4,20 @@
     <h2>Please Login from <a href="/login">here</a></h2>
   <%else %>
     <header class="page-header">
-      <h1>Rental #<%= @rental.id %></h1>
+      <h2>Rental #<%= @rental.id %> Details</h2>
     </header>
 
-    <div class="rental-summary jumbotron">
+<!--     <div class="rental-summary jumbotron">
 
-    </div>
-    <div class="panel panel-default rental-details">
-      <h4>Rental Detail</h4>
-          <table class="table table-bordered" >
-            <thead>
-            <tr>
+    </div> -->
+    <!-- <div class="row" > -->
+
+      <!-- <div class="col-sm-12 col-12 detail-table rental-details"> -->
+    <!--<h4>Rental Detail</h4>-->
+      <div class="table-responsive">
+        <table class="table" >
+          <thead>
+            <tr id="table_title_line">
               <th>Tool Image</th>
               <th>Tool Name</th>
               <th>Tool Description</th>
@@ -23,22 +26,24 @@
               <th>Tool Deposite</th>
 
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
             <%= render @rental.rental_items %>
-            </tbody>
-            <tr>
-              <th>Email:</th>
-              <td><%= current_user.email %></td>
-            </tr>
-            <tr>
-            <th>Total Fee:</th>
-            <td>
-              <%= @rental.total_fee %>
-            </td>
-            </tr>
-          </table>
-    </div>
+          </tbody>
+          <tr>
+            <th>Email:</th>
+            <td><%= current_user.email %></td>
+          </tr>
+          <tr>
+          <th>Total Fee:</th>
+          <td>
+            <%= @rental.total_fee %>
+          </td>
+          </tr>
+        </table>
+      </div>
+      <!-- </div> -->
+    <!-- </div> -->
     <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
   <% end %>
 </section>

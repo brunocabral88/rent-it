@@ -30,9 +30,9 @@
             <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
           </div>
           <div class="form-group">
-            <%= f.submit 'Login', class: 'btn btn-default form-control' %>
+            <%= f.submit 'Login', class: 'btn btn-default form-control login-botton' %>
           </div>
-          <p>Not registered? <%= link_to 'Create an account', register_path, class: 'white-text' %></p> 
+          <p>Not registered? <%= link_to 'Create an account', register_path, class: 'gray-text' %></p>
           <div class="text-center"><h4>OR</h4></div>
           <%= link_to "/auth/facebook", id: "sign_in" do %>
             <div class="facebook-login form-control">
