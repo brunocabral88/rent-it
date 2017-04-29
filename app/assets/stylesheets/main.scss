@@ -2,6 +2,19 @@
 @import "bootstrap";
 $green: #1abc9c;
 
+// All screen sizes
+
+div.animated-element {
+  opacity: 0;
+  transition: all 500ms linear;
+  transform: translate3d(-100px,0px,0px);
+}
+
+div.animated-element.in-view {
+  opacity: 1;
+  transform: translate3d(0px,0px,0px);
+}
+
 .background-img {
   background: url('../uploads/main_page.png');
   background-size: cover;
@@ -88,7 +101,24 @@ $green: #1abc9c;
       margin-bottom: 10px;
     }
   }
+  section.dashboard {
+    width: 100%;
+    padding: 30px;
+    #current-rentouts {
+      padding-top: 30px;
+      padding-bottom: 10px;
+    }
+    #tools, #rental-history, #renter-history {
+      padding-bottom: 10px;
+    }
+    .btn-info {
+      padding: 5px 30px;
+      background-color: $green;
+      border-color: $green;
+    }
+  }
 }
+
 
 @media screen and (max-width: 600px) {
   span.brand-name {
@@ -166,17 +196,23 @@ $green: #1abc9c;
       font-size: 43px;
     }
   }
+  section.dashboard {
+    width: 100%;
+    padding: 30px;
+
+    #current-rentouts {
+      padding-top: 30px;
+      padding-bottom: 10px;
+    }
+    #tools, #rental-history, #renter-history {
+      padding-bottom: 10px;
+    }
+    .btn-info {
+      padding: 5px 30px;
+      background-color: $green;
+      border-color: $green;
+    }
+  }
 }
 
-// All screen sizes
 
-div.animated-element {
-  opacity: 0;
-  transition: all 500ms linear;
-  transform: translate3d(-100px,0px,0px);
-}
-
-div.animated-element.in-view {
-  opacity: 1;
-  transform: translate3d(0px,0px,0px);
-}
