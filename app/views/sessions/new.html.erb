@@ -1,17 +1,47 @@
-<h1>Login</h1>
-<%= form_for :user do |f| %>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rent-It!</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
 
-  <%= f.label :email %>
-  <%= f.text_field :email %>
+<body class="login-page">
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+  <% if !flash.empty? %>
+      <% flash.each do |type, message| %>
+          <div class="alert alert-<%= type %>"><%= message %></div>
+      <% end %>
+  <% end %>
 
-  <%= f.submit 'Login', class: 'btn btn-success' %>
-  <p>Not registered? <%= link_to 'Click here to register', register_path %></p> 
-  
-  <div class="facebook-login">
-    <i class="fa fa-facebook-official" aria-hidden="true"></i>
-    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1">
+      <div class="login">
+        <%= form_for :user do |f| %>
+          <div class="form-group">
+            <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
+          </div>
+          <div class="form-group">
+            <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
+          </div>
+          <div class="form-group">
+            <%= f.submit 'Login', class: 'btn btn-default form-control login-botton' %>
+          </div>
+          <p>Not registered? <%= link_to 'Create an account', register_path, class: 'gray-text' %></p>
+          <div class="text-center"><h4>OR</h4></div>
+          <%= link_to "/auth/facebook", id: "sign_in" do %>
+            <div class="facebook-login form-control">
+              <i class="fa fa-facebook-official" aria-hidden="true"></i> Sign in with Facebook
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
-<% end %>
+</body>
+</html>

@@ -2,6 +2,25 @@
 @import "bootstrap";
 $green: #1abc9c;
 
+// All screen sizes
+
+div.animated-element {
+  opacity: 0;
+  transition: all 500ms linear;
+  transform: translate3d(-100px,0px,0px);
+}
+
+div.animated-element.in-view {
+  opacity: 1;
+  transform: translate3d(0px,0px,0px);
+}
+
+.background-img {
+  background: url('../uploads/main_page.png');
+  background-size: cover;
+
+  }
+
 @media screen and (min-width: 601px) {
 
   span.brand-name {
@@ -27,13 +46,18 @@ $green: #1abc9c;
       border-radius: 10px;
       min-width: 200px;
       min-height: 200px;
+      main {
+        text-align: center;
+        width: 100%;
+      }
     }
   }
 
   section.search-area {
 
+
     display:block;
-    margin: 20px 100px 60px 50px;
+    padding: 20px 100px 60px 50px;
 
 
     .btn-success {
@@ -53,8 +77,9 @@ $green: #1abc9c;
     .start-search-description {
     padding: 30px 120px 30px 120px;
 
-    margin: auto;
-    color: #269898;
+    color: $green;
+    text-align: center;
+    width: 100%;
     }
   }
 
@@ -67,14 +92,33 @@ $green: #1abc9c;
     }
 
     .fa-wrench, .fa-check-circle, .fa-search {
-      padding: 23px 120px;
+      padding: 30px;
       font-size: 43px;
+      text-align: center;
+      width: 100%;
     }
     .how-it-works_item {
       margin-bottom: 10px;
     }
   }
+  section.dashboard {
+    width: 100%;
+    padding: 30px;
+    #current-rentouts {
+      padding-top: 30px;
+      padding-bottom: 10px;
+    }
+    #tools, #rental-history, #renter-history {
+      padding-bottom: 10px;
+    }
+    .btn-info {
+      padding: 5px 30px;
+      background-color: $green;
+      border-color: $green;
+    }
+  }
 }
+
 
 @media screen and (max-width: 600px) {
   span.brand-name {
@@ -85,10 +129,11 @@ $green: #1abc9c;
   }
 
   section.page-intro {
-      display: inline;
-      margin-left : 1px;
+    display: inline;
+    padding-left : 1px;
       .info {
         width: 100%;
+
       }
     }
 
@@ -108,7 +153,7 @@ $green: #1abc9c;
     }
 
     .form-group {
-      margin-top: 15px;
+      padding-top: 15px;
       input{
         border-radius: 5px;
         width: 100%;
@@ -117,7 +162,7 @@ $green: #1abc9c;
 
     }
     .start-search-description {
-    margin-left: 20px;
+    padding-left: 20px;
     color: #269898;
     }
   }
@@ -137,15 +182,37 @@ $green: #1abc9c;
       border-radius: 10px;
       min-width: 200px;
       min-height: 200px;
+      main {
+        text-align: center;
+        width: 100%;
+      }
     }
     .how-it-works_item {
-      margin: 10px 20px;
+      padding: 30px;
     }
     .fa-wrench, .fa-check-circle, .fa-search {
-      padding: 23px 120px;
+      text-align: center;
+      width: 100%;
       font-size: 43px;
     }
   }
+  section.dashboard {
+    width: 100%;
+    padding: 30px;
 
-
+    #current-rentouts {
+      padding-top: 30px;
+      padding-bottom: 10px;
+    }
+    #tools, #rental-history, #renter-history {
+      padding-bottom: 10px;
+    }
+    .btn-info {
+      padding: 5px 30px;
+      background-color: $green;
+      border-color: $green;
+    }
+  }
 }
+
+

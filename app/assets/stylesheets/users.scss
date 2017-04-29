@@ -1,3 +1,10 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+body.login-page {
+  .register_submit_botton {
+    background-color: #6C7A89;
+    color: white;
+  }
+
+  .gray-text {
+    color: #6C7A89;
+  }
+}

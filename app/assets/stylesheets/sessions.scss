@@ -2,16 +2,43 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-div.facebook-login {
-  border-radius: 3px;
-  background-color: #4065b3;
-  display: inline-block; 
-  color: white;
-  padding: 0.4em;
-  a {
+$green: #1abc9c;
+
+body.login-page {
+
+  background: url('/assets/tools-bg.jpeg') no-repeat center center fixed;
+  background-size: cover;
+
+  div.facebook-login {
+    border-radius: 3px;
+    background-color: #4065b3;
+    display: inline-block;
     color: white;
-    &:hover {
-      text-decoration: none;
+    padding: 0.4em;
+    a {
+      color: white;
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
+
+  div.login {
+    background-color: $green;
+    background-color: rgba(255, 255, 255, 0.58);
+    border-radius: 7px;
+    margin-top: 10em;
+    padding: 2em;
+    text-align: center;
+  }
+  .login {
+    .login-botton {
+      background-color: #6C7A89;
+      color: white;
+    }
+  }
+}
+
+.gray-text {
+  color: #6C7A89;
 }

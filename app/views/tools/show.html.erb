@@ -35,6 +35,18 @@
               <th>Overall Rating:</th>
               <td><%= number_with_precision(@tool.reviews.average(:rating), precision: 1)|| 'N/A'%></td>
             </tr>
+            <% if logged_in? %>
+              <tr>
+                <th></th>
+                <td>
+                  <div class="pull-right">
+                    <%= link_to add_item_cart_path(tool_id: @tool.id), method: :put, class: 'btn btn-default' do %>
+                      Add to cart <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
       </div>
@@ -59,14 +71,14 @@
           <% end %>
 
 
-          <div class="form-group">
+          <div class="form-group form-rating">
             <%= form.label :rating %>
             <%= form.select :rating, options_for_select(1..5), class: 'form-control' %>
           </div>
 
-          <div class="form-group">
+          <div class="form-group form-comment">
             <%= form.label :comment %>
-            <%= form.text_area :comment, class: 'form-control' %>
+            <%= form.text_area :comment, class: 'form-control comment_text_area' %>
           </div>
 
           <%= form.submit 'Submit Review', class: 'btn btn-primary' %>
@@ -74,7 +86,7 @@
 
       </div>
     <% elsif  !current_user %>
-      <%= link_to "login to creat a review", login_path %>
+      <%= link_to "login to create a review", login_path %>
 
     <% end %>
 

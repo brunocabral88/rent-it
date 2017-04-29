@@ -1,21 +1,51 @@
-<h1>Register</h1>
-<%= form_for @user, class: 'form-group' do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name, class: 'form-control' %>
-  
-  <%= f.label :email %>
-  <%= f.text_field :email, class: 'form-control' %>
-  
-  <%= f.label :password %>
-  <%= f.password_field :password, class: 'form-control' %>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rent-It!</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
 
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation, class: 'form-control' %>
+<body class="login-page">
 
-  <%= f.submit 'Go!', class:'btn btn-success' %>
-  <p>Already registered? <%= link_to 'Click here to sign in', login_path %></p>
-  <div class="facebook-login">
-    <i class="fa fa-facebook-official" aria-hidden="true"></i>
-    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+  <% if !flash.empty? %>
+      <% flash.each do |type, message| %>
+          <div class="alert alert-<%= type %>"><%= message %></div>
+      <% end %>
+  <% end %>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1">
+      <div class="login">
+        <%= form_for @user, class: 'form-group' do |f| %>
+          <div class="form-group">
+            <%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
+          </div>
+          <div class="form-group">
+            <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
+          </div>
+          <div class="form-group">
+            <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Password Confirmation' %>
+          </div>
+          <div class="form-group">
+            <%= f.submit 'Go!', class:'btn btn-default form-control register_submit_botton' %>
+          </div>
+          <p>Already registered? <%= link_to 'Click here to sign in', login_path, class: 'gray-text' %></p>
+          <%= link_to "/auth/facebook", id: "sign_in" do %>
+            <div class="facebook-login form-control">
+              <i class="fa fa-facebook-official" aria-hidden="true"></i> Sign up with Facebook
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
-<% end %>
+</body>
+</html>

@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+
+  layout false, only: [:new]
+
   def new
     @user = User.new
   end

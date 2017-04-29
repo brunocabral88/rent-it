@@ -2,7 +2,14 @@
 @import "bootstrap";
 $green: #1abc9c;
 
+
 @media screen and (min-width: 601px){
+
+  div.tools {
+    height: 400px;
+    overflow-y: scroll;
+  }
+
   section.tools-show {
     .page-header h1 {
       margin-left: 20px;
@@ -12,7 +19,18 @@ $green: #1abc9c;
         display: flex;
         margin-left: 50px;
         flex-direction: initial;
-        width: 60%
+        width: 60%;
+        .form-rating {
+          padding-top: 40px;
+          font-size: 1.2em;
+        }
+        .form-comment {
+          padding-bottom: 10px;
+          font-size: 1.2em;
+          .comment_text_area {
+            padding: 30px 350px;
+          }
+        }
       }
       .image-table{
 
@@ -30,6 +48,9 @@ $green: #1abc9c;
       }
     }
   }
+  section.new-tool-page {
+    padding: 30px;
+  }
 }
 
 #my-style-on-review-list{
@@ -42,6 +63,10 @@ $green: #1abc9c;
 }
 
 @media screen and (max-width: 600px) {
+
+  section.new-tool-page {
+    padding: 30px;
+  }
 
   section.tools-show {
     .page-header h1 {
@@ -75,3 +100,17 @@ $green: #1abc9c;
   }
 }
 
+a.add-to-cart {
+  background-color: $green;
+  color: white;
+  padding:8px;
+  margin-bottom: 5px;
+  border-bottom: 3px solid #4c8060;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+.no-padding {
+  padding: 0;
+}
