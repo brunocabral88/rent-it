@@ -25,3 +25,7 @@ public/uploads
 # dotenv
 # TODO Comment out this rule if environment variables can be committed
 .env
+
+#google credintials
+"LHL finall project-b04b7ee7c1b9.json"
+
