@@ -215,25 +215,18 @@ puts 'seeding tools_dictionary'
 
 ToolsDictionary.destroy_all
 
-# require 'csv'
+require 'csv'
 
-# csv_file = open_asset('tools_dictionary.csv')
+csv_file = open_asset('tools_dictionary.csv')
 
-# csv_text = File.read(csv_file)
-# csv = CSV.parse(csv_text)
-# puts csv.class
-# csv.each do |row|
-#   ToolsDictionary.create(row)
-#   # puts row
-#   # puts row.class
-# end
-
-require 'smarter_csv'
-options = {}
-SmarterCSV.process('input_file.csv', options) do |chunk|
-  chunk.each do |data_hash|
-    ToolsDictionary.create!( data_hash )
-  end
+csv_text = File.read(csv_file)
+csv = CSV.parse(csv_text)
+puts csv.class
+csv.each do |row|
+  ToolsDictionary.create(row)
+  # puts row
+  # puts row.class
 end
+
 
 puts 'Done'
