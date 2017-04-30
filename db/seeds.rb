@@ -210,4 +210,16 @@ puts 'Seeding reviews'
 Review.create(rental_item: rental1.rental_items.first, rating: 5, comment: Faker::Hacker.say_something_smart)
 Review.create(rental_item: rental1.rental_items.second, rating: 3, comment: Faker::Hacker.say_something_smart)
 Review.create(rental_item: rental2.rental_items.first, rating: 2, comment: Faker::Hacker.say_something_smart)
-puts 'Done!'
+
+puts 'Seeding tools_dictionary'
+
+ToolsDictionary.destroy_all
+
+csv_file = open_asset('tools_dictionary.csv')
+csv_text = File.read(csv_file)
+csv = CSV.parse(csv_text)
+csv.each do |row|
+  ToolsDictionary.create(name: row[0])
+end
+
+puts 'Done'

@@ -35,7 +35,7 @@
 
 <div class="row">
   <div class="col-md-6 col-xs-12 no-padding">
-    <div class="tools"> 
+    <div class="tools">
     <% @filtered_result.each do |tool| %>
       <div class="row">
         <div class="tool" data-tool-id="<%= tool.id%>">
@@ -71,8 +71,6 @@
         </div>
       </div>
     <% end %>
-      <h3>aaaa</h3>
-      <h3>aaaa</h3>
     </div>
   </div>
   <div class="col-md-6 col-lg-6 col-xs-12 no-padding">
@@ -109,11 +107,13 @@
 
         function filter_tools_by_category(category_name) {
             if (category_name === 'all') {
+                console.log("$tools", $tools);
                 return $tools;
             } else {
                 var $filtered_tools = $tools.filter(function (index) {
                     return $($tools[index]).find('.category').text() === category_name
                 });
+                console.log("$filtered_tools: ", $filtered_tools);
                 return $filtered_tools;
             }
         }
@@ -133,6 +133,7 @@
             var category_name = $('#filter_by_category_name').val();
             var distance = $('#filter_by_distance').val();
             if (category_name === 'all') {
+
                 return $tools.filter(function (index) {
                     return Number($($tools[index]).find('.distance').text()) <= Number(distance)
                 });
@@ -311,6 +312,10 @@
             let content = `<img src="${tool.picture.tiny.url}"><ul><li>Name: ${tool.name}</li><li>Location: ${tool.street_address}</li><li>Deposit: ${tool.deposit_cents / 100}</li><li>Daily Rate: ${tool.daily_rate_cents / 100}</li><li><a href="/tools/${tool.id}" target="_blank">Details</a></li></ul>`;
 
             google.maps.event.addListener(marker, 'click', function() {
+
+                map.setZoom(15);
+                map.setCenter(marker.getPosition());
+
                 if (infowindow) {
                     infowindow.close();
                 }
@@ -318,6 +323,8 @@
                 infowindow = new google.maps.InfoWindow({
                     content: content
                 });
+
+
                 infowindow.open(map, marker);
             });
         }
@@ -347,5 +354,5 @@
     }
 </script>
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js"></script>-->
-<script src="/markerclusterer.js"></script>
+<!--<script src="/markerclusterer.js"></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC2pWNHJAhzOEtqohWE1mD1tvTLXQfBQLI&callback=initMap"></script>
