@@ -211,29 +211,15 @@ Review.create(rental_item: rental1.rental_items.first, rating: 5, comment: Faker
 Review.create(rental_item: rental1.rental_items.second, rating: 3, comment: Faker::Hacker.say_something_smart)
 Review.create(rental_item: rental2.rental_items.first, rating: 2, comment: Faker::Hacker.say_something_smart)
 
-puts 'seeding tools_dictionary'
+puts 'Seeding tools_dictionary'
 
 ToolsDictionary.destroy_all
 
-# require 'csv'
-
-# csv_file = open_asset('tools_dictionary.csv')
-
-# csv_text = File.read(csv_file)
-# csv = CSV.parse(csv_text)
-# puts csv.class
-# csv.each do |row|
-#   ToolsDictionary.create(row)
-#   # puts row
-#   # puts row.class
-# end
-
-require 'smarter_csv'
-options = {}
-SmarterCSV.process('input_file.csv', options) do |chunk|
-  chunk.each do |data_hash|
-    ToolsDictionary.create!( data_hash )
-  end
+csv_file = open_asset('tools_dictionary.csv')
+csv_text = File.read(csv_file)
+csv = CSV.parse(csv_text)
+csv.each do |row|
+  ToolsDictionary.create(name: row[0])
 end
 
 puts 'Done'
