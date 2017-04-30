@@ -16,9 +16,30 @@ class MainController < ApplicationController
     @rentals_not_returned_this_user = []
     result.each { |rental| @rentals_not_returned_this_user << rental  }
 
+    @graph_data = get_dashboard_graph_data    
+    @user = current_user
+    
+    # User rentout history
+    @user_rentouts = []
+    @user.tools.each do |tool| 
+      tool.rentals.distinct.each do |rental|
+        @user_rentouts << rental
+      end
+    end 
+  end
+
+  def get_renter_name_by_rental_id(id)
+    rent = Rental.find_by(id: id)
+    name = rent.renter.name
+  end
+  helper_method :get_renter_name_by_rental_id
+
+  private 
+
+  def get_dashboard_graph_data
     # Get user's total earnings and spenditures for the last six months 
     rentals_owned = []
-    @graph_data = []
+    graph_data = []
     current_user.tools.map do |tool|
       tool.rentals.where('end_date > ?',[6.month.ago]).distinct.each do |rental|
         rentals_owned << rental
@@ -33,15 +54,9 @@ class MainController < ApplicationController
       temp_hash = { day: day, user_data: 0, owner_data: 0 }
       rentals_as_user.each { |r| temp_hash[:user_data] += (r.end_date == day ? r.total_cents.to_f / 100 : 0) }
       rentals_owned.each { |r| temp_hash[:owner_data] += (r.end_date == day ? r.total_cents.to_f / 100 : 0 )}
-      @graph_data << temp_hash unless temp_hash[:owner_data] == 0 && temp_hash[:user_data] == 0
+      graph_data << temp_hash unless temp_hash[:owner_data] == 0 && temp_hash[:user_data] == 0
     end
-    
-    @user = current_user
+    graph_data
   end
 
-  def get_renter_name_by_rental_id(id)
-    rent = Rental.find_by(id: id)
-    name = rent.renter.name
-  end
-  helper_method :get_renter_name_by_rental_id
 end

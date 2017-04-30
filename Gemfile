@@ -52,6 +52,9 @@ gem 'react-rails'
 # Rails Geocoder for locations of tools
 gem 'geocoder'
 
+# Pagination
+gem 'will_paginate'
+
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 

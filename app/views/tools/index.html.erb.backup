@@ -38,7 +38,7 @@
     <div class="tools">
     <% @filtered_result.each do |tool| %>
       <div class="row">
-        <div class="tool" data-tool-id="<%= tool.id%>">
+        <div class="tool">
           <div class="col-md-3 col-xs-4">
             <%= image_tag tool.picture.tiny %>
           </div>
@@ -71,6 +71,8 @@
         </div>
       </div>
     <% end %>
+      <h3>aaaa</h3>
+      <h3>aaaa</h3>
     </div>
   </div>
   <div class="col-md-6 col-lg-6 col-xs-12 no-padding">
@@ -107,13 +109,11 @@
 
         function filter_tools_by_category(category_name) {
             if (category_name === 'all') {
-                console.log("$tools", $tools);
                 return $tools;
             } else {
                 var $filtered_tools = $tools.filter(function (index) {
                     return $($tools[index]).find('.category').text() === category_name
                 });
-                console.log("$filtered_tools: ", $filtered_tools);
                 return $filtered_tools;
             }
         }
@@ -133,7 +133,6 @@
             var category_name = $('#filter_by_category_name').val();
             var distance = $('#filter_by_distance').val();
             if (category_name === 'all') {
-
                 return $tools.filter(function (index) {
                     return Number($($tools[index]).find('.distance').text()) <= Number(distance)
                 });
@@ -155,7 +154,6 @@
         }
 
         render();
-
         $('.filter_by').change(function () {
             render();
         })
@@ -268,6 +266,7 @@
             }
         ];
 
+
         const map = new google.maps.Map(document.getElementById('map'), {
             zoom: 11,
             center: {lat: gon.result[0].lat, lng: gon.result[0].lng},
@@ -295,7 +294,6 @@
         let bounds = new google.maps.LatLngBounds();
 
         for (let i in tools) {
-
             let tool = tools[i];
             let marker = new google.maps.Marker({
                 position: {
@@ -305,26 +303,19 @@
                 map: map
             });
 
-            marker.tool_id = tool.id;
             markers.push(marker);
+
             marker.setIcon(pinIcon);
 
             let content = `<img src="${tool.picture.tiny.url}"><ul><li>Name: ${tool.name}</li><li>Location: ${tool.street_address}</li><li>Deposit: ${tool.deposit_cents / 100}</li><li>Daily Rate: ${tool.daily_rate_cents / 100}</li><li><a href="/tools/${tool.id}" target="_blank">Details</a></li></ul>`;
 
             google.maps.event.addListener(marker, 'click', function() {
-
-                map.setZoom(15);
-                map.setCenter(marker.getPosition());
-
                 if (infowindow) {
                     infowindow.close();
                 }
-
                 infowindow = new google.maps.InfoWindow({
                     content: content
                 });
-
-
                 infowindow.open(map, marker);
             });
         }
@@ -335,24 +326,8 @@
 
         map.fitBounds(bounds);
 
-        //const markerCluster = new MarkerClusterer(map, markers, {imagePath: '/cluster-m'});
-
-        $('.tool').click(function(){
-            let tool_id = $(this).data("tool-id");
-
-            let marker = null;
-            for (let i = 0; i < markers.length; i++){
-                if (markers[i].tool_id === tool_id) {
-                    marker = markers[i];
-                    break;
-                }
-            }
-
-            google.maps.event.trigger(marker, 'click');
-
-        })
+        const markerCluster = new MarkerClusterer(map, markers, {imagePath: '/cluster-m'});
     }
 </script>
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js"></script>-->
-<!--<script src="/markerclusterer.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC2pWNHJAhzOEtqohWE1mD1tvTLXQfBQLI&callback=initMap"></script>
