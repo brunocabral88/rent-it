@@ -17,7 +17,7 @@
           <th></th>
         </thead>
         <tbody>
-          <% @rentals_not_returned_this_user.each do |rental| %>
+          <% @rentals_not_returned_this_user.paginate(page: params[:rentout_page], per_page: 10).each do |rental| %>
             <tr>
               <td><%= rental["id"] %></td>
               <td><%= get_renter_name_by_rental_id rental["id"] %></td>
@@ -28,6 +28,9 @@
           <% end %>
         </tbody>
       </table>
+      <div class="apple_pagination">
+        <%= will_paginate @rentals_not_returned_this_user.paginate(page: params[:rentout_page], per_page: 10), param_name: 'rentout_page' %>
+      </div>
     </section>
   <% end %>
   <section id="tools">
@@ -68,7 +71,7 @@
       </thead>
       <tbody>
         <% if @user.rentals.size > 0 %>
-          <% @user.rentals.each do |rental| %>
+          <% @user.rentals.paginate(page: params[:rental_history_page], per_page: 10).each do |rental| %>
             <tr>
               <td><%= rental.id %></td>
               <td><%= rental.start_date %> to <%= rental.end_date %></td>
@@ -83,6 +86,9 @@
         <% end %>
       </tbody>
     </table>
+    <div class="apple_pagination">
+      <%= will_paginate @user.rentals.paginate(page: params[:rental_history_page], per_page: 10), param_name: 'rental_history_page'%>
+    </div>
   </section>
 
   <section id="renter-history">
@@ -95,16 +101,14 @@
         <th>Action</th>
       </thead>
       <tbody>
-        <% if @user.tools.size > 0 %>
-          <% @user.tools.each do |tool| %>
-            <% tool.rentals.distinct.each do |rental| %>
-              <tr>
-                <td><%= rental.id %></td>
-                <td><%= rental.start_date %> to <%= rental.end_date %></td>
-                <td>$ <%= "%.2f" % (rental.total_cents.to_f / 100) %></td>
-                <td><%= link_to 'View', rental, class: 'btn btn-info' %></td>
-              </tr>
-            <% end %>
+        <% if @user_rentouts.size > 0 %>
+          <% @user_rentouts.paginate(page: params[:rentout_history_page], per_page: 10).each do |rental| %>
+            <tr>
+              <td><%= rental.id %></td>
+              <td><%= rental.start_date %> to <%= rental.end_date %></td>
+              <td>$ <%= "%.2f" % (rental.total_cents.to_f / 100) %></td>
+              <td><%= link_to 'View', rental, class: 'btn btn-info' %></td>
+            </tr>
           <% end %>
         <% else %>
           <tr>
@@ -113,6 +117,9 @@
         <% end %>
       </tbody>
     </table>
+    <div class="apple_pagination">
+      <%= will_paginate @user_rentouts.paginate(page: params[:rentout_history_page], per_page: 10), param_name: 'rentout_history_page' %>
+    </div>
   </section>
 
   <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
