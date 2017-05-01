@@ -19,42 +19,68 @@ puts 'Seeding data'
 puts 'Seeding users'
 User.destroy_all
 
-admin = User.create(name: Faker::Name.name,
+admin = User.create(name: Faker::StarWars.character,
                     email: 'admin@email.com',
                     phone: Faker::PhoneNumber.cell_phone,
                     password: 'password',
                     password_confirmation: 'password',
                     admin: true)
 
-user1 = User.create(name: Faker::Name.name,
+user1 = User.create(name: Faker::StarWars.character,
                     email: 'john@smith.com',
                     phone: Faker::PhoneNumber.cell_phone,
                     password: 'password',
                     password_confirmation: 'password')
 
-user2 = User.create(name: Faker::Name.name,
+user2 = User.create(name: Faker::StarWars.character,
                     email: 'jane@smith.com',
                     phone: Faker::PhoneNumber.cell_phone,
                     password: 'password',
                     password_confirmation: 'password')
 
-user3 = User.create(name: Faker::Name.name,
+user3 = User.create(name: Faker::StarWars.character,
                     email: 'jack@smith.com',
                     phone: Faker::PhoneNumber.cell_phone,
                     password: 'password',
                     password_confirmation: 'password')
 
-user4 = User.create(name: Faker::Name.name,
+user4 = User.create(name: Faker::StarWars.character,
                     email: 'joan@smith.com',
                     phone: Faker::PhoneNumber.cell_phone,
                     password: 'password',
                     password_confirmation: 'password')
 
 
+user5 = User.create(name: Faker::StarWars.character,
+                    email: 'user5@email.com',
+                    phone: Faker::PhoneNumber.cell_phone,
+                    password: 'password',
+                    password_confirmation: 'password')
+
+user6 = User.create(name: Faker::StarWars.character,
+                    email: 'user6@email.com',
+                    phone: Faker::PhoneNumber.cell_phone,
+                    password: 'password',
+                    password_confirmation: 'password')
+
+user7 = User.create(name: Faker::StarWars.character,
+                    email: 'user7@email.com',
+                    phone: Faker::PhoneNumber.cell_phone,
+                    password: 'password',
+                    password_confirmation: 'password')
+
+user8 = User.create(name: Faker::StarWars.character,
+                    email: 'user8@email.com',
+                    phone: Faker::PhoneNumber.cell_phone,
+                    password: 'password',
+                    password_confirmation: 'password')
+
+
+
 1..50.times do |n|
   admin = (n == 1) ? true : false
   User.create(
-    name: Faker::Name.name,
+    name: Faker::StarWars.character,
     email: "user#{n}@example.org",
     phone: Faker::PhoneNumber.cell_phone,
     password: "password",
@@ -71,6 +97,7 @@ Category.destroy_all
 hand_tool = Category.create(name: 'Hand Tool')
 cleaning = Category.create(name: 'Cleaning')
 ladder_and_scaffoldding = Category.create(name: 'Ladder and Scaffolding')
+weapon = Category.create(name: 'Weapon')
 
 tool1 = Tool.create(name: 'Hammer',
                     description: Faker::Hipster.sentence,
@@ -161,6 +188,55 @@ tool7 = Tool.create(name: 'Hammer - 4',
                     full_address: "46 Spadina Ave, Toronto, ON",
                     category: hand_tool,
                     availability: true)
+
+weapon1 = Tool.create(name: 'Lightsaber',
+                      description: Faker::StarWars.quote,
+                      owner: user5,
+                      picture: open_asset('lightsaber1.png'),
+                      street_address: '1 Yonge Street',
+                      deposit: 1000,
+                      daily_rate: 100,
+                      city: 'Toronto',
+                      province: 'ON',
+                      category: weapon,
+                      availability: true)
+
+weapon2 = Tool.create(name: 'Lightsaber',
+                      description: Faker::StarWars.quote,
+                      owner: user6,
+                      picture: open_asset('lightsaber2.jpg'),
+                      street_address: '1000 Yonge Street',
+                      deposit: 500,
+                      daily_rate: 10,
+                      city: 'Toronto',
+                      province: 'ON',
+                      category: weapon,
+                      availability: true)
+
+weapon3 = Tool.create(name: 'Lightsaber',
+                      description: Faker::StarWars.quote,
+                      owner: user7,
+                      picture: open_asset('lightsaber3.jpg'),
+                      street_address: '2000 Yonge Street',
+                      deposit: 450,
+                      daily_rate: 50,
+                      city: 'Toronto',
+                      province: 'ON',
+                      category: weapon,
+                      availability: true)
+
+weapon4 = Tool.create(name: 'Lightsaber',
+                      description: Faker::StarWars.quote,
+                      owner: user8,
+                      picture: open_asset('lightsaber4.png'),
+                      street_address: '3000 Yonge Street',
+                      deposit: 349,
+                      daily_rate: 20,
+                      city: 'Toronto',
+                      province: 'ON',
+                      category: weapon,
+                      availability: true)
+
 
 puts 'Seeding rentals'
 Rental.destroy_all
