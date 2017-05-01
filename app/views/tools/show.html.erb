@@ -53,8 +53,35 @@
     </div>
 
 
-    <% if current_user && current_is_previous_renter?(@tool) %>
 
+
+    <div class="row">
+      <h3> Reviews </h3>
+    </div>
+    <div class="row">
+      <dl id="my-style-on-review-list" class="dl-horizontal">
+        <% @tool.reviews.order("created_at desc").each do |review| %>
+          <% if review.id %>
+            <dt>date:</dt>
+            <dd><%= review.created_at.strftime("%d %b. %Y") %></dd>
+            <dt>reviewer:</dt>
+            <dd><%= review.rental.renter.name %></dd>
+            <dt>rate:</dt>
+            <dd><%= review.rating %></dd>
+            <dt>comment:</dt>
+            <dd><%= review.comment %></dd>
+
+            <% if current_user && current_user.id == review.rental.renter_id %>
+            <dt></dt>
+            <dd><%= link_to "delete", tool_review_path(@tool, review), :method => :delete, :confirm => "Are you sure?" %></dd>
+            <% end %>
+          <% end %>
+        <% end %>
+      </dl>
+
+    </div>
+
+    <% if current_user && current_is_previous_renter?(@tool) %>
       <div class="row">
         <%= form_for [@tool, @tool.reviews.new] do |form| %>
 
@@ -89,33 +116,6 @@
       <%= link_to "login to create a review", login_path %>
 
     <% end %>
-
-
-    <div class="row">
-      <h3> Reviews </h3>
-    </div>
-    <div class="row">
-      <dl id="my-style-on-review-list" class="dl-horizontal">
-        <% @tool.reviews.order("created_at desc").each do |review| %>
-          <% if review.id %>
-            <dt>date:</dt>
-            <dd><%= review.created_at.strftime("%d %b. %Y") %></dd>
-            <dt>reviewer:</dt>
-            <dd><%= review.rental.renter.name %></dd>
-            <dt>rate:</dt>
-            <dd><%= review.rating %></dd>
-            <dt>comment:</dt>
-            <dd><%= review.comment %></dd>
-
-            <% if current_user && current_user.id == review.rental.renter_id %>
-            <dt></dt>
-            <dd><%= link_to "delete", tool_review_path(@tool, review), :method => :delete, :confirm => "Are you sure?" %></dd>
-            <% end %>
-          <% end %>
-        <% end %>
-      </dl>
-
-    </div>
 
   </article>
 
