@@ -98,6 +98,7 @@ hand_tool = Category.create(name: 'Hand Tool')
 cleaning = Category.create(name: 'Cleaning')
 ladder_and_scaffoldding = Category.create(name: 'Ladder and Scaffolding')
 weapon = Category.create(name: 'Weapon')
+toy = Category.create(name: 'Toy')
 
 tool1 = Tool.create(name: 'Hammer',
                     description: Faker::Hipster.sentence,
@@ -249,6 +250,29 @@ weapon5 = Tool.create(name: 'Bowcaster',
                       category: weapon,
                       availability: true)
 
+toy1 = Tool.create(name: 'Lightsaber',
+                   description: Faker::StarWars.quote,
+                   owner: user8,
+                   picture: open_asset('lightsaber-toy1.jpg'),
+                   street_address: '300 Borough Drive',
+                   deposit: 50,
+                   daily_rate: 5,
+                   city: 'Scarborough',
+                   province: 'ON',
+                   category: toy,
+                   availability: true)
+
+toy2 = Tool.create(name: 'Lightsaber',
+                   description: Faker::StarWars.quote,
+                   owner: user8,
+                   picture: open_asset('lightsaber-toy2.jpg'),
+                   street_address: '3255 Highway 7 East',
+                   deposit: 45,
+                   daily_rate: 3.25,
+                   city: 'Markham',
+                   province: 'ON',
+                   category: toy,
+                   availability: true)
 
 puts 'Seeding rentals'
 Rental.destroy_all
