@@ -21,7 +21,7 @@
   <div class="row">
     <div class="col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1">
       <div class="login">
-        <%= form_for @user, class: 'form-group' do |f| %>
+        <%= form_for @user, class: 'form-group', html: {id: 'signup'} do |f| %>
           <div class="form-group">
             <%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
           </div>
@@ -29,7 +29,7 @@
             <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
           </div>
           <div class="form-group">
-            <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
+            <%= f.password_field :password, class: 'form-control', id: 'password', placeholder: 'Password' %>
           </div>
           <div class="form-group">
             <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Password Confirmation' %>
@@ -47,5 +47,47 @@
       </div>
     </div>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/additional-methods.min.js"></script>
+
+  <script type="text/javascript" charset="utf-8">
+      $(document).ready(function (){
+          $('#signup').validate({
+              rules: {
+                  "user[name]": {
+                      required: true
+                  },
+                  "user[email]": {
+                      required: true,
+                      email: true
+                  },
+                  "user[password]": {
+                      required: true
+                  },
+                  "user[password_confirmation]": {
+                      required: true,
+                      equalTo: "#password"
+                  }
+              },
+              messages: {
+                  "user[name]": {
+                      required: "Please enter your name"
+                  },
+                  "user[email]": {
+                      required: "Please enter your email",
+                      email: "Please enter a valid email"
+                  },
+                  "user[password]": {
+                      required: "Please enter your password"
+                  },
+                  "user[password_confirmation]": {
+                      required: "Please type in your password",
+                      equalTo: "Your password confirmation does not match"
+                  }
+              }
+          });
+      });
+  </script>
 </body>
 </html>

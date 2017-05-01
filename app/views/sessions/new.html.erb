@@ -13,16 +13,16 @@
 
 <body class="login-page">
 
-  <% if !flash.empty? %>
-      <% flash.each do |type, message| %>
-          <div class="alert alert-<%= type %>"><%= message %></div>
-      <% end %>
-  <% end %>
+<% if !flash.empty? %>
+    <% flash.each do |type, message| %>
+        <div class="alert alert-<%= type %>"><%= message %></div>
+    <% end %>
+<% end %>
 
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1">
-      <div class="login">
-        <%= form_for :user do |f| %>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1">
+    <div class="login">
+      <%= form_for :user, html: {id: 'login'} do |f| %>
           <div class="form-group">
             <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
           </div>
@@ -35,13 +35,41 @@
           <p>Not registered? <%= link_to 'Create an account', register_path, class: 'gray-text' %></p>
           <div class="text-center"><h4>OR</h4></div>
           <%= link_to "/auth/facebook", id: "sign_in" do %>
-            <div class="facebook-login form-control">
-              <i class="fa fa-facebook-official" aria-hidden="true"></i> Sign in with Facebook
-            </div>
+              <div class="facebook-login form-control">
+                <i class="fa fa-facebook-official" aria-hidden="true"></i> Sign in with Facebook
+              </div>
           <% end %>
-        <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/additional-methods.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function (){
+        $('#login').validate({
+            rules: {
+               "user[email]": {
+                   required: true,
+                   email: true
+               },
+                "user[password]": {
+                   required: true
+                }
+           },
+            messages: {
+                "user[email]": {
+                    required: "Please enter your email",
+                    email: "Please enter a valid email"
+                },
+                "user[password]": {
+                    required: "Please enter your password"
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>
