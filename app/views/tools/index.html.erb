@@ -61,8 +61,8 @@
           </div>
           <div class="col-md-3">
             <div class="row">
-              <%= link_to add_item_cart_path(tool_id: tool.id), method: :put, class: 'add-to-cart' do %>
-              Add to cart <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+              <%= link_to add_item_cart_path(tool_id: tool.id, start_date: params[:start_date], end_date: params[:end_date]), method: :put, class: 'add-to-cart' do %>
+                Add to cart <i class="fa fa-shopping-basket" aria-hidden="true"></i>
               <% end %>
             </div>
             <div class="row"><%= link_to 'Details', tool, target: '_blank' %></div>
