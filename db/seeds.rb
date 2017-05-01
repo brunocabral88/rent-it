@@ -184,26 +184,26 @@ rental4 = Rental.new(renter: user2, start_date: Date.today, end_date: 3.days.fro
 rental4.tools << tool1
 rental4.save!
 
-1..60.times do |n|
-  start_date = Faker::Date.backward(Random.rand(120))
-  returned = Random.rand(2) == 1 ? true : false
-  rental = Rental.new(
-    renter: User.find(Random.rand(User.count-1)+1),
-    start_date: start_date,
-    end_date: start_date + Random.rand(10),
-    returned: returned,
-    stripe_charge_id: "12323113"
-    )
-  total_rate = 0
-  1..Random.rand(Tool.count).times do |y|
-    tool = y == 0 ? Tool.find(y+1) : Tool.find(y)
-    total_rate += tool.daily_rate * (rental.end_date - start_date).to_i
-    rental.tools << tool
-  end
-  total_cents = total_rate.to_i * 100
-  rental.total_cents = total_cents
-  rental.save!
-end
+# 1..60.times do |n|
+#   start_date = Faker::Date.backward(Random.rand(120))
+#   returned = Random.rand(2) == 1 ? true : false
+#   rental = Rental.new(
+#     renter: User.find(Random.rand(User.count-1)+1),
+#     start_date: start_date,
+#     end_date: start_date + Random.rand(10),
+#     returned: returned,
+#     stripe_charge_id: "12323113"
+#     )
+#   total_rate = 0
+#   1..Random.rand(Tool.count).times do |y|
+#     tool = y == 0 ? Tool.find(y+1) : Tool.find(y)
+#     total_rate += tool.daily_rate * (rental.end_date - start_date).to_i
+#     rental.tools << tool
+#   end
+#   total_cents = total_rate.to_i * 100
+#   rental.total_cents = total_cents
+#   rental.save!
+# end
 
 
 puts 'Seeding reviews'
