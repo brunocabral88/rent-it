@@ -237,6 +237,18 @@ weapon4 = Tool.create(name: 'Lightsaber',
                       category: weapon,
                       availability: true)
 
+weapon5 = Tool.create(name: 'Bowcaster',
+                      description: Faker::StarWars.quote,
+                      owner: user8,
+                      picture: open_asset('bowcaster.png'),
+                      street_address: '3000 Yonge Street',
+                      deposit: 500,
+                      daily_rate: 45,
+                      city: 'Toronto',
+                      province: 'ON',
+                      category: weapon,
+                      availability: true)
+
 
 puts 'Seeding rentals'
 Rental.destroy_all
