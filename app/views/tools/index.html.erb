@@ -39,6 +39,7 @@
     <% @filtered_result.each do |tool| %>
       <div class="row">
         <div class="tool" data-tool-id="<%= tool.id%>">
+          <p class="category" style="display: none"><%= tool.category.name %></p>
           <div class="col-md-3 col-xs-4">
             <%= image_tag tool.picture.tiny %>
           </div>
@@ -313,7 +314,11 @@
 
             google.maps.event.addListener(marker, 'click', function() {
 
-                map.setZoom(15);
+                let zoom_level = map.getZoom();
+                if (zoom_level < 15) {
+                    map.setZoom(15);
+                }
+
                 map.setCenter(marker.getPosition());
 
                 if (infowindow) {

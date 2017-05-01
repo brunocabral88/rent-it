@@ -114,3 +114,9 @@ a.add-to-cart {
 .no-padding {
   padding: 0;
 }
+
+.tool {
+  &:hover {
+    color: grey;
+  }
+}

@@ -12,8 +12,8 @@ class ToolsController < ApplicationController
   def index
 
     if params[:start_date].blank? || params[:end_date].blank?
-      flash.alert = 'Please enter start date and end date'
-      redirect_to root_path
+      # flash.alert = 'Please enter start date and end date'
+      # redirect_to root_path
     elsif params[:tool].blank?
       flash.alert = 'Please enter a tool name'
       redirect_to root_path
