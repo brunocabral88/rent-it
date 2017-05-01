@@ -33,7 +33,7 @@ class RentalsController < ApplicationController
       # if rental has a deposit charge, proceed to refund
       if @deposit_rental.stripe_charge_id
         charge = perform_stripe_refund(@deposit_rental)
-        refund = create_final_charge_and_refund(@deposit_rental, charge)
+        # refund = create_final_charge_and_refund(@deposit_rental, charge)
         send_email_message_refund_rentee(@deposit_rental)
         redirect_to(rental_path(@deposit_rental), notice: 'Renting process successfully finished')
 

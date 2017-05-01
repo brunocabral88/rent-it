@@ -4,7 +4,7 @@ class Rental < ApplicationRecord
   has_many :tools, through: :rental_items
   monetize :total_cents, numericality: true
   validates :stripe_charge_id, presence: true
-  validates :start_date, :end_date, presence: true
+  validates :start_date, :end_date, presence: true, on: :create
 
   def total_fee
     daily_fee = 0

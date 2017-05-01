@@ -77,7 +77,7 @@ module SendMail
     message_params =  { from: 'gh.sadooghi@sandbox938ba7294b8648d0bc2f4194d20b4efe.mailgun.org',
       to:   'gh.sadooghi@yahoo.com',
       subject: "Your return was successfully processed",
-      html:  "your return was accepted buy the owner and you got #{refund_amount(rental)/100}$ back from your deposit money"
+      html:  "your return was accepted buy the owner and you got #{refund_amount(rental)/100.00}$ back from your deposit money"
     }
 
     # Send your message through the client
