@@ -1,11 +1,11 @@
 <tr>
 
   <td >
-  <%= image_tag("#{rental_item.tool.picture}", :style => "max-width:200px") %>
+  <%= image_tag("#{rental_item.tool.picture.url(:tiny)}", :style => "max-width:200px") %>
   </td>
 
   <td>
-  <%= rental_item.tool.name%>
+  <%= link_to rental_item.tool.name, rental_item.tool %>
   </td>
 
   <td>

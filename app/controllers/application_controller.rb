@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def cart
-    session[:cart_items] ||= []
+    session[:cart_items] ||= {}
   end
 
   private

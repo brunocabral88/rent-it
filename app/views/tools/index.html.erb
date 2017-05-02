@@ -46,39 +46,35 @@
 <div class="row">
   <div class="col-md-6 col-xs-12 no-padding">
     <div class="tools">
-      <% @filtered_result.each do |tool| %>
-          <div class="row">
-            <div class="tool" data-tool-id="<%= tool.id %>">
-              <div class="col-md-3 col-xs-4">
-                <%= image_tag tool.picture.tiny %>
-              </div>
-              <div class="col-md-6 col-xs-4">
-                <span class="category" style="display: none"><%= tool.category.name %></span>
-                <div class="row"><h5><%= tool.name %></h5></div>
-                <div class="col-6">
-                  <i class="fa fa-usd" aria-hidden="true"></i>
-                  <%= humanized_money tool.daily_rate %> (daily)
-                </div>
-                <div class="col-6">
-                  <% if @lat && @lng %>
-                      <i class="fa fa-location-arrow" aria-hidden="true"></i>
-                      <span class="distance">
+    <% @filtered_result.each do |tool| %>
+      <div class="row">
+        <div class="tool" data-tool-id="<%= tool.id%>">
+          <div class="col-md-3 col-xs-4">
+            <%= image_tag tool.picture.url(:small) %>
+          </div>
+          <div class="col-md-6 col-xs-4">
+            <span class="category" style="display: none"><%= tool.category.name %></span>
+            <div class="row"><h5>Name: <%= tool.name %></h5></div>
+            <div class="col-6">
+              <i class="fa fa-usd" aria-hidden="true"></i>
+              <%= humanized_money tool.daily_rate %> (daily)
+            </div>
+            <div class="col-6">
+              <% if @lat && @lng %>
+              <i class="fa fa-location-arrow" aria-hidden="true"></i>
+              <span class="distance">
                   <%= tool.distance_to([@lat, @lng]).round (2) %>
               </span> km (aprox)
-                  <% end %>
-                </div>
+            <% end %>
+            </div>
 
-              </div>
-              <div class="col-md-3">
-                <div class="row">
-                  <% if current_user %>
-                      <%= link_to add_item_cart_path(tool_id: tool.id), method: :put, class: 'add-to-cart' do %>
-                          Add to cart <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                      <% end %>
-                  <% end %>
-                </div>
-                <div class="row"><%= link_to 'Details', tool, target: '_blank' %></div>
-              </div>
+          </div>
+          <div class="col-md-3">
+            <div class="row">
+              <%= link_to add_item_cart_path(tool_id: tool.id, start_date: params[:start_date], end_date: params[:end_date]), method: :put, class: 'add-to-cart' do %>
+                Add to cart <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+              <% end %>
+
             </div>
           </div>
       <% end %>
@@ -329,7 +325,7 @@
             markers.push(marker);
             marker.setIcon(pinIcon);
 
-            let content = `<img src="${tool.picture.tiny.url}"><ul><li>Name: ${tool.name}</li><li>Location: ${tool.street_address}</li><li>Deposit: ${tool.deposit_cents / 100}</li><li>Daily Rate: ${tool.daily_rate_cents / 100}</li><li><a href="/tools/${tool.id}" target="_blank">Details</a></li></ul>`;
+            let content = `<img src="${tool.img_url}"><ul><li>Name: ${tool.name}</li><li>Location: ${tool.street_address}</li><li>Deposit: ${tool.deposit_cents / 100}</li><li>Daily Rate: ${tool.daily_rate_cents / 100}</li><li><a href="/tools/${tool.id}" target="_blank">Details</a></li></ul>`;
 
             google.maps.event.addListener(marker, 'click', function () {
 

@@ -41,7 +41,8 @@ gem 'faker', '~> 1.7'
 
 # Used to upload images
 gem 'carrierwave', '~> 1.0'
-gem 'rmagick'
+gem 'aws-sdk'	# amazon web services gem
+gem 'paperclip' 		# paperclip gem for file management
 
 # Used to use Stripe API
 gem 'stripe'
@@ -57,6 +58,7 @@ gem 'will_paginate'
 
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+gem 'dotenv-rails'
 
 # Add figaro to manipulate ENV variables
 gem 'figaro'

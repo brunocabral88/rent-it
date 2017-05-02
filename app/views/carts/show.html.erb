@@ -12,37 +12,48 @@
           <th>Image</th>
           <th>Name</th>
           <th>Owner</th>
+          <th>Period</th>
+          <th>Price</th>
           <th> </th>
         </thead>
         <tbody>
           <% @tools.each do |tool| %>
             <tr>
-              <td><%= image_tag tool.picture.tiny %></td>
+              <td><%= image_tag tool.picture.url(:tiny) %></td>
               <td><%= link_to tool.name, tool %></td>
               <td><%= tool.owner.name %></td>
+              <td><%= "#{session[:cart_items][tool.id.to_s]['start_date']} - #{session[:cart_items][tool.id.to_s]['end_date']}" %></td>
+              <td><%= format_price (tool.daily_rate_cents * (session[:cart_items][tool.id.to_s]['end_date'].to_date - session[:cart_items][tool.id.to_s]['start_date'].to_date).to_i) %></td>
               <td align="right"><%= link_to 'Delete', delete_item_cart_path(tool_id: tool.id), method: :delete, class: 'btn btn-danger' %></td>
             </tr>
           <% end %>
           <tr>
-            <td colspan="4" align="right"><strong>Total:</strong><%= format_price @total %></td>
+            <td colspan="6" align="right"><strong>Total:</strong><%= format_price @total %></td>
+          </tr>
+          <tr>
+            <td colspan="6" align="right"><strong>Deposit (charged now): </strong><%= format_price @total_deposit %></td>
           </tr>
         </tbody>
         <tr>
-          <td colspan="3"></td>
+          <td colspan="5"></td>
           <td>
             <div class="row pull-right">
               <div class="col-xs-12 ">
-                <%= form_tag rentals_path do %>
-                <script
-                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                    data-amount="<%= @total_deposit %>"
-                    data-name="Rent-it"
-                    data-description="Rent-it Rental Order"
-                    data-locale="auto"
-                    data-email= "<%= current_user.email %>"
-                    data-currency="cad">
-                  </script>
+                <% if current_user %>
+                  <%= form_tag rentals_path do %>
+                  <script
+                      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                      data-amount="<%= @total_deposit %>"
+                      data-name="Rent-it"
+                      data-description="Rent-it Rental Order"
+                      data-locale="auto"
+                      data-email= "<%= current_user.email %>"
+                      data-currency="cad">
+                    </script>
+                  <% end %>
+                <% else %>
+                  <%= link_to "Login first to checkout", login_path, class: 'btn btn-default' %>
                 <% end %>
               </div>
             </div>
