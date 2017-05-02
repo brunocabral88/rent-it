@@ -12,9 +12,10 @@
 
     <div class="col-md-4 col-xs-6">
       <div class="filter_by">
-        <label for="filter_by_category_name">Category: </label>
+        <!--<label for="filter_by_category_name">Category: </label>-->
         <select id="filter_by_category_name">
-          <option value="all">Show all categories</option>
+          <option></option>
+          <option value="all">All</option>
           <% @categories.each do |category| %>
               <option value="<%= category.name %>"><%= category.name %></option>
           <% end %>
@@ -24,13 +25,14 @@
     <div class="col-md-4 col-xs-6">
       <div class="filter_by">
 
-        <label for="filter_by_distance">Distance: </label>
+        <!--<label for="filter_by_distance">Distance: </label>-->
         <select id="filter_by_distance">
+          <option></option>
           <option value="5">5 km</option>
           <option value="10">10 km</option>
           <option value="15">15 km</option>
           <option value="25">25 km</option>
-          <option value="50" selected="selected">50 km</option>
+          <option value="50">50 km</option>
           <option value="100">100 km</option>
         </select>
 
@@ -97,8 +99,14 @@
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function () {
 
-        $("select").select2({
-            minimumResultsForSearch: -1
+        $("#filter_by_category_name").select2({
+            placeholder: "By Category",
+            minimumResultsForSearch: Infinity
+        });
+
+        $("#filter_by_distance").select2({
+            placeholder: "By Distance",
+            minimumResultsForSearch: Infinity
         });
 
         var $tools = $('.tool');
@@ -166,7 +174,7 @@
             $result.show();
         }
 
-        render();
+//        render();
 
         $('.filter_by').change(function () {
             render();
