@@ -4,7 +4,7 @@ $green: #1abc9c;
 
 @media screen and (min-width: 601px){
   nav.navbar {
-
+    position: static;
     background-color: $green;
     height: 65px;
     size: 2em;
@@ -20,11 +20,18 @@ $green: #1abc9c;
 
     .navbar-nav{
       height: 40px;
+
+      li a {
+        color: white;
+      }
       .dropdown-toggle {
         color: white;
         &:hover {
           color: black;
         }
+      #my-cart-navbar {
+        color: white !important;
+      }
       }
     }
 
@@ -38,6 +45,7 @@ $green: #1abc9c;
 @media screen and (max-width: 600px) {
   nav.navbar {
 
+    position: static;
     background-color: $green;
     height: 65px;
     size: 2em;

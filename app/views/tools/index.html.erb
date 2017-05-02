@@ -1,372 +1,391 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
-<h1>Tool Search Result for <i><%= params[:tool] %></i></h1>
-<h3><i class="fa fa-angle-double-right" aria-hidden="true"></i><%= pluralize @filtered_result.count, 'item' %> found
-</h3>
+<section class="tools-index">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
-<div id="filter_bys">
+    <div class="left-side col-md-4">
+        <div class="left-side-without-results">
 
-  <header>Filter Result:</header>
-  <div class="row">
+            <h1>Tool Search Result for <i><%= params[:tool] %></i></h1>
+            <h3><i class="fa fa-angle-double-right" aria-hidden="true"></i><%= pluralize @filtered_result.count, 'item' %> found
+            </h3>
 
-    <div class="col-md-4 col-xs-6">
-      <div class="filter_by">
-        <!--<label for="filter_by_category_name">Category: </label>-->
-        <select id="filter_by_category_name">
-          <option></option>
-          <option value="all">All</option>
-          <% @categories.each do |category| %>
-              <option value="<%= category.name %>"><%= category.name %></option>
-          <% end %>
-        </select>
-      </div>
-    </div>
-    <div class="col-md-4 col-xs-6">
-      <div class="filter_by">
+            <div id="filter_bys">
 
-        <!--<label for="filter_by_distance">Distance: </label>-->
-        <select id="filter_by_distance">
-          <option></option>
-          <option value="5">5 km</option>
-          <option value="10">10 km</option>
-          <option value="15">15 km</option>
-          <option value="25">25 km</option>
-          <option value="50">50 km</option>
-          <option value="100">100 km</option>
-        </select>
+              <header>Filter Result:</header>
+              <div class="row">
 
-      </div>
-    </div>
+                <div class="col-md-6 col-xs-6 filter-category-and-distance">
+                  <div class="filter_by">
+                    <!--<label for="filter_by_category_name">Category: </label>-->
+                    <select id="filter_by_category_name">
+                      <option></option>
+                      <option value="all">All</option>
+                      <% @categories.each do |category| %>
+                          <option value="<%= category.name %>"><%= category.name %></option>
+                      <% end %>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-6 filter-category-and-distance">
+                  <div class="filter_by">
+
+                    <!--<label for="filter_by_distance">Distance: </label>-->
+                    <select id="filter_by_distance">
+                      <option></option>
+                      <option value="5">5 km</option>
+                      <option value="10">10 km</option>
+                      <option value="15">15 km</option>
+                      <option value="25">25 km</option>
+                      <option value="50">50 km</option>
+                      <option value="100">100 km</option>
+                    </select>
+
+                  </div>
+                </div>
 
 
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6 col-xs-12 no-padding">
-    <div class="tools">
-    <% @filtered_result.each do |tool| %>
-      <div class="row">
-        <div class="tool" data-tool-id="<%= tool.id%>">
-          <div class="col-md-3 col-xs-4">
-            <%= image_tag tool.picture.url(:small) %>
-          </div>
-          <div class="col-md-6 col-xs-4">
-            <span class="category" style="display: none"><%= tool.category.name %></span>
-            <div class="row"><h5>Name: <%= tool.name %></h5></div>
-            <div class="col-6">
-              <i class="fa fa-usd" aria-hidden="true"></i>
-              <%= humanized_money tool.daily_rate %> (daily)
-            </div>
-            <div class="col-6">
-              <% if @lat && @lng %>
-              <i class="fa fa-location-arrow" aria-hidden="true"></i>
-              <span class="distance">
-                  <%= tool.distance_to([@lat, @lng]).round (2) %>
-              </span> km (aprox)
-            <% end %>
+              </div>
             </div>
 
-          </div>
-          <div class="col-md-3">
-            <div class="row">
-              <%= link_to add_item_cart_path(tool_id: tool.id, start_date: params[:start_date], end_date: params[:end_date]), method: :put, class: 'add-to-cart' do %>
-                Add to cart <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-              <% end %>
+            <div class="search-result-list">
+                <div class="row">
+                  <div class="col-md-12 col-xs-12 no-padding">
+                    <div class="tools">
+                    <% @filtered_result.each do |tool| %>
+                      <div class="row each-item">
+                        <div class="tool" data-tool-id="<%= tool.id%>">
+                          <div class="col-md-4 col-xs-4 each-item-img">
+                            <%= image_tag tool.picture.url(:small) %>
+                          </div>
+                          <div class="col-md-8 col-xs-4 each-item-details">
+                            <span class="category" style="display: none"><%= tool.category.name %></span>
+                            <div class="row"><h5><%= tool.name %></h5></div>
+                            <div class="col-6">
+                              <i class="fa fa-usd" aria-hidden="true"></i>
+                              <%= humanized_money tool.daily_rate %> (daily)
+                            </div>
+                            <div class="col-6">
+                              <% if @lat && @lng %>
+                              <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                              <span class="distance">
+                                  <%= tool.distance_to([@lat, @lng]).round (2) %>
+                              </span> km (aprox)
+                            <% end %>
+                            </div>
+                          </div>
 
+                          <div class="col-md-12">
+                            <div class="row detail-and-add-to-cart-button">
+                              <div class="col-md-6"><%= link_to 'Details', tool, target: '_blank', class: 'add-to-cart' %></div>
+
+                              <div class="col-md-6">
+                                <% if current_user %>
+                                  <%= link_to add_item_cart_path(tool_id: tool.id), method: :put, class: 'add-to-cart' do %>
+                                      Add to cart <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                  <% end %>
+                                <% end %>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <% end %>
+                  </div>
+                </div>
             </div>
-          </div>
-      <% end %>
+        </div>
     </div>
-  </div>
-  <div class="col-md-6 col-lg-6 col-xs-12 no-padding">
-    <div id="map"></div>
-  </div>
-</div>
+    <div class="col-md-8 col-xs-12 no-padding map-image">
+        <div id="map"></div>
+    </div>
+    </div>
 
-<style>
-  #map {
-    height: 400px;
-    margin: 0 auto;
-  }
-</style>
+    <style>
+      #map {
+        height: 400px;
+        margin: 0 auto;
+      }
+    </style>
 
-<script type="text/javascript" charset="utf-8">
-    $(document).ready(function () {
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
 
-        $("#filter_by_category_name").select2({
-            placeholder: "By Category",
-            minimumResultsForSearch: Infinity
-        });
-
-        $("#filter_by_distance").select2({
-            placeholder: "By Distance",
-            minimumResultsForSearch: Infinity
-        });
-
-        var $tools = $('.tool');
-
-        function sort_tools($sort_by_value) {
-            $tools.sort(function (a, b) {
-                var an = $(a).find('.' + $sort_by_value).text();
-                var bn = $(b).find('.' + $sort_by_value).text();
-                if (an > bn) {
-                    return 1;
-                }
-                if (an < bn) {
-                    return -1;
-                }
-                return 0;
+            $("#filter_by_category_name").select2({
+                placeholder: "By Category",
+                minimumResultsForSearch: Infinity
             });
-        }
 
-        function filter_tools_by_category(category_name) {
-            if (category_name === 'all') {
-                console.log("$tools", $tools);
-                return $tools;
-            } else {
-                var $filtered_tools = $tools.filter(function (index) {
-                    return $($tools[index]).find('.category').text() === category_name
-                });
-                console.log("$filtered_tools: ", $filtered_tools);
-                return $filtered_tools;
-            }
-        }
+            $("#filter_by_distance").select2({
+                placeholder: "By Distance",
+                minimumResultsForSearch: Infinity
+            });
 
-        function filter_tools_by_distance(distance) {
-            if (distance === 'all') {
-                return $tools
-            } else {
-                var $filtered_tools = $tools.filter(function (index) {
-                    return Number($($tools[index]).find('.distance').text()) <= Number(distance)
-                });
-                return $filtered_tools
-            }
-        }
+            var $tools = $('.tool');
 
-        function filter_tools() {
-            var category_name = $('#filter_by_category_name').val();
-            var distance = $('#filter_by_distance').val();
-            if (category_name === 'all') {
-
-                return $tools.filter(function (index) {
-                    return Number($($tools[index]).find('.distance').text()) <= Number(distance)
-                });
-            } else {
-                var $filtered_tools_by_distance = $tools.filter(function (index) {
-                    return Number($($tools[index]).find('.distance').text()) <= Number(distance)
-                });
-                // Filter again by category
-                return $filtered_tools_by_distance.filter(function (index) {
-                    return $($filtered_tools_by_distance[index]).find('.category').text() === category_name
+            function sort_tools($sort_by_value) {
+                $tools.sort(function (a, b) {
+                    var an = $(a).find('.' + $sort_by_value).text();
+                    var bn = $(b).find('.' + $sort_by_value).text();
+                    if (an > bn) {
+                        return 1;
+                    }
+                    if (an < bn) {
+                        return -1;
+                    }
+                    return 0;
                 });
             }
-        }
 
-        function render() {
-            $tools.hide();
-            var $result = filter_tools();
-            $result.show();
-        }
-
-//        render();
-
-        $('.filter_by').change(function () {
-            render();
-        })
-    });
-
-    function initMap() {
-
-        const styles = [
-            {
-                "featureType": "landscape",
-                "stylers": [
-                    {
-                        "hue": "#FFA800"
-                    },
-                    {
-                        "saturation": 0
-                    },
-                    {
-                        "lightness": 0
-                    },
-                    {
-                        "gamma": 1
-                    }
-                ]
-            },
-            {
-                "featureType": "road.highway",
-                "stylers": [
-                    {
-                        "hue": "#53FF00"
-                    },
-                    {
-                        "saturation": -73
-                    },
-                    {
-                        "lightness": 40
-                    },
-                    {
-                        "gamma": 1
-                    }
-                ]
-            },
-            {
-                "featureType": "road.arterial",
-                "stylers": [
-                    {
-                        "hue": "#FBFF00"
-                    },
-                    {
-                        "saturation": 0
-                    },
-                    {
-                        "lightness": 0
-                    },
-                    {
-                        "gamma": 1
-                    }
-                ]
-            },
-            {
-                "featureType": "road.local",
-                "stylers": [
-                    {
-                        "hue": "#00FFFD"
-                    },
-                    {
-                        "saturation": 0
-                    },
-                    {
-                        "lightness": 30
-                    },
-                    {
-                        "gamma": 1
-                    }
-                ]
-            },
-            {
-                "featureType": "water",
-                "stylers": [
-                    {
-                        "hue": "#00BFFF"
-                    },
-                    {
-                        "saturation": 6
-                    },
-                    {
-                        "lightness": 8
-                    },
-                    {
-                        "gamma": 1
-                    }
-                ]
-            },
-            {
-                "featureType": "poi",
-                "stylers": [
-                    {
-                        "hue": "#679714"
-                    },
-                    {
-                        "saturation": 33.4
-                    },
-                    {
-                        "lightness": -25.4
-                    },
-                    {
-                        "gamma": 1
-                    }
-                ]
+            function filter_tools_by_category(category_name) {
+                if (category_name === 'all') {
+                    console.log("$tools", $tools);
+                    return $tools;
+                } else {
+                    var $filtered_tools = $tools.filter(function (index) {
+                        return $($tools[index]).find('.category').text() === category_name
+                    });
+                    console.log("$filtered_tools: ", $filtered_tools);
+                    return $filtered_tools;
+                }
             }
-        ];
 
-        const map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 11,
-            center: {lat: gon.result[0].lat, lng: gon.result[0].lng},
-            styles: styles
+            function filter_tools_by_distance(distance) {
+                if (distance === 'all') {
+                    return $tools
+                } else {
+                    var $filtered_tools = $tools.filter(function (index) {
+                        return Number($($tools[index]).find('.distance').text()) <= Number(distance)
+                    });
+                    return $filtered_tools
+                }
+            }
+
+            function filter_tools() {
+                var category_name = $('#filter_by_category_name').val();
+                var distance = $('#filter_by_distance').val();
+                if (category_name === 'all') {
+
+                    return $tools.filter(function (index) {
+                        return Number($($tools[index]).find('.distance').text()) <= Number(distance)
+                    });
+                } else {
+                    var $filtered_tools_by_distance = $tools.filter(function (index) {
+                        return Number($($tools[index]).find('.distance').text()) <= Number(distance)
+                    });
+                    // Filter again by category
+                    return $filtered_tools_by_distance.filter(function (index) {
+                        return $($filtered_tools_by_distance[index]).find('.category').text() === category_name
+                    });
+                }
+            }
+
+            function render() {
+                $tools.hide();
+                var $result = filter_tools();
+                $result.show();
+            }
+
+    //        render();
+
+            $('.filter_by').change(function () {
+                render();
+            })
         });
 
-        const tools = gon.result;
+        function initMap() {
 
-        let infowindow = null;
+            const styles = [
+                {
+                    "featureType": "landscape",
+                    "stylers": [
+                        {
+                            "hue": "#FFA800"
+                        },
+                        {
+                            "saturation": 0
+                        },
+                        {
+                            "lightness": 0
+                        },
+                        {
+                            "gamma": 1
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "stylers": [
+                        {
+                            "hue": "#53FF00"
+                        },
+                        {
+                            "saturation": -73
+                        },
+                        {
+                            "lightness": 40
+                        },
+                        {
+                            "gamma": 1
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "stylers": [
+                        {
+                            "hue": "#FBFF00"
+                        },
+                        {
+                            "saturation": 0
+                        },
+                        {
+                            "lightness": 0
+                        },
+                        {
+                            "gamma": 1
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.local",
+                    "stylers": [
+                        {
+                            "hue": "#00FFFD"
+                        },
+                        {
+                            "saturation": 0
+                        },
+                        {
+                            "lightness": 30
+                        },
+                        {
+                            "gamma": 1
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "stylers": [
+                        {
+                            "hue": "#00BFFF"
+                        },
+                        {
+                            "saturation": 6
+                        },
+                        {
+                            "lightness": 8
+                        },
+                        {
+                            "gamma": 1
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "stylers": [
+                        {
+                            "hue": "#679714"
+                        },
+                        {
+                            "saturation": 33.4
+                        },
+                        {
+                            "lightness": -25.4
+                        },
+                        {
+                            "gamma": 1
+                        }
+                    ]
+                }
+            ];
 
-        const iconUrl = '<%= image_url('rentit-logo') %>';
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 11,
+                center: {lat: gon.result[0].lat, lng: gon.result[0].lng},
+                styles: styles
+            });
 
-        const pinIcon = new google.maps.MarkerImage(iconUrl, null, null, null, new google.maps.Size(30, 30));
+            const tools = gon.result;
 
-        const user_marker = new google.maps.Marker({
-            position: {
-                lat: Number(gon.coordinate.lat),
-                lng: Number(gon.coordinate.lng)
-            },
-            map: map
-        });
+            let infowindow = null;
 
-        let markers = [user_marker];
+            const iconUrl = '<%= image_url('rentit-logo') %>';
 
-        let bounds = new google.maps.LatLngBounds();
+            const pinIcon = new google.maps.MarkerImage(iconUrl, null, null, null, new google.maps.Size(30, 30));
 
-        for (let i in tools) {
-
-            let tool = tools[i];
-            let marker = new google.maps.Marker({
+            const user_marker = new google.maps.Marker({
                 position: {
-                    lat: Number(tool.lat),
-                    lng: Number(tool.lng)
+                    lat: Number(gon.coordinate.lat),
+                    lng: Number(gon.coordinate.lng)
                 },
                 map: map
             });
 
-            marker.tool_id = tool.id;
-            markers.push(marker);
-            marker.setIcon(pinIcon);
+            let markers = [user_marker];
 
-            let content = `<img src="${tool.img_url}"><ul><li>Name: ${tool.name}</li><li>Location: ${tool.street_address}</li><li>Deposit: ${tool.deposit_cents / 100}</li><li>Daily Rate: ${tool.daily_rate_cents / 100}</li><li><a href="/tools/${tool.id}" target="_blank">Details</a></li></ul>`;
+            let bounds = new google.maps.LatLngBounds();
 
-            google.maps.event.addListener(marker, 'click', function () {
+            for (let i in tools) {
 
-                map.setZoom(15);
-                map.setCenter(marker.getPosition());
-
-                if (infowindow) {
-                    infowindow.close();
-                }
-
-                infowindow = new google.maps.InfoWindow({
-                    content: content
+                let tool = tools[i];
+                let marker = new google.maps.Marker({
+                    position: {
+                        lat: Number(tool.lat),
+                        lng: Number(tool.lng)
+                    },
+                    map: map
                 });
 
+                marker.tool_id = tool.id;
+                markers.push(marker);
+                marker.setIcon(pinIcon);
 
-                infowindow.open(map, marker);
-            });
-        }
+                let content = `<img src="${tool.img_url}"><ul><li>Name: ${tool.name}</li><li>Location: ${tool.street_address}</li><li>Deposit: ${tool.deposit_cents / 100}</li><li>Daily Rate: ${tool.daily_rate_cents / 100}</li><li><a href="/tools/${tool.id}" target="_blank">Details</a></li></ul>`;
 
-        for (var i = 0; i < markers.length; i++) {
-            bounds.extend(markers[i].getPosition());
-        }
+                google.maps.event.addListener(marker, 'click', function () {
 
-        map.fitBounds(bounds);
+                    map.setZoom(15);
+                    map.setCenter(marker.getPosition());
 
-        //const markerCluster = new MarkerClusterer(map, markers, {imagePath: '/cluster-m'});
+                    if (infowindow) {
+                        infowindow.close();
+                    }
 
-        $('.tool').click(function () {
-            let tool_id = $(this).data("tool-id");
+                    infowindow = new google.maps.InfoWindow({
+                        content: content
+                    });
 
-            let marker = null;
-            for (let i = 0; i < markers.length; i++) {
-                if (markers[i].tool_id === tool_id) {
-                    marker = markers[i];
-                    break;
-                }
+
+                    infowindow.open(map, marker);
+                });
             }
 
-            google.maps.event.trigger(marker, 'click');
+            for (var i = 0; i < markers.length; i++) {
+                bounds.extend(markers[i].getPosition());
+            }
 
-        })
-    }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC2pWNHJAhzOEtqohWE1mD1tvTLXQfBQLI&callback=initMap"></script>
+            map.fitBounds(bounds);
+
+            //const markerCluster = new MarkerClusterer(map, markers, {imagePath: '/cluster-m'});
+
+            $('.tool').click(function () {
+                let tool_id = $(this).data("tool-id");
+
+                let marker = null;
+                for (let i = 0; i < markers.length; i++) {
+                    if (markers[i].tool_id === tool_id) {
+                        marker = markers[i];
+                        break;
+                    }
+                }
+
+                google.maps.event.trigger(marker, 'click');
+
+            })
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC2pWNHJAhzOEtqohWE1mD1tvTLXQfBQLI&callback=initMap"></script>
+</section>
