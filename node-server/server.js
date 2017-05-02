@@ -12,22 +12,22 @@ var clarifai = new Clarifai.App(
 );
 
 // predict the contents of an image by passing in a url
-function predictImageByUrl(image,callback) {
-  clarifai.models.predict({id: Clarifai.GENERAL_MODEL}, image).then(callback,callback);
+function predictImageByUrl(imageUrl,cbOk,cbErr) {
+  clarifai.models.predict(Clarifai.GENERAL_MODEL, imageUrl).then(cbOk,cbErr);
 }
+
 app.get("/api",(req,res) => {
   if (req.query.imageUrl) {
     var output = {};
     console.log("Trying to predict: ",req.query.imageUrl);
-    predictImageByUrl(req.query.imageUrl,(response) => {
-      console.log(response.data.outputs)
+    predictImageByUrl(req.query.imageUrl.toString(),(response) => {
       res.status(200);
       response.outputs[0].data.concepts.forEach((el) => {
-        output[el.name] =  el.value;
+        output[el.name] = el.value;
       })
       res.send(output);
-    },(response,err) => {
-      res.status(400).json(err);
+    },(err) => {
+      res.send(err);
     })
   } else {
     res.send("Please specify a url using the ?imageUrl variable");
