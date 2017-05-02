@@ -15,6 +15,8 @@
       <!-- <div class="col-sm-12 col-12 detail-table rental-details"> -->
     <!--<h4>Rental Detail</h4>-->
       <div class="table-responsive">
+        <h4>Email: <%= current_user.email %></h4>
+        <h4>Date: <%= @rental.start_date %></h4>
         <table class="table" >
           <thead>
             <tr id="table_title_line">
@@ -23,22 +25,18 @@
               <th>Tool Description</th>
               <th>Tool Rental Daily Price</th>
               <th>Total Renting duration</th>
-              <th>Tool Deposite</th>
-
+              <th>Tool Deposit</th>
             </tr>
           </thead>
           <tbody>
             <%= render @rental.rental_items %>
           </tbody>
           <tr>
-            <th>Email:</th>
-            <td><%= current_user.email %></td>
-          </tr>
-          <tr>
-          <th>Total Fee:</th>
-          <td>
-            <%= @rental.total_fee %>
-          </td>
+            <td colspan="4"></td>
+            <th>Total:</th>
+            <td>
+              $<%= "%.2f" % @rental.total_fee %>
+            </td>
           </tr>
         </table>
       </div>

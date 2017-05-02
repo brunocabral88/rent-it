@@ -46,7 +46,7 @@
       <tbody>
         <% @user.tools.each do |tool| %>
           <tr>
-            <td><%= image_tag tool.picture.tiny %></td>
+            <td><%= image_tag tool.picture.url(:tiny) %></td>
             <td><%= link_to tool.name, tool %></td>
             <td><%= tool.description %></td>
             <td>$ <%= '%.2f' % (tool.daily_rate_cents.to_f / 100) %></td>

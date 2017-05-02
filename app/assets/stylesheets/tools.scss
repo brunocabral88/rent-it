@@ -147,6 +147,10 @@ $green: #1abc9c;
   }
 }
 
+select {
+  width: 15em;
+}
+
 @media screen and (max-width: 600px) {
   .each-item {
     padding: 20px 10px;

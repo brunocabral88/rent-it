@@ -1,131 +1,127 @@
+
 <section class="tools-index">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
     <div class="left-side col-md-4">
         <div class="left-side-without-results">
-            <h1 >Tool Search Result for <i><%= params[:tool]%></i></h1>
-            <h3 ><i class="fa fa-angle-double-right" aria-hidden="true"></i><%= pluralize @filtered_result.count, 'item' %> found</h3>
+
+            <h1>Tool Search Result for <i><%= params[:tool] %></i></h1>
+            <h3><i class="fa fa-angle-double-right" aria-hidden="true"></i><%= pluralize @filtered_result.count, 'item' %> found
+            </h3>
 
             <div id="filter_bys">
 
-              <!-- <header>Filter Result:</header> -->
-                <div class="row">
-                    <div class="col-md-6 col-xs-6 filter-category-and-distance">
-     <!--                    <div class="filter_by">
-                            <label for="filter_by_category_name">Category: </label>
-                            <select id="filter_by_category_name">
-                            <option value="all">Show all categories</option>
-                            <%# @categories.each do |category| %>
-                                <option value="<%#= category.name %>"><%#= category.name %></option>
-                            <%# end %>
-                            </select>
-                        </div>
+              <header>Filter Result:</header>
+              <div class="row">
 
-    -->                 <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Category
-                            <span class="caret"></span></button>
-                              <ul class="dropdown-menu">
-                                <% @categories.each do |category| %>
-                                    <li><a href="#"><%= category.name %></a></li>
-                                <% end %>
-                              </ul>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-6 col-xs-6 filter-category-and-distance">
-    <!--                     <div class="filter_by">
-                            <label for="filter_by_distance">Distance: </label>
-                            <select id="filter_by_distance">
-                            <option value="5">5 km</option>
-                            <option value="10">10 km</option>
-                            <option value="15">15 km</option>
-                            <option value="25">25 km</option>
-                            <option value="50" selected="selected">50 km</option>
-                            <option value="100">100 km</option>
-                            </select>
-                        </div>
-     -->
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Distance
-                            <span class="caret"></span></button>
-                              <ul class="dropdown-menu">
-                                <li><a href="#"> >5 km </a></li>
-                                <li><a href="#"> >10 km </a></li>
-                                <li><a href="#"> >15 km </a></li>
-                                <li><a href="#"> >25 km </a></li>
-                                <li><a href="#"> >50 km </a></li>
-                                <li><a href="#"> >100 km </a></li>
-                              </ul>
-                        </div>
-
-                    </div>
-
-
+                <div class="col-md-6 col-xs-6 filter-category-and-distance">
+                  <div class="filter_by">
+                    <!--<label for="filter_by_category_name">Category: </label>-->
+                    <select id="filter_by_category_name">
+                      <option></option>
+                      <option value="all">All</option>
+                      <% @categories.each do |category| %>
+                          <option value="<%= category.name %>"><%= category.name %></option>
+                      <% end %>
+                    </select>
+                  </div>
                 </div>
+                <div class="col-md-6 col-xs-6 filter-category-and-distance">
+                  <div class="filter_by">
+
+                    <!--<label for="filter_by_distance">Distance: </label>-->
+                    <select id="filter_by_distance">
+                      <option></option>
+                      <option value="5">5 km</option>
+                      <option value="10">10 km</option>
+                      <option value="15">15 km</option>
+                      <option value="25">25 km</option>
+                      <option value="50">50 km</option>
+                      <option value="100">100 km</option>
+                    </select>
+
+                  </div>
+                </div>
+
+
+              </div>
             </div>
-        </div>
 
-        <div class="search-result-list">
-            <div class="row">
-              <div class="col-md-12 col-xs-12 no-padding">
-                <div class="tools">
-                <% @filtered_result.each do |tool| %>
-                  <div class="row each-item">
-                    <div class="tool" data-tool-id="<%= tool.id%>">
-                      <div class="col-md-4 col-xs-4 each-item-img">
-                        <%= image_tag tool.picture.tiny %>
-                      </div>
-                      <div class="col-md-8 col-xs-4 each-item-details">
-                        <div class="row"><h5><%= tool.name %></h5></div>
-                        <div class="col-6">
-                          <i class="fa fa-usd" aria-hidden="true"></i>
-                          <%= humanized_money tool.daily_rate %> (daily)
-                        </div>
-                        <div class="col-6">
-                          <% if @lat && @lng %>
-                          <i class="fa fa-location-arrow" aria-hidden="true"></i>
-                          <span class="distance">
-                              <%= tool.distance_to([@lat, @lng]).round (2) %>
-                          </span> km (aprox)
-                        <% end %>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="row detail-and-add-to-cart-button">
-                            <div class="col-md-6"><%= link_to 'Details', tool, target: '_blank', class: 'add-to-cart' %></div>
+            <div class="search-result-list">
+                <div class="row">
+                  <div class="col-md-12 col-xs-12 no-padding">
+                    <div class="tools">
+                    <% @filtered_result.each do |tool| %>
+                      <div class="row each-item">
+                        <div class="tool" data-tool-id="<%= tool.id%>">
+                          <div class="col-md-4 col-xs-4 each-item-img">
+                            <%= image_tag tool.picture.url(:small) %>
+                          </div>
+                          <div class="col-md-8 col-xs-4 each-item-details">
+                            <span class="category" style="display: none"><%= tool.category.name %></span>
+                            <div class="row"><h5><%= tool.name %></h5></div>
+                            <div class="col-6">
+                              <i class="fa fa-usd" aria-hidden="true"></i>
+                              <%= humanized_money tool.daily_rate %> (daily)
+                            </div>
+                            <div class="col-6">
+                              <% if @lat && @lng %>
+                              <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                              <span class="distance">
+                                  <%= tool.distance_to([@lat, @lng]).round (2) %>
+                              </span> km (aprox)
+                            <% end %>
+                            </div>
+                          </div>
 
-                            <div class="col-md-6">
+                          <div class="col-md-12">
+                            <div class="row detail-and-add-to-cart-button">
+                              <div class="col-md-6"><%= link_to 'Details', tool, target: '_blank', class: 'add-to-cart' %></div>
+
+                              <div class="col-md-6">
                                 <% if current_user %>
-                                    <%= link_to add_item_cart_path(tool_id: tool.id), method: :put, class: 'add-to-cart' do %>
+                                  <%= link_to add_item_cart_path(tool_id: tool.id), method: :put, class: 'add-to-cart' do %>
                                       Add to cart <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                    <% end %>
+                                  <% end %>
                                 <% end %>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
 
+                      </div>
                     </div>
+                    <% end %>
                   </div>
-                <% end %>
                 </div>
-              </div>
             </div>
         </div>
     </div>
     <div class="col-md-8 col-xs-12 no-padding map-image">
         <div id="map"></div>
     </div>
+    </div>
 
-
-<!--     <style>
+    <style>
       #map {
-        height: 680px;
-        <%#width: 80%;%>
+        height: 400px;
         margin: 0 auto;
       }
-    </style> -->
+    </style>
 
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function () {
+
+            $("#filter_by_category_name").select2({
+                placeholder: "By Category",
+                minimumResultsForSearch: Infinity
+            });
+
+            $("#filter_by_distance").select2({
+                placeholder: "By Distance",
+                minimumResultsForSearch: Infinity
+            });
 
             var $tools = $('.tool');
 
@@ -192,7 +188,7 @@
                 $result.show();
             }
 
-            render();
+    //        render();
 
             $('.filter_by').change(function () {
                 render();
@@ -347,9 +343,9 @@
                 markers.push(marker);
                 marker.setIcon(pinIcon);
 
-                let content = `<img src="${tool.picture.tiny.url}"><ul><li>Name: ${tool.name}</li><li>Location: ${tool.street_address}</li><li>Deposit: ${tool.deposit_cents / 100}</li><li>Daily Rate: ${tool.daily_rate_cents / 100}</li><li><a href="/tools/${tool.id}" target="_blank">Details</a></li></ul>`;
+                let content = `<img src="${tool.img_url}"><ul><li>Name: ${tool.name}</li><li>Location: ${tool.street_address}</li><li>Deposit: ${tool.deposit_cents / 100}</li><li>Daily Rate: ${tool.daily_rate_cents / 100}</li><li><a href="/tools/${tool.id}" target="_blank">Details</a></li></ul>`;
 
-                google.maps.event.addListener(marker, 'click', function() {
+                google.maps.event.addListener(marker, 'click', function () {
 
                     map.setZoom(15);
                     map.setCenter(marker.getPosition());
@@ -375,11 +371,11 @@
 
             //const markerCluster = new MarkerClusterer(map, markers, {imagePath: '/cluster-m'});
 
-            $('.tool').click(function(){
+            $('.tool').click(function () {
                 let tool_id = $(this).data("tool-id");
 
                 let marker = null;
-                for (let i = 0; i < markers.length; i++){
+                for (let i = 0; i < markers.length; i++) {
                     if (markers[i].tool_id === tool_id) {
                         marker = markers[i];
                         break;
@@ -391,7 +387,5 @@
             })
         }
     </script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js"></script>-->
-    <!--<script src="/markerclusterer.js"></script>-->
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC2pWNHJAhzOEtqohWE1mD1tvTLXQfBQLI&callback=initMap"></script>
 </section>

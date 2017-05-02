@@ -41,7 +41,13 @@ class ToolsController < ApplicationController
         end
 
         # pass data to view as JS
-        gon.result = @filtered_result.as_json
+        result_json = @filtered_result.as_json
+        result_json.each do |tool|
+          tool_id = tool["id"]
+          img_url = @result.find_by_id(tool_id).picture.url(:small)
+          tool["img_url"] = img_url
+        end
+        gon.result = result_json
         gon.coordinate = { lat: params[:lat], lng: params[:lng] }
 
         category_ids = @result.distinct(:category).pluck(:category_id)

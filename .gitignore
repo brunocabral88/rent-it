@@ -29,3 +29,5 @@ public/uploads
 
 # Node packages
 node_modules
+
+.DS_Store
