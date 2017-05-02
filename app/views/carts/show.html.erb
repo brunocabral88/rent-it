@@ -19,7 +19,7 @@
         <tbody>
           <% @tools.each do |tool| %>
             <tr>
-              <td><%= image_tag tool.picture.tiny %></td>
+              <td><%= image_tag tool.picture.url(:tiny) %></td>
               <td><%= link_to tool.name, tool %></td>
               <td><%= tool.owner.name %></td>
               <td><%= "#{session[:cart_items][tool.id.to_s]['start_date']} - #{session[:cart_items][tool.id.to_s]['end_date']}" %></td>
