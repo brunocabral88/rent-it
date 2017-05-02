@@ -5,9 +5,92 @@ $green: #1abc9c;
 
 @media screen and (min-width: 601px){
 
-  div.tools {
-    height: 400px;
-    overflow-y: scroll;
+  section.tools-index {
+    h1 {
+      font-size: 30px;
+    }
+    margin-top: -20px;
+    padding: 0px;
+    position: fixed;
+
+    .left-side {
+      position: relative;
+      width: 100%;
+      overflow-y: scroll;
+    }
+
+    .left-side-without-results {
+      height: 185px;
+    }
+
+    .search-result-list {
+      height: calc(100% - 233px);
+    }
+
+    .no-padding {
+      padding: 0px;
+    }
+
+    #map {
+      position: inherit;
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+    }
+
+    .map-image {
+      border-left: 1px solid gray;
+      height: 100%;
+      right: 0px;
+      background: gr;
+      position: fixed;
+    }
+
+    .filter-category-and-distance {
+      padding-bottom: 15px;
+    }
+
+    div.tools {
+
+      overflow-y: scroll;
+
+      .each-item {
+        border-bottom: 1px solid gray;
+      }
+
+      .tool {
+        display: block;
+        height: 100%;
+        margin: 0px;
+      }
+
+      .each-item-img {
+        height: 100%;
+      }
+
+      .each-item-details {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        background: #f1f1f1;
+        padding: 20px;
+        font-size: 16px;
+
+        h5 {
+          font-size: 17px;
+          text-align: center;
+        }
+
+        .fa-usd , .fa-location-arrow {
+          color: $green;
+          font-size: 20px;
+          margin-bottom: 12px;
+        }
+
+      }
+    }
+
+
   }
 
   section.tools-show {
@@ -51,6 +134,8 @@ $green: #1abc9c;
   section.new-tool-page {
     padding: 30px;
   }
+
+
 }
 
 #my-style-on-review-list{
@@ -63,7 +148,9 @@ $green: #1abc9c;
 }
 
 @media screen and (max-width: 600px) {
-
+  .each-item {
+    padding: 20px 10px;
+  }
   section.new-tool-page {
     padding: 30px;
   }
@@ -100,17 +187,27 @@ $green: #1abc9c;
   }
 }
 
-a.add-to-cart {
-  background-color: $green;
-  color: white;
-  padding:8px;
-  margin-bottom: 5px;
-  border-bottom: 3px solid #4c8060;
+.detail-and-add-to-cart-button {
+  padding-top: 15px;
 
-  &:hover {
-    text-decoration: none;
+  a.add-to-cart {
+    background-color: $green;
+    color: white;
+    padding:8px;
+    margin-bottom: 5px;
+    border-bottom: 3px solid #4c8060;
+    border-radius: 2px;
+    width: 120px;
+    height: 39px;
+    text-align: center;
+    display: block;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
+
 .no-padding {
   padding: 0;
 }
