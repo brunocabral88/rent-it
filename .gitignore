@@ -26,7 +26,6 @@ public/uploads
 # TODO Comment out this rule if environment variables can be committed
 .env
 
-
 # Node packages
 node_modules
 
