@@ -40,7 +40,7 @@
       <div class="row">
         <div class="tool" data-tool-id="<%= tool.id%>">
           <div class="col-md-3 col-xs-4">
-            <%= image_tag tool.picture.tiny %>
+            <%= image_tag tool.picture.url(:small) %>
           </div>
           <div class="col-md-6 col-xs-4">
             <span class="category" style="display: none"><%= tool.category.name %></span>
@@ -308,7 +308,7 @@
             markers.push(marker);
             marker.setIcon(pinIcon);
 
-            let content = `<img src="${tool.picture.tiny.url}"><ul><li>Name: ${tool.name}</li><li>Location: ${tool.street_address}</li><li>Deposit: ${tool.deposit_cents / 100}</li><li>Daily Rate: ${tool.daily_rate_cents / 100}</li><li><a href="/tools/${tool.id}" target="_blank">Details</a></li></ul>`;
+            let content = `<img src="${tool.img_url}"><ul><li>Name: ${tool.name}</li><li>Location: ${tool.street_address}</li><li>Deposit: ${tool.deposit_cents / 100}</li><li>Daily Rate: ${tool.daily_rate_cents / 100}</li><li><a href="/tools/${tool.id}" target="_blank">Details</a></li></ul>`;
 
             google.maps.event.addListener(marker, 'click', function() {
 
@@ -355,3 +355,4 @@
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js"></script>-->
 <!--<script src="/markerclusterer.js"></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC2pWNHJAhzOEtqohWE1mD1tvTLXQfBQLI&callback=initMap"></script>
+<%= console %>

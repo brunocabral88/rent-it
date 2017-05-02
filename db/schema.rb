@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170430204411) do
+ActiveRecord::Schema.define(version: 20170502170130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,20 +53,23 @@ ActiveRecord::Schema.define(version: 20170430204411) do
   create_table "tools", force: :cascade do |t|
     t.string   "name"
     t.integer  "owner_id"
-    t.string   "picture"
     t.text     "description"
     t.float    "lat"
     t.float    "lng"
     t.integer  "deposit_cents"
     t.integer  "daily_rate_cents"
-    t.boolean  "availability",     default: true
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.boolean  "availability",         default: true
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "city"
     t.string   "province"
     t.integer  "category_id"
     t.string   "street_address"
     t.string   "full_address"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
     t.index ["owner_id"], name: "index_tools_on_owner_id", using: :btree
   end
 

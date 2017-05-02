@@ -19,9 +19,9 @@ function checkIfElementsInView() {
      }
   })
 }
-
-$(document).ready(function() {
+const pageReady = () => {
   $animated_elements = $('div.animated-element');
   $window.on('scroll resize',checkIfElementsInView);
   $window.trigger('scroll');
-})
+}
+$(document).ready(pageReady);
