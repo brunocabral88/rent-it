@@ -139,21 +139,22 @@
                 });
             }
 
-            function filter_tools_by_category(category_name) {
-                if (category_name === 'all') {
-                    console.log("$tools", $tools);
+            function filter_tools_by_category($tools) {
+                var category_name = $('#filter_by_category_name').val();
+                if (category_name === 'all' || category_name === '') {
                     return $tools;
                 } else {
                     var $filtered_tools = $tools.filter(function (index) {
                         return $($tools[index]).find('.category').text() === category_name
                     });
-                    console.log("$filtered_tools: ", $filtered_tools);
+
                     return $filtered_tools;
                 }
             }
 
-            function filter_tools_by_distance(distance) {
-                if (distance === 'all') {
+            function filter_tools_by_distance($tools) {
+                var distance = $('#filter_by_distance').val();
+                if (distance === 'all' || distance === '') {
                     return $tools
                 } else {
                     var $filtered_tools = $tools.filter(function (index) {
@@ -182,16 +183,10 @@
                 }
             }
 
-            function render() {
-                $tools.hide();
-                var $result = filter_tools();
-                $result.show();
-            }
-
-    //        render();
-
             $('.filter_by').change(function () {
-                render();
+                $tools.hide();
+                var $result = filter_tools_by_category(filter_tools_by_distance($tools));
+                $result.show();
             })
         });
 
