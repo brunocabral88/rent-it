@@ -21,7 +21,11 @@ $(document).ready(function() {
         data: { image: JSON.stringify(image64) },
         type: "POST"
       }).success(function(response) {
-        loadSuggestions(response);
+        if (response.length > 0) {
+          loadSuggestions(response);
+        } else {
+          console.log("No suggestion from API..");
+        }
       })
     }, false);
 
