@@ -20,7 +20,7 @@ class CartsController < ApplicationController
       redirect_to :back
       return
     end
-    cart[params[:tool_id]] = { start_date: params[:start_date], end_date: params[:end_date] } 
+    cart[params[:tool_id]] = { start_date: params[:start_date], end_date: params[:end_date] }
     flash[:success] = 'Item added to the cart!'
     redirect_to :back
   end

@@ -15,7 +15,10 @@ class ApplicationController < ActionController::Base
   end
 
   def cart
-    session[:cart_items] ||= {}
+    if session[:cart_items].nil?
+      session[:cart_items] = {}
+    end
+    session[:cart_items]
   end
 
   private
