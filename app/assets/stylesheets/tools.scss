@@ -17,14 +17,21 @@ $green: #1abc9c;
       position: relative;
       width: 100%;
       overflow-y: scroll;
+      background: #d8d8d8;
+
     }
 
     .left-side-without-results {
-      height: 185px;
+      height: 165px;
     }
 
     .search-result-list {
-      height: calc(100% - 233px);
+      height: 100%;
+      width:33%;
+      padding-bottom: 251px;
+      position: fixed;
+      display: block;
+      overflow-y: scroll;
     }
 
     .no-padding {
@@ -56,6 +63,7 @@ $green: #1abc9c;
 
       .each-item {
         border-bottom: 1px solid gray;
+        width: 100%;
       }
 
       .tool {
@@ -66,19 +74,22 @@ $green: #1abc9c;
 
       .each-item-img {
         height: 100%;
+        padding: 40px;
+        max-height: 120px;
       }
 
       .each-item-details {
         height: 100%;
         margin: 0px;
-        padding: 0px;
         background: #f1f1f1;
-        padding: 20px;
+        padding: 10px;
         font-size: 16px;
 
         h5 {
           font-size: 17px;
           text-align: center;
+          margin: 0px;
+          padding-bottom: 10px;
         }
 
         .fa-usd , .fa-location-arrow {
@@ -192,7 +203,7 @@ select {
 }
 
 .detail-and-add-to-cart-button {
-  padding-top: 15px;
+  padding-top: 5px;
 
   a.add-to-cart {
     background-color: $green;

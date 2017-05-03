@@ -7,93 +7,105 @@
         <div class="left-side-without-results">
 
             <h1>Tool Search Result for <i><%= params[:tool] %></i></h1>
-            <h3><i class="fa fa-angle-double-right" aria-hidden="true"></i><%= pluralize @filtered_result.count, 'item' %> found
+            <h3>
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i><%= pluralize @filtered_result.count, 'item' %> found
             </h3>
 
             <div id="filter_bys">
 
-              <header>Filter Result:</header>
-              <div class="row">
-
-                <div class="col-md-6 col-xs-6 filter-category-and-distance">
-                  <div class="filter_by">
-                    <!--<label for="filter_by_category_name">Category: </label>-->
-                    <select id="filter_by_category_name">
-                      <option></option>
-                      <option value="all">All</option>
-                      <% @categories.each do |category| %>
-                          <option value="<%= category.name %>"><%= category.name %></option>
-                      <% end %>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-xs-6 filter-category-and-distance">
-                  <div class="filter_by">
-
-                    <!--<label for="filter_by_distance">Distance: </label>-->
-                    <select id="filter_by_distance">
-                      <option></option>
-                      <option value="5">5 km</option>
-                      <option value="10">10 km</option>
-                      <option value="15">15 km</option>
-                      <option value="25">25 km</option>
-                      <option value="50">50 km</option>
-                      <option value="100">100 km</option>
-                    </select>
-
-                  </div>
-                </div>
-
-
-              </div>
-            </div>
-
-            <div class="search-result-list">
+                <header>Filter Result:</header>
                 <div class="row">
-                  <div class="col-md-12 col-xs-12 no-padding">
-                    <div class="tools">
-                    <% @filtered_result.each do |tool| %>
-                      <div class="row each-item">
-                        <div class="tool" data-tool-id="<%= tool.id%>">
-                          <div class="col-md-4 col-xs-4 each-item-img">
-                            <%= image_tag tool.picture.url(:small) %>
-                          </div>
-                          <div class="col-md-8 col-xs-4 each-item-details">
-                            <span class="category" style="display: none"><%= tool.category.name %></span>
-                            <div class="row"><h5><%= tool.name %></h5></div>
-                            <div class="col-6">
-                              <i class="fa fa-usd" aria-hidden="true"></i>
-                              <%= humanized_money tool.daily_rate %> (daily)
-                            </div>
-                            <div class="col-6">
-                              <% if @lat && @lng %>
-                              <i class="fa fa-location-arrow" aria-hidden="true"></i>
-                              <span class="distance">
-                                  <%= tool.distance_to([@lat, @lng]).round (2) %>
-                              </span> km (aprox)
-                            <% end %>
-                            </div>
-                          </div>
 
-                          <div class="col-md-12">
-                            <div class="row detail-and-add-to-cart-button">
-                              <div class="col-md-6"><%= link_to 'Details', tool, target: '_blank', class: 'add-to-cart' %></div>
-
-                              <div class="col-md-6">
-                                <% if current_user %>
-                                  <%= link_to add_item_cart_path(tool_id: tool.id, start_date: params[:start_date],end_date: params[:end_date]), method: :put, class: 'add-to-cart' do %>
-                                      Add to cart <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                  <% end %>
+                    <div class="col-md-6 col-xs-6 filter-category-and-distance">
+                        <div class="filter_by">
+                            <!--<label for="filter_by_category_name">Category: </label>-->
+                            <select id="filter_by_category_name">
+                                <option></option>
+                                <option value="all">All</option>
+                                <% @categories.each do |category| %>
+                                <option value="<%= category.name %>">
+                                    <%=category.name %>
+                                </option>
                                 <% end %>
-                              </div>
-                            </div>
-                          </div>
+                            </select>
                         </div>
-
-                      </div>
                     </div>
-                    <% end %>
-                  </div>
+                    <div class="col-md-6 col-xs-6 filter-category-and-distance">
+                        <div class="filter_by">
+
+                            <!--<label for="filter_by_distance">Distance: </label>-->
+                            <select id="filter_by_distance">
+                                <option></option>
+                                <option value="5">5 km</option>
+                                <option value="10">10 km</option>
+                                <option value="15">15 km</option>
+                                <option value="25">25 km</option>
+                                <option value="50">50 km</option>
+                                <option value="100">100 km</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="search-result-list">
+            <div class="row">
+                <div class="col-md-12 col-xs-12 no-padding">
+                    <div class="tools">
+                        <% @filtered_result.each do |tool| %>
+                            <div class="row each-item">
+                                <!-- each tool info + photo start  -->
+                                <div class="tool" data-tool-id="<%= tool.id%>">
+                                    <div class="col-md-4 col-xs-4 each-item-img">
+                                        <%=image_tag tool.picture.url(:small) %>
+                                    </div>
+                                    <!-- all right side item info start-->
+                                    <div class="col-md-8 col-xs-4 each-item-details">
+                                        <span class="category" style="display: none"><%= tool.category.name %></span>
+                                        <div class="row">
+                                            <h5><%= tool.name %></h5>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <i class="fa fa-usd" aria-hidden="true"></i>
+                                                <%=humanized_money tool.daily_rate %> (daily)
+                                            </div>
+                                            <div class="col-md-6">
+                                                <% if @lat && @lng %>
+                                                <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                                <span class="distance">
+                                                <%= tool.distance_to([@lat, @lng]).round (2) %>
+                                                </span> km
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                        <!-- itembuttons start -->
+                                        <div class="col-12">
+                                            <div class="row detail-and-add-to-cart-button">
+                                                <div class="col-md-6">
+                                                    <%=link_to 'Details', tool, target: '_blank', class: 'add-to-cart' %>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <% if current_user %>
+                                                    <%=link_to add_item_cart_path(tool_id: tool.id), method: :put, class: 'add-to-cart' do %>
+                                                    Add to cart <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                                    <% end %>
+                                                    <% end %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- itembuttons end -->
+                                    </div>
+                                    <!-- all right side item info end-->
+                                </div>
+                                <!-- each tool info + photo end -->
+                            </div>
+                        <% end %>
+                    </div>
                 </div>
             </div>
         </div>
@@ -101,14 +113,8 @@
     <div class="col-md-8 col-xs-12 no-padding map-image">
         <div id="map"></div>
     </div>
-    </div>
 
-    <style>
-      #map {
-        height: 400px;
-        margin: 0 auto;
-      }
-    </style>
+
 
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function () {
