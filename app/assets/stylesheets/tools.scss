@@ -231,3 +231,32 @@ $green: #1abc9c;
 .no-padding {
   padding: 0;
 }
+
+div.pic-upload {
+  border-radius: 50%;
+  background-color: $green;
+  color: white;
+  width: 111px;
+  height: 100px;
+  text-align: center;
+  padding-top: 17px;
+  &:hover {
+    cursor:pointer;
+  }
+}
+
+img.preview {
+  border: 2px solid $green;
+  border-radius: 20px;
+}
+
+div.suggestions {
+  div.suggestion {
+    display: inline-block;
+    padding: 5px;
+    margin: 3px 5px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

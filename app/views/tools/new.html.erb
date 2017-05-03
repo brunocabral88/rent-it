@@ -9,7 +9,19 @@
   <% end %>
   <div class="row">
     <div class="col-md-8 col-md col-md-offset-2 col-xs-12 well">
-      <%= form_for @tool do |f| %>
+      <div class="row">  
+        <div class="col-md-3 col-md-offset-5 col-xs-6 col-xs-offset-3">
+          <img src="" height="200" width="200" class="preview"><br>
+          <button class="delete-pic btn btn-default">Change Image</button>
+          <div class="pic-upload">
+            <%= fa_icon "upload" %>
+            <p>Click to upload a picture</p>
+          </div>
+        </div>
+      </div>
+      <div class="suggestions"></div>
+      <%= form_for @tool, class: 'pic-form' do |f| %>
+        <%= f.file_field :picture, accept: 'image/png,image/gif,image/jpeg, image/jpg', id: 'file-field' %>
 
         <div class="form-group">
           <%= f.label :name %>
@@ -42,10 +54,6 @@
           <%= f.collection_select(:category_id, Category.all, :id, :name) %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :picture, "Picture" %>
-          <%= f.file_field :picture %>
-        </div>
 
 
         <%= f.submit "Create" %>
