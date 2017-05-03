@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :tools do
     resources :reviews
   end
+  patch :upload_tool_pic, to: 'tools#upload_tool_pic'
 
   resources :rentals, only: [:create, :show]
 

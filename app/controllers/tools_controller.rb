@@ -77,6 +77,12 @@ class ToolsController < ApplicationController
   def delete
   end
 
+  def upload_tool_pic
+      # @pic = params[:picture]
+      # puts @pic
+      render text: 'testinggg'
+  end
+
   private
 
   def tool_params
