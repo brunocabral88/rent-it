@@ -10,11 +10,11 @@ class Tool < ApplicationRecord
   has_many :reviews, through: :rental_items
 
   has_attached_file :picture, styles: {
-    small: "64x64", 
-		med: "200x200", 
+    small: "64x64",
+		med: "200x200",
 		large: "400x400",
     tiny: "100x100",
-    thumb: "300x300" 
+    thumb: "300x300"
   }
 
   validates_presence_of :name, :description, :deposit_cents, :daily_rate_cents
