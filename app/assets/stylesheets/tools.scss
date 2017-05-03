@@ -145,6 +145,12 @@ $green: #1abc9c;
   section.new-tool-page {
     padding: 30px;
   }
+  .filter_by {
+  width: 100%;
+  }
+  .select2 select2-container select2-container--default {
+  width: 100% !important;
+  }
 
 
 }
@@ -158,9 +164,7 @@ $green: #1abc9c;
   }
 }
 
-select {
-  width: 15em;
-}
+
 
 @media screen and (max-width: 600px) {
   .each-item {
