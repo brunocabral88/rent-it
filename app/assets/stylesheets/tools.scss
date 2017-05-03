@@ -6,6 +6,7 @@ $green: #1abc9c;
 @media screen and (min-width: 601px){
 
   section.tools-index {
+    width: 100%;
     h1 {
       font-size: 30px;
     }
@@ -15,15 +16,12 @@ $green: #1abc9c;
 
     .left-side {
       position: relative;
-      width: 100%;
+      width: 34%;
       overflow-y: scroll;
       background: #d8d8d8;
 
     }
 
-    .left-side-without-results {
-      height: 165px;
-    }
 
     .search-result-list {
       height: 100%;
@@ -145,6 +143,14 @@ $green: #1abc9c;
   section.new-tool-page {
     padding: 30px;
   }
+  .filter_by {
+     width: 100%;
+
+    .select2 {
+      width: 100% !important;
+    }
+  }
+
 
 
 }
@@ -158,9 +164,7 @@ $green: #1abc9c;
   }
 }
 
-select {
-  width: 15em;
-}
+
 
 @media screen and (max-width: 600px) {
   .each-item {

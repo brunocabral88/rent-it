@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def cart
-    if session[:cart_items].empty?
+    if session[:cart_items].nil?
       session[:cart_items] = {}
     end
     session[:cart_items]
