@@ -16,8 +16,8 @@
         </div>
         <div>
         <ul class="nav navbar-nav navbar-right">
-          <li id="my-cart-navbar">
-            <%= link_to cart_path do %>
+          <li id="my-cart-navbar" >
+            <%= link_to cart_path, { :style => "color: white;" }  do %>
               <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
             <% end %>
           </li>

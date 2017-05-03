@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def empty_cart
-    session[:cart_items] = []
+    session[:cart_items] = {}
   end
 
   def require_authentication

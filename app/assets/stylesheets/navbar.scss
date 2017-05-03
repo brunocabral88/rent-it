@@ -21,17 +21,14 @@ $green: #1abc9c;
     .navbar-nav{
       height: 40px;
 
-      li a {
-        color: white;
+      .link-to-cart {
+        color: white !important;
       }
       .dropdown-toggle {
         color: white;
         &:hover {
           color: black;
         }
-      #my-cart-navbar {
-        color: white !important;
-      }
       }
     }
 
