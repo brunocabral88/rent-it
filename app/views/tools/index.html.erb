@@ -306,7 +306,9 @@
             const map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 11,
                 center: {lat: gon.result[0].lat, lng: gon.result[0].lng},
-                styles: styles
+                styles: styles,
+                streetViewControl: false,
+                disableDefaultUI: true
             });
 
             const tools = gon.result;
