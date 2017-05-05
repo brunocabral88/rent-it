@@ -106,6 +106,17 @@ $green: #1abc9c;
 
   }
 
+  section.new-tool-page {
+    h1 {
+      text-align: center;
+    }
+    .submit-button {
+      padding-right: 50px;
+      padding-left: 50px;
+      border-radius: 3px;
+    }
+  }
+
   section.tools-show {
     .page-header h1 {
       margin-left: 20px;
@@ -264,3 +275,17 @@ div.suggestions {
     }
   }
 }
+
+  section.new-tool-page {
+    h1 {
+      text-align: center;
+    }
+    .submit-button {
+      padding-right: 50px;
+      padding-left: 50px;
+      border-radius: 3px;
+    }
+    .pic-upload {
+      margin: auto;
+    }
+  }
