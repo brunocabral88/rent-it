@@ -1,74 +1,18 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
 $green: #1abc9c;
 
-@media screen and (min-width: 601px){
-  nav.navbar {
-    position: static;
-    background-color: $green;
-    height: 65px;
-    size: 2em;
-    color: white;
-
-    .navbar-brand {
-      color: white;
-      padding: 5px 10px;
-      &:hover {
-        color: black;
-      }
+nav.navbar {
+  background-color: $green;
+  .navbar-brand {
+    margin: 0;
+    padding: 5px;
+    img {
+      max-height: 100%;
     }
-
-    .navbar-nav{
-      height: 40px;
-
-      .link-to-cart {
-        color: white !important;
-      }
-      .dropdown-toggle {
-        color: white;
-        &:hover {
-          color: black;
-        }
-      }
+    &:hover {
+      color: black;
     }
-
-    .navbar-header span {
-      color:black
-    }
-
-  }
-}
-
-@media screen and (max-width: 600px) {
-  nav.navbar {
-
-    position: static;
-    background-color: $green;
-    height: 65px;
-    size: 2em;
-    color: white;
-
-    .navbar-brand {
-      color: white;
-      padding: 5px 10px;
-      &:hover {
-        color: black;
-      }
-    }
-
-    .navbar-nav{
-      height: 40px;
-      .dropdown-toggle {
-        color: white;
-        &:hover {
-          color: black;
-        }
-      }
-    }
-
-    .navbar-header span {
-      color:black
-    }
-
   }
 }
