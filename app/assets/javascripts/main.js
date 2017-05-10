@@ -2,9 +2,9 @@ $animated_elements = null;
 $window = $(window);
 
 function checkIfElementsInView() {
-  let windowHeight = $window.height();
+  let window_height = $window.height();
   let window_top_position = $window.scrollTop();
-  let windows_bottom_position = window_top_position + windowHeight;
+  let windows_bottom_position = window_top_position + window_height;
 
   $.each($animated_elements, function() {
     let $element = $(this);
