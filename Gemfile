@@ -83,7 +83,7 @@ gem 'mailgun-ruby', '~>1.1.4'
 
 gem 'clarifai_ruby'
 
-gem "rmagick", :require => 'RMagick'
+gem "rmagick"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
