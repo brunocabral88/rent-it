@@ -49,7 +49,6 @@ class ToolsController < ApplicationController
         end
         gon.result = result_json
         gon.coordinate = { lat: params[:lat], lng: params[:lng] }
-
         category_ids = @result.distinct(:category).pluck(:category_id)
         @categories = Category.find(category_ids);
       end
