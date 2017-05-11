@@ -83,4 +83,16 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+      # config for amazon S3 and paperclip, method 2 using dotenv direct
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_region => "ca-central-1",
+    :s3_host_name => "s3-ca-central-1.amazonaws.com",
+    :s3_credentials => {
+      :bucket => ENV['S3_BUCKET_NAME'],
+      :access_key_id => ENV['S3_KEY'],
+      :secret_access_key => ENV['S3_SECRET']
+    }
+  }
 end
