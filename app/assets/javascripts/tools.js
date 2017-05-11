@@ -17,7 +17,7 @@ $(document).ready(function() {
 
       var image64 = reader.result.split(',')[1];
       $.ajax({
-        url: gon.clarify_api_url,
+        url: "https://infinite-sierra-87845.herokuapp.com/api",
         data: { image: JSON.stringify(image64) },
         type: "POST"
       }).success(function(response) {
