@@ -1,16 +1,17 @@
 const express = require('express');
-const dotenv = require('dotenv').config({path:'../.env'});
+const dotenv = require('dotenv').config({path:'.env'});
 const app = express();
 const fs = require('fs');
 const bodyParser = require('body-parser');
-var csv = require("fast-csv");
+const csv = require("fast-csv");
 // Load Clarifai
-var Clarifai = require('clarifai');
+const Clarifai = require('clarifai');
+const clarifai_origin = process.env.ACCESS_CONTROL_ORIGIN_ADDRES || "http://localhost:3000"
 
 // Middleware to allow CORS requests
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', clarifai_origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -46,7 +47,7 @@ app.post('/api',(req,res) => {
 
     var matchingSuggests = [];
     readDictionary((dictionary) => {
-      suggestions.forEach((suggestion) => { // Goes through every suggestion from Clarifai       
+      suggestions.forEach((suggestion) => { // Goes through every suggestion from Clarifai
         let regexp = new RegExp(suggestion,"g");
         dictionary.forEach((dictionaryWord) => { //Tries to match with the dictionary words and add to matchingSuggests array
           if (regexp.test(dictionaryWord)) {
@@ -60,7 +61,7 @@ app.post('/api',(req,res) => {
         res.send("Empty response");
       }
     })
-    
+
   },function(err){
     console.log('There was an error fetching data from Clarifai:',err.statusText);
     res.send(err);
