@@ -84,6 +84,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  # Adds public folder
+  config.serve_static_assets = true
+
       # config for amazon S3 and paperclip, method 2 using dotenv direct
   config.paperclip_defaults = {
     :storage => :s3,
