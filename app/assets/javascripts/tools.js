@@ -17,7 +17,8 @@ $(document).ready(function() {
       
       var image64 = reader.result.split(',')[1];
       $.ajax({
-        url: "http://localhost:3001/api",
+        // url: "http://localhost:3001/api",
+        url: gon.clarify_api_url,
         data: { image: JSON.stringify(image64) },
         type: "POST"
       }).success(function(response) {

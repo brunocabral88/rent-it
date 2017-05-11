@@ -7,6 +7,7 @@ class ToolsController < ApplicationController
 
   def new
     @tool = Tool.new(owner: current_user, daily_rate: 0.00, deposit: 0.00)
+    gon.clarify_api_url = ENV['CLARIFY_API_URL'] || 'http://localhost:3001/api'
   end
 
   def index
