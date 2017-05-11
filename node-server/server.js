@@ -34,7 +34,9 @@ function predictImageByUrl(image64,cbOk,cbErr) {
   console.log('Predicting image64...');
   clarifai.models.predict(Clarifai.GENERAL_MODEL, {base64: image64}).then(cbOk,cbErr);
 }
-
+app.get('/',(req,res)=>{
+  res.send("hello")
+})
 app.post('/api',(req,res) => {
   let image64 = req.body.image;
   image64 = image64.replace(/^"(.*)"$/, '$1');
