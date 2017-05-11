@@ -46,6 +46,7 @@ gem 'paperclip' 		# paperclip gem for file management
 gem 'rmagick' #Image manipulation gem
 
 
+
 # Used to use Stripe API
 gem 'stripe'
 
