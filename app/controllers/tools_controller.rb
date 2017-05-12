@@ -6,7 +6,8 @@ class ToolsController < ApplicationController
   end
 
   def new
-    @tool = Tool.new(owner: current_user, daily_rate: 0.00, deposit: 0.00)
+    # @tool = Tool.new(owner: current_user, daily_rate: 0.00, deposit: 0.00)
+    @tool = Tool.new(owner: current_user)
     gon.clarify_api_url = ENV['CLARIFY_API_URL'] || 'http://localhost:3001/api'
   end
 
@@ -87,7 +88,7 @@ class ToolsController < ApplicationController
 
   def tool_params
     params.require(:tool).permit(:name,:description,:full_address,:lat,:lng,
-      :daily_rate,:deposit_cents,:category_id, :picture)
+      :daily_rate,:deposit,:category_id, :picture)
   end
 end
 

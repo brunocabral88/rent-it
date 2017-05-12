@@ -32,6 +32,10 @@
               <td><%= @tool.daily_rate %></td>
             </tr>
             <tr>
+              <th>Deposit:</th>
+              <td><%= @tool.deposit %></td>
+            </tr>
+            <tr>
               <th>Overall Rating:</th>
               <td><%= number_with_precision(@tool.reviews.average(:rating), precision: 1)|| 'N/A'%></td>
             </tr>
