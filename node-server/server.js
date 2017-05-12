@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const csv = require("fast-csv");
 // Load Clarifai
 const Clarifai = require('clarifai');
-const clarifai_origin = process.env.ACCESS_CONTROL_ORIGIN_ADDRES || "http://localhost:3000"
+const clarifai_origin = process.env.ACCESS_CONTROL_ORIGIN_ADDRESS || "http://localhost:3000"
 
 // Middleware to allow CORS requests
 app.use(function (req, res, next) {
