@@ -16,9 +16,9 @@ class MainController < ApplicationController
     @rentals_not_returned_this_user = []
     result.each { |rental| @rentals_not_returned_this_user << rental  }
 
-    @graph_data = get_dashboard_graph_data    
+    @graph_data = get_dashboard_graph_data
     @user = current_user
-    
+
     # User rentout history
     @user_rentouts = []
     @user.tools.each do |tool| 

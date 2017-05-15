@@ -1,20 +1,14 @@
 <section class="tools-show">
 
   <header class="page-header">
-
   <!-- add link_to before @tool.category  -->
     <h1><%= @tool.category.name %> &raquo; <%= @tool.name %></h1>
-
   </header>
 
   <article class="tool-detail">
-
     <div class="row" >
-
       <div class="col-sm-6 col-12 image-table">
-
         <%= image_tag @tool.picture.url(:thumb), class: 'main-img' %>
-
       </div>
       <div class="col-sm-6 col-12 detail-table">
         <table class="table table-default">
@@ -30,6 +24,10 @@
             <tr>
               <th>Daily Rate:</th>
               <td><%= @tool.daily_rate %></td>
+            </tr>
+            <tr>
+              <th>Deposit:</th>
+              <td><%= @tool.deposit %></td>
             </tr>
             <tr>
               <th>Overall Rating:</th>
@@ -78,14 +76,11 @@
           <% end %>
         <% end %>
       </dl>
-
     </div>
 
     <% if current_user && current_is_previous_renter?(@tool) %>
       <div class="row">
         <%= form_for [@tool, @tool.reviews.new] do |form| %>
-
-
           <% if form.object.errors.any? %>
             <div class="alert alert-danger">
               <strong>The following errors prevented saving:</strong>

@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get '/register', to: 'users#new'
   get '/dashboard', to: 'main#dashboard'
+
   resources :users, only: [:create, :destroy]
+
   resource :cart, only: [:show] do
     put :add_item
     delete :delete_item
@@ -19,6 +21,7 @@ Rails.application.routes.draw do
   resources :tools do
     resources :reviews
   end
+
   patch :upload_tool_pic, to: 'tools#upload_tool_pic'
 
   resources :rentals, only: [:create, :show]
