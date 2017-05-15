@@ -21,10 +21,10 @@ class Tool < ApplicationRecord
   validates_attachment_content_type :picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
 
-  # Geocoding
-  def full_address
-    [street_address, city, province].compact.join(',')
-  end
+  # Geocoding - UNCOMMENT THE FOLLOWING FOR SEEDING
+  # def full_address
+  #   [street_address, city, province].compact.join(',')
+  # end
 
   geocoded_by :full_address, latitude: :lat, longitude: :lng
   after_validation :geocode

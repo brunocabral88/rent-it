@@ -1,5 +1,6 @@
 class ToolsController < ApplicationController
   before_action :require_authentication, only: [:new, :create, :delete]
+
   def show
     @tool = Tool.find params[:id]
     @rental = Rental.new
@@ -50,7 +51,7 @@ class ToolsController < ApplicationController
           tool["img_url"] = img_url
         end
         gon.result = result_json
-        gon.coordinate = { lat: params[:lat], lng: params[:lng] }
+        gon.coordinate = {lat: params[:lat], lng: params[:lng]}
         category_ids = @result.distinct(:category).pluck(:category_id)
         @categories = Category.find(category_ids);
       end
@@ -67,7 +68,7 @@ class ToolsController < ApplicationController
     tool = Tool.new(tool_params)
     tool.owner = current_user
     if tool.save
-      flash[:success] = "Tool created!"
+      flash[:success] = 'Tool created!'
       redirect_to dashboard_path
     else
       @tool = tool
@@ -78,17 +79,43 @@ class ToolsController < ApplicationController
   def delete
   end
 
+  def destroy
+    tool = Tool.find params[:id]
+    if tool.owner == current_user && tool.destroy
+      flash[:success] = 'Tool deleted!'
+    else
+      flash[:fail] = 'Tool cannot be deleted'
+    end
+    redirect_to dashboard_path
+  end
+
+
+  def edit
+    @tool = Tool.find params[:id]
+    render 'edit'
+  end
+
+  def update
+    @tool = Tool.find params[:id]
+    if @tool.owner == current_user && @tool.update(tool_params)
+      flash[:success] = 'Update successful'
+      redirect_to @tool
+    else
+      render 'edit'
+    end
+  end
+
   def upload_tool_pic
-      # @pic = params[:picture]
-      # puts @pic
-      render text: 'testinggg'
+    # @pic = params[:picture]
+    # puts @pic
+    render text: 'testinggg'
   end
 
   private
 
   def tool_params
-    params.require(:tool).permit(:name,:description,:full_address,:lat,:lng,
-      :daily_rate,:deposit,:category_id, :picture)
+    params.require(:tool).permit(:name, :description, :full_address, :lat, :lng,
+                                 :daily_rate, :deposit, :category_id, :picture)
   end
 end
 

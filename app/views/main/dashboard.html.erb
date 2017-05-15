@@ -44,6 +44,8 @@
       <th>Daily rate</th>
       <th>Deposit</th>
       <th>Available?</th>
+      <th>Modify</th>
+      <th>Delete</th>
       </thead>
       <tbody>
       <% @user.tools.each do |tool| %>
@@ -54,6 +56,8 @@
             <td><%= currency_symbol %><%= humanized_money tool.daily_rate %></td>
             <td><%= currency_symbol %><%= humanized_money tool.deposit %></td>
             <td><%= tool.availability %></td>
+            <td><%= link_to 'Modify', edit_tool_path(tool), class: 'btn btn-default'%></td>
+            <td><%= link_to fa_icon('trash'), [tool], method: 'delete', data: { confirm: 'Are you sure?' } %></td>
           </tr>
       <% end %>
       <tr>
