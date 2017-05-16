@@ -1,0 +1,106 @@
+<section class="new-tool-page">
+  <h1>Edit Tool: <%= @tool.name %></h1>
+  <% if !@tool.errors.empty? %>
+      <div class="alert alert-danger">
+        <% @tool.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-8 col-md col-md-offset-2 col-xs-12 well">
+      <div class="row">
+        <div class="col-md-3 col-md-offset-5 col-xs-6 col-xs-offset-3">
+          <img src="https:<%= @tool.picture.url%>" height="200" width="200" class="preview">
+          <button class="delete-pic btn btn-default">Change Image</button>
+          <div class="pic-upload">
+            <%= fa_icon "upload" %>
+            <p>Click to upload a picture</p>
+          </div>
+        </div>
+      </div>
+      <div class="suggestions"></div>
+      <%= form_for @tool, class: 'pic-form', method: :patch do |f| %>
+          <%= f.file_field :picture, accept: 'image/png,image/gif,image/jpeg, image/jpg', id: 'file-field' %>
+
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :description %>
+            <%= f.text_field :description, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :full_address %>
+            <%= f.text_field :full_address, class: 'form-control' %>
+          </div>
+          <%= f.hidden_field :lat %>
+          <%= f.hidden_field :lng %>
+
+          <div class="form-group">
+            <%= f.label :daily_rate, "Daily Rate ($)" %>
+            <%= f.number_field :daily_rate, class: 'form-control', step: :any %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :deposit, "Deposit ($)" %>
+            <%= f.number_field :deposit, class: 'form-control', step: :any %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :category_id, 'Category: ' %>
+            <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+          </div>
+
+          <%= f.submit "Update" , class: 'submit-button'%>
+      <% end %>
+    </div>
+  </div>
+
+  <script>
+
+    $(document).ready(function(){
+      $(".preview").show()
+    });
+
+    var autocomplete;
+
+    function initAutocomplete() {
+      autocomplete = new google.maps.places.Autocomplete(
+        (document.getElementById('tool_full_address')),
+        {types: []});
+      autocomplete.addListener('place_changed', function () {
+        var place = autocomplete.getPlace();
+        var formatted_address = place.formatted_address;
+        var lng = place.geometry.location.toJSON().lng;
+        var lat = place.geometry.location.toJSON().lat;
+
+
+        $("input[id = tool_full_address]").val(formatted_address);
+        $("input[id = tool_lng]").val(lng);
+        $("input[id = tool_lat]").val(lat);
+      });
+    }
+
+    function geolocate() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var geolocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          var circle = new google.maps.Circle({
+            center: geolocation,
+            radius: position.coords.accuracy
+          });
+          autocomplete.setBounds(circle.getBounds());
+        });
+      }
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2pWNHJAhzOEtqohWE1mD1tvTLXQfBQLI&libraries=places&callback=initAutocomplete"async defer>
+  </script>
+</section>

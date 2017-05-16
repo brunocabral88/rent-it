@@ -1,62 +1,69 @@
 <section class="dashboard">
   <h1>My Dashboard</h1>
-    <% if @graph_data.size > 0 %>
+  <% if @graph_data.size > 0 %>
       <section id="graphs">
         <div id="graph"></div>
       </section>
-    <% end %>
-    <% if @rentals_not_returned_this_user.count > 0 %>
-    <section id="current-rentouts">
-      <h3>Current rentouts</h3>
-      <table class="table table-hover">
-        <thead>
+  <% end %>
+  <% if @rentals_not_returned_this_user.count > 0 %>
+      <section id="current-rentouts">
+        <h3>Current rentouts</h3>
+        <table class="table table-hover">
+          <thead>
           <th>Rental Number</th>
           <th>Renter Name</th>
           <th>Start Date</th>
           <th>End Date</th>
           <th></th>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
           <% @rentals_not_returned_this_user.paginate(page: params[:rentout_page], per_page: 10).each do |rental| %>
-            <tr>
-              <td><%= rental["id"] %></td>
-              <td><%= get_renter_name_by_rental_id rental["id"] %></td>
-              <td><%= rental["start_date"] %></td>
-              <td><%= rental["end_date"] %></td>
-              <td><%= link_to 'Mark as returned', rental_return_path(rental_id: rental["id"]), method: :post, class: 'btn btn-default' %></td>
-            </tr>
+              <tr>
+                <td><%= rental["id"] %></td>
+                <td><%= get_renter_name_by_rental_id rental["id"] %></td>
+                <td><%= rental["start_date"] %></td>
+                <td><%= rental["end_date"] %></td>
+                <td><%= link_to 'Mark as returned', rental_return_path(rental_id: rental["id"]), method: :post, class: 'btn btn-default' %></td>
+
+              </tr>
           <% end %>
-        </tbody>
-      </table>
-      <div class="apple_pagination">
-        <%= will_paginate @rentals_not_returned_this_user.paginate(page: params[:rentout_page], per_page: 10), param_name: 'rentout_page' %>
-      </div>
-    </section>
+          </tbody>
+        </table>
+        <div class="apple_pagination">
+          <%= will_paginate @rentals_not_returned_this_user.paginate(page: params[:rentout_page], per_page: 10), param_name: 'rentout_page' %>
+        </div>
+      </section>
   <% end %>
   <section id="tools">
     <h3>My tools</h3>
     <table class="table table-hover">
       <thead>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Daily rate</th>
-        <th>Available?</th>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Daily rate</th>
+      <th>Deposit</th>
+      <th>Available?</th>
+      <th>Modify</th>
+      <th>Delete</th>
       </thead>
       <tbody>
-        <% @user.tools.each do |tool| %>
+      <% @user.tools.each do |tool| %>
           <tr>
             <td><%= image_tag tool.picture.url(:tiny) %></td>
             <td><%= link_to tool.name, tool %></td>
             <td><%= tool.description %></td>
-            <td>$ <%= '%.2f' % (tool.daily_rate_cents.to_f / 100) %></td>
+            <td><%= currency_symbol %><%= humanized_money tool.daily_rate %></td>
+            <td><%= currency_symbol %><%= humanized_money tool.deposit %></td>
             <td><%= tool.availability %></td>
+            <td><%= link_to 'Modify', edit_tool_path(tool), class: 'btn btn-default'%></td>
+            <td><%= link_to fa_icon('trash'), [tool], method: 'delete', data: { confirm: 'Are you sure?' } %></td>
           </tr>
-        <% end %>
-        <tr>
-          <td colspan="4"></td>
-          <td><%= link_to "+ New tool", new_tool_path, class: 'btn btn-info' %></td>
-        </tr>
+      <% end %>
+      <tr>
+        <td colspan="4"></td>
+        <td><%= link_to "+ New tool", new_tool_path, class: 'btn btn-info' %></td>
+      </tr>
       </tbody>
     </table>
   </section>
@@ -64,30 +71,30 @@
     <h2>Rental history</h2>
     <table class="table table-hover">
       <thead>
-        <th>Number</th>
-        <th>Date</th>
-        <th>Total Spended</th>
-        <th>Action</th>
+      <th>Number</th>
+      <th>Date</th>
+      <th>Total Spended</th>
+      <th>Action</th>
       </thead>
       <tbody>
-        <% if @user.rentals.size > 0 %>
+      <% if @user.rentals.size > 0 %>
           <% @user.rentals.paginate(page: params[:rental_history_page], per_page: 10).each do |rental| %>
-            <tr>
-              <td><%= rental.id %></td>
-              <td><%= rental.start_date %> to <%= rental.end_date %></td>
-              <td>$ <%= "%.2f" % (rental.total_cents.to_f / 100) %></td>
-              <td><%= link_to 'View', rental, class: 'btn btn-info' %></td>
-            </tr>
+              <tr>
+                <td><%= rental.id %></td>
+                <td><%= rental.start_date %> to <%= rental.end_date %></td>
+                <td>$ <%= "%.2f" % (rental.total_cents.to_f / 100) %></td>
+                <td><%= link_to 'View', rental, class: 'btn btn-info' %></td>
+              </tr>
           <% end %>
-        <% else %>
+      <% else %>
           <tr>
             <td colspan="3">No rents history so far :(</td>
           </tr>
-        <% end %>
+      <% end %>
       </tbody>
     </table>
     <div class="apple_pagination">
-      <%= will_paginate @user.rentals.paginate(page: params[:rental_history_page], per_page: 10), param_name: 'rental_history_page'%>
+      <%= will_paginate @user.rentals.paginate(page: params[:rental_history_page], per_page: 10), param_name: 'rental_history_page' %>
     </div>
   </section>
 
@@ -95,26 +102,26 @@
     <h2>Rentout history</h2>
     <table class="table">
       <thead>
-        <th>Number</th>
-        <th>Date</th>
-        <th>Total earned</th>
-        <th>Action</th>
+      <th>Number</th>
+      <th>Date</th>
+      <th>Total earned</th>
+      <th>Action</th>
       </thead>
       <tbody>
-        <% if @user_rentouts.size > 0 %>
+      <% if @user_rentouts.size > 0 %>
           <% @user_rentouts.paginate(page: params[:rentout_history_page], per_page: 10).each do |rental| %>
-            <tr>
-              <td><%= rental.id %></td>
-              <td><%= rental.start_date %> to <%= rental.end_date %></td>
-              <td>$ <%= "%.2f" % (rental.total_cents.to_f / 100) %></td>
-              <td><%= link_to 'View', rental, class: 'btn btn-info' %></td>
-            </tr>
+              <tr>
+                <td><%= rental.id %></td>
+                <td><%= rental.start_date %> to <%= rental.end_date %></td>
+                <td>$ <%= "%.2f" % (rental.total_cents.to_f / 100) %></td>
+                <td><%= link_to 'View', rental, class: 'btn btn-info' %></td>
+              </tr>
           <% end %>
-        <% else %>
+      <% else %>
           <tr>
-            <td colspan="3">No rentouts history so far :(</td>
+            <td colspan="3">No rent out history so far :(</td>
           </tr>
-        <% end %>
+      <% end %>
       </tbody>
     </table>
     <div class="apple_pagination">
@@ -127,17 +134,19 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
   <script>
     <% if @graph_data.size > 0 %>
-      var morris = Morris.Line({
-        element: 'graph',
-        data: <%= @graph_data.to_json.html_safe %>,
-        xkey: 'day',
-        ykeys: ['user_data', 'owner_data'],
-        labels: ['Earnings', 'Spenditures'],
-        resize: true,
-        preUnits: "$",
-        lineColors: [ "#9b59b6", "#3498db"]
-      });
-      <% end %>
-      $(window).resize(function() { morris.redraw() });
+    var morris = Morris.Line({
+      element: 'graph',
+      data: <%= @graph_data.to_json.html_safe %>,
+      xkey: 'day',
+      ykeys: ['user_data', 'owner_data'],
+      labels: ['Earning', 'Expenditure'],
+      resize: true,
+      preUnits: "$",
+      lineColors: ["#9b59b6", "#3498db"]
+    });
+    <% end %>
+    $(window).resize(function () {
+      morris.redraw()
+    });
   </script>
 </section>
