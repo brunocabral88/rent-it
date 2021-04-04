@@ -60,10 +60,11 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.0.6)
-    carrierwave (1.0.0)
+    carrierwave (1.3.2)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+      ssrf_filter (~> 1.0)
     clarifai_ruby (0.1.2)
       httmultiparty
     climate_control (0.1.0)
@@ -76,7 +77,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.0.5)
+    concurrent-ruby (1.1.8)
     connection_pool (2.2.1)
     domain_name (0.5.20160615)
       unf (>= 0.0.5, < 1.0.0)
@@ -112,7 +113,7 @@ GEM
       domain_name (~> 0.5)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
-    i18n (0.8.1)
+    i18n (0.8.6)
     jbuilder (2.6.3)
       activesupport (>= 3.0.0, < 5.2)
       multi_json (~> 1.2)
@@ -133,12 +134,14 @@ GEM
     mailgun-ruby (1.1.5)
       rest-client (~> 2.0)
     method_source (0.8.2)
-    mime-types (3.1)
+    mime-types (3.3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2016.0521)
-    mimemagic (0.3.2)
+    mime-types-data (3.2021.0225)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_portile2 (2.1.0)
-    minitest (5.10.1)
+    minitest (5.14.4)
     monetize (1.6.0)
       money (~> 6.8)
     money (6.8.4)
@@ -241,12 +244,13 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    ssrf_filter (1.0.7)
     stripe (1.48.0)
       rest-client (>= 1.4, < 3.0)
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
-    tzinfo (1.2.3)
+    tzinfo (1.2.9)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
@@ -272,7 +276,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap-sass
   byebug
-  carrierwave (~> 1.0)
+  carrierwave (~> 1.3)
   clarifai_ruby
   coffee-rails (~> 4.2)
   dotenv-rails
