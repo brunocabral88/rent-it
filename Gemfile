@@ -40,7 +40,7 @@ gem 'money-rails', '~>1'
 gem 'faker', '~> 1.7'
 
 # Used to upload images
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3'
 gem 'aws-sdk'	# amazon web services gem
 gem 'paperclip' 		# paperclip gem for file management
 gem 'rmagick' #Image manipulation gem
